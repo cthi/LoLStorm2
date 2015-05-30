@@ -17,6 +17,7 @@
 
 <resources>
     <color name="white">#ffffff</color>
+    <color name="white_transparent">#66ffffff</color>
     <color name="black">#000000</color>
     <color name="blue_light">#1976D2</color>
     <color name="blue">#1565C0</color>
