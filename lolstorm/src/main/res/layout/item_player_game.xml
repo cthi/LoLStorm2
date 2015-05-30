@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="2dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="88dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_player_game_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            app:border_color="#FF000000"/>
+
+        <TextView
+            android:id="@+id/item_player_game_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/item_player_game_icon"
+            android:layout_toEndOf="@+id/item_player_game_icon"
+            android:layout_toLeftOf="@+id/item_player_game_result"
+            android:layout_toStartOf="@+id/item_player_game_result"
+            android:textSize="16sp"
+            tools:text="Ranked Solo 5x5" />
+
+        <TextView
+            android:id="@+id/item_player_game_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_player_game_title"
+            android:layout_toEndOf="@+id/item_player_game_icon"
+            android:layout_toRightOf="@+id/item_player_game_icon"
+            android:layout_toLeftOf="@+id/item_player_game_result"
+            android:layout_toStartOf="@+id/item_player_game_result"
+            android:textSize="14sp"
+            tools:text="One day ago" />
+
+        <TextView
+            android:id="@+id/item_player_game_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_player_game_date"
+            android:layout_toRightOf="@+id/item_player_game_icon"
+            android:layout_toEndOf="@+id/item_player_game_icon"
+            android:textSize="14sp"
+            tools:text="Lv. 18 5/3/5"
+            android:layout_toLeftOf="@+id/item_player_game_result"
+            android:layout_toStartOf="@+id/item_player_game_result" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/item_player_game_result"
+            android:background="@drawable/circle"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="16dp" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

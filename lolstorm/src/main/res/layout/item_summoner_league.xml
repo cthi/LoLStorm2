@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/item_summoner_league_rank"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/circle_blue"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:ignore="contentDescription" />
+
+        <TextView
+            android:id="@+id/item_summoner_league_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/item_summoner_league_rank"
+            android:layout_toRightOf="@id/item_summoner_league_rank"
+            android:textSize="16sp"
+            tools:text="Exodarkr" />
+
+        <TextView
+            android:id="@+id/item_summoner_league_wins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_summoner_league_name"
+            android:layout_toEndOf="@id/item_summoner_league_rank"
+            android:layout_toRightOf="@id/item_summoner_league_rank"
+            android:textSize="14sp"
+            tools:text="524 Wins" />
+
+        <TextView
+            android:id="@+id/item_summoner_league_lp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16sp"
+            tools:text="55 LP" />
+
+        <include
+            android:id="@+id/item_summoner_league_miniseries"
+            layout="@layout/item_mini_series"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
