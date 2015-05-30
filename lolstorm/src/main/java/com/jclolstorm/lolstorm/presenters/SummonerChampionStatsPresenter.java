@@ -6,7 +6,9 @@ import com.jclolstorm.lolstorm.views.SummonerChampionStatsView;
 
 import java.util.ArrayList;
 
+import lolstormSDK.GameConstants;
 import lolstormSDK.models.AggregatedStats;
+import lolstormSDK.models.ChampionStats;
 
 public class SummonerChampionStatsPresenter {
 
@@ -15,8 +17,9 @@ public class SummonerChampionStatsPresenter {
     public SummonerChampionStatsPresenter() {
     }
 
-    public void setStats(AggregatedStats stats) {
-        processStats(stats);
+    public void setStats(ChampionStats stats) {
+        view.setTitle(GameConstants.CHAMPION_NAME_MAP.get(Integer.toString(stats.getId())));
+        processStats(stats.getStats());
     }
 
     public void setView(SummonerChampionStatsView view) {

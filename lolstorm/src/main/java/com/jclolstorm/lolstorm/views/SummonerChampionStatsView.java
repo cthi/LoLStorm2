@@ -7,4 +7,6 @@ import java.util.List;
 public interface SummonerChampionStatsView {
 
     void populateAdapter(List<Stat> stats);
+
+    void setTitle(String string);
 }

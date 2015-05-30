@@ -119,6 +119,6 @@ public class SummonerChampionsAdapter extends BaseHeaderRecyclerViewAdapter<Cham
     }
 
     private ChampionStats getChampionStat(View view) {
-        return mChampionStatList.get(((ViewHolder)view.getTag()).getAdapterPosition());
+        return mChampionStatList.get(((ViewHolder)view.getTag()).getAdapterPosition() - 1);
     }
 }

@@ -47,13 +47,14 @@ public class SummonerChampionStatsActivity extends AppCompatActivity
 
         ChampionStats championStats = Parcels.unwrap(getIntent().getExtras()
                 .getParcelable(Constants.RANKED_CHAMPION_STATS_TAG));
-        presenter.setStats(championStats.getStats());
+        presenter.setStats(championStats);
 
     }
 
     private void initToolbar() {
         if (null != mToolbar) {
             setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -66,6 +67,11 @@ public class SummonerChampionStatsActivity extends AppCompatActivity
                     new SummonerChampionStatsAdapter(this, new ArrayList<>());
             mRecyclerView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public void setTitle(String string) {
+        getSupportActionBar().setTitle(string);
     }
 
     @Override
