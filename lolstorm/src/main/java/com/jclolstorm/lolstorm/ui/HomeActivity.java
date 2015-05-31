@@ -42,7 +42,6 @@ public class HomeActivity extends AppCompatActivity{
             mViewPager.setAdapter(new HomePagerAdapter(this, getSupportFragmentManager()));
 
             mTabLayout.setupWithViewPager(mViewPager);
-            mTabLayout.setBackgroundResource(R.color.blue);
         }
     }
 }

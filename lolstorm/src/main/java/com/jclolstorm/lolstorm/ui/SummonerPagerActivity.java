@@ -53,7 +53,6 @@ public class SummonerPagerActivity extends AppCompatActivity {
                     getIntent().getExtras()));
 
             mTabLayout.setupWithViewPager(mViewPager);
-            mTabLayout.setBackgroundResource(R.color.blue);
         }
     }
 }
