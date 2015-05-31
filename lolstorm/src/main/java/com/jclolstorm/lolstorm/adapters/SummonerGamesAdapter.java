@@ -25,19 +25,21 @@ import lolstormSDK.models.RawStats;
 public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
 
     private List<Game> mGameList;
-    private OnClick mListener;
+    private OnClick mCallback;
     private View mHeader;
     private Context mContext;
+    private View.OnClickListener mOnClickListener;
 
     public interface OnClick {
-        void onClick(int position);
+        void onClick(Game game);
     }
 
     public SummonerGamesAdapter(Context context, List<Game> gameList, View header, OnClick listener) {
         this.mGameList = gameList;
         this.mHeader = header;
-        this.mListener = listener;
+        this.mCallback = listener;
         this.mContext = context;
+        this.mOnClickListener = (View v) -> mCallback.onClick(mGameList.get(((ViewHolder)v.getTag()).getAdapterPosition() -1));
     }
 
     @Override
@@ -68,6 +70,8 @@ public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_player_game, parent, false);
 
+            view.setOnClickListener(mOnClickListener);
+
             return new ViewHolder(view);
         }
     }
@@ -93,6 +97,8 @@ public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
             super(view);
 
             ButterKnife.inject(this, view);
+
+            view.setTag(this);
         }
     }
 

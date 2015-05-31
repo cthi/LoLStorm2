@@ -1,5 +1,6 @@
 package com.jclolstorm.lolstorm.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.jclolstorm.lolstorm.views.SummonerGamesView;
 import org.parceler.Parcels;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lolstormSDK.models.Game;
 import lolstormSDK.models.RecentGames;
 
 public class SummonerGamesFragment extends Fragment implements SummonerGamesView,
@@ -85,8 +87,14 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(Game game) {
+        Intent intent = new Intent(getActivity(), SummonerGameResultActivity.class);
 
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.GAME_TAG, Parcels.wrap(game));
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
