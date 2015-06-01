@@ -2,12 +2,13 @@
 
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginBottom="8dp"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/blue_light">
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/blue_light"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,26 +19,26 @@
             android:id="@+id/header_summoner_champions_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/header_summoner_champions_title"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:text="@string/header_summoner_champions_title" />
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/header_summoner_champions_kda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/header_summoner_champions_title"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:layout_below="@id/header_summoner_champions_title"
             tools:text="5.5 / 3.5 / 5.5"/>
 
         <TextView
             android:id="@+id/header_summoner_champions_games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/header_summoner_champions_kda"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:layout_below="@id/header_summoner_champions_kda"
             tools:text="100 Games 50 W 50 L"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
