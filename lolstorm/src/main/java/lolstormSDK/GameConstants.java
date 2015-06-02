@@ -88,6 +88,7 @@ public class GameConstants {
         championMap.put("60","Elise");
         championMap.put("28","Evelynn");
         championMap.put("81","Ezreal");
+        championMap.put("245","Ekko");
         championMap.put("9","FiddleSticks");
         championMap.put("114","Fiora");
         championMap.put("105","Fizz");
@@ -215,6 +216,7 @@ public class GameConstants {
         championMap.put("131","Diana");
         championMap.put("36","Dr. Mundo");
         championMap.put("119","Draven");
+        championMap.put("245","Ekko");
         championMap.put("60","Elise");
         championMap.put("28","Evelynn");
         championMap.put("81","Ezreal");
