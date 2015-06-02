@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="@color/blue_light"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_champion_image"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            tools:ignore="contentDescription"
+            tools:src="@drawable/aatrox"/>
+
+        <TextView
+            android:id="@+id/header_game_result_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/header_game_result_champion_image"
+            android:layout_toRightOf="@id/header_game_result_champion_image"
+            android:paddingTop="16dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="HotShotGG"/>
+
+        <TextView
+            android:id="@+id/header_game_result_champion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_game_result_name"
+            android:layout_toEndOf="@id/header_game_result_champion_image"
+            android:layout_toRightOf="@id/header_game_result_champion_image"
+            android:textColor="@color/white"
+            tools:text="Aatrox"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_01"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/header_game_result_champion_image"
+            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_02"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_01"
+            android:layout_toRightOf="@id/header_game_result_spell_01"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_03"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_02"
+            android:layout_toRightOf="@id/header_game_result_spell_02"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_04"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_03"
+            android:layout_toRightOf="@id/header_game_result_spell_03"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_05"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_04"
+            android:layout_toRightOf="@id/header_game_result_spell_04"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_06"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_05"
+            android:layout_toRightOf="@id/header_game_result_spell_05"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_07"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_06"
+            android:layout_toRightOf="@id/header_game_result_spell_06"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_08"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toEndOf="@id/header_game_result_spell_07"
+            android:layout_toRightOf="@id/header_game_result_spell_07"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_spell_09"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/header_game_result_spell_01"
+            android:layout_toEndOf="@id/header_game_result_spell_08"
+            android:layout_toRightOf="@id/header_game_result_spell_08"
+            android:src="@drawable/_3004"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/header_game_result_indicator"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

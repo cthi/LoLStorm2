@@ -35,6 +35,7 @@ public class Player {
      int championId;
      long summonerId;
      int teamId;
+    boolean isWinner;
 
     public int getChampionId() {
         return championId;
@@ -60,9 +61,11 @@ public class Player {
         this.teamId = teamId;
     }
 
-    @Override
-    public String toString() {
-        return "Player [championId=" + championId + ", summonerId="
-                + summonerId + ", teamId=" + teamId + "]";
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setIsWinner(boolean winner) {
+        isWinner = winner;
     }
 }

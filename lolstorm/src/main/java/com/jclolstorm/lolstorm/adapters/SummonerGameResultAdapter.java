@@ -1,6 +1,7 @@
 package com.jclolstorm.lolstorm.adapters;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.GameConstants;
+import lolstormSDK.models.Game;
 import lolstormSDK.models.Player;
 
 public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Player> {
@@ -56,10 +58,12 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
 
             Player currentPlayer = mPlayerList.get(position - 1);
             viewHolder.summonerName.setText(currentPlayer.getSummonerName());
-            viewHolder.summonerChampionName.setText(GameConstants.CHAMPION_NAME_MAP.get(Integer.toString(currentPlayer.getChampionId())));
-            Glide.with(mContext)
-                    .load(ResourceUtils.championDrawableFromID(currentPlayer.getChampionId(), mContext))
-                    .into(viewHolder.summonerChampionImage);
+            viewHolder.summonerChampionName.setText(GameConstants.CHAMPION_NAME_MAP.get(Integer
+                    .toString(currentPlayer.getChampionId())));
+            viewHolder.summonerGameResult.getBackground()
+                    .setColorFilter(formatResultIndicator(currentPlayer.isWinner()), PorterDuff.Mode.MULTIPLY);
+            Glide.with(mContext).load(ResourceUtils.championDrawableFromID(currentPlayer
+                    .getChampionId(), mContext)).into(viewHolder.summonerChampionImage);
         }
     }
 
@@ -85,8 +89,11 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
         }
     }
 
-    private int formatResultIndicator(boolean playerWon, int teamId) {
-       // if (playerWon && teamId == game)
-        return 12;
+    private int formatResultIndicator(boolean playerWon) {
+       if (playerWon) {
+           return mContext.getResources().getColor(R.color.game_blue);
+       } else {
+           return mContext.getResources().getColor(R.color.game_red);
+       }
     }
 }

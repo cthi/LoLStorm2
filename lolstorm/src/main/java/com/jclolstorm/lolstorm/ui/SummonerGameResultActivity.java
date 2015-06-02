@@ -5,12 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.jclolstorm.lolstorm.adapters.SummonerGameResultAdapter;
 import com.jclolstorm.lolstorm.presenters.SummonerGameResultPresenter;
+import com.jclolstorm.lolstorm.ui.widgets.headers.SummonerGameResultHeader;
 import com.jclolstorm.lolstorm.utils.Constants;
 import com.jclolstorm.lolstorm.utils.NetworkUtils;
 import com.jclolstorm.lolstorm.views.SummonerGameResultView;
@@ -23,6 +23,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lolstormSDK.GameConstants;
 import lolstormSDK.models.Game;
 import lolstormSDK.models.Player;
 
@@ -33,15 +34,18 @@ public class SummonerGameResultActivity extends AppCompatActivity
     Toolbar mToolbar;
     @InjectView(R.id.summoner_game_result_rv)
     RecyclerView mRecyclerView;
-    private View mHeader;
+    private SummonerGameResultHeader mHeader;
 
     private SummonerGameResultPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.summoner_game_result_activity);
         ButterKnife.inject(this);
+
+        mHeader = new SummonerGameResultHeader(this);
 
         initToolbar();
         initRecyclerView();
@@ -50,7 +54,9 @@ public class SummonerGameResultActivity extends AppCompatActivity
         presenter.setView(this);
 
         Game game = Parcels.unwrap(getIntent().getExtras().getParcelable(Constants.GAME_TAG));
+        setTitle(GameConstants.GAME_TYPES.get(game.getSubType()));
         presenter.setGame(game);
+        mHeader.setGame(game);
     }
 
     private void initToolbar() {
@@ -66,7 +72,7 @@ public class SummonerGameResultActivity extends AppCompatActivity
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             BaseHeaderRecyclerViewAdapter<Player> adapter =
-                    new SummonerGameResultAdapter(this, new ArrayList<>(), new View(this));
+                    new SummonerGameResultAdapter(this, new ArrayList<>(), mHeader);
             mRecyclerView.setAdapter(adapter);
         }
     }

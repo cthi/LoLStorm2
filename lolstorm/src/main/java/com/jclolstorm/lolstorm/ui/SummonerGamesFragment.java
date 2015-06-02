@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.Game;
 import lolstormSDK.models.RecentGames;
+import lolstormSDK.models.Summoner;
 
 public class SummonerGamesFragment extends Fragment implements SummonerGamesView,
         SummonerGamesAdapter.OnClick {
@@ -48,12 +49,12 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
 
         presenter = new SummonerGamesPresenter();
         presenter.setView(this);
-        presenter.setSummoner(Parcels.unwrap(getArguments()
-                .getParcelable(Constants.SUMMONER_TAG)));
-        presenter.setLeauges(Parcels.unwrap(getArguments()
-                .getParcelable(Constants.LEAGUES_TAG)));
-        presenter.setPlayerStatsSummary(Parcels.unwrap(getArguments()
-                .getParcelable(Constants.PLAYER_STATS_SUMMARY_TAG)));
+
+        Summoner summoner = Parcels.unwrap(getArguments().getParcelable(Constants.SUMMONER_TAG));
+        presenter.setSummoner(summoner);
+        presenter.setLeauges(Parcels.unwrap(getArguments().getParcelable(Constants.LEAGUES_TAG)));
+        presenter.setPlayerStatsSummary(Parcels.unwrap(getArguments().getParcelable(Constants
+                .PLAYER_STATS_SUMMARY_TAG)));
         presenter.initHeaderData();
 
         return view;
