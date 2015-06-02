@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         initToolbar();
         initNavDrawer();
         linkDrawer();
+        initView();
     }
 
     @Override
@@ -66,18 +69,24 @@ public class HomeActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(item.equals("Search")) {
-                            getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.home_fragment, SummonerSearchFragment.newInstance())
-                                    .commit();
+                        Fragment fragment;
+
+                        if (item.equals("Search")) {
+                            fragment = SummonerSearchFragment.newInstance();
                         } else if (item.equals("About")) {
-                            getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.home_fragment, AboutFragment.newInstance())
-                                    .commit();
+                            fragment = AboutFragment.newInstance();
+                        } else {
+                            fragment = SummonerSearchFragment.newInstance();
                         }
 
+                        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R
+                                .id.home_fragment);
+                        if (fragment.getClass() != currentFragment.getClass()) {
+                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                            ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                            ft.replace(R.id.home_fragment, fragment).commit();
+
+                        }
                     }
                 }, 300);
                 return true;
@@ -87,8 +96,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void linkDrawer() {
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string
+                .drawer_open, R.string.drawer_close);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    private void initView() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment,
+                SummonerSearchFragment.newInstance()).commit();
+        mNavView.getMenu().getItem(0).setChecked(true);
     }
 }
