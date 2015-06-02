@@ -81,6 +81,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
 
         mPresenter = new SummonerSearchPresenter(this);
 
+        getActivity().setTitle(getString(R.string.summoner_search_title));
         return view;
     }
 
