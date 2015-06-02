@@ -71,6 +71,11 @@ public class HomeActivity extends AppCompatActivity {
                                     .beginTransaction()
                                     .replace(R.id.home_fragment, SummonerSearchFragment.newInstance())
                                     .commit();
+                        } else if (item.equals("About")) {
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.home_fragment, AboutFragment.newInstance())
+                                    .commit();
                         }
 
                     }
