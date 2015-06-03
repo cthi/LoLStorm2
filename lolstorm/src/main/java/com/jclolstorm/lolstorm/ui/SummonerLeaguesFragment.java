@@ -34,6 +34,7 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
     RecyclerView mRecyclerView;
     private SummonerLeaguesHeader mHeader;
 
+    private BaseHeaderRecyclerViewAdapter<LeagueEntry> mAdapter;
     private SummonerLeaguesPresenter presenter;
 
     public static SummonerLeaguesFragment newInstance(Bundle bundle) {
@@ -73,9 +74,8 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
 
             initHeader();
 
-            SummonerLeaguesAdapter adapter =
-                    new SummonerLeaguesAdapter(getActivity(), new ArrayList<>(), mHeader);
-            mRecyclerView.setAdapter(adapter);
+            mAdapter = new SummonerLeaguesAdapter(getActivity(), new ArrayList<>(), mHeader);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 
@@ -85,7 +85,7 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
 
     @Override
     public void populateAdapter(List<LeagueEntry> entries) {
-        ((BaseHeaderRecyclerViewAdapter) mRecyclerView.getAdapter()).populate(entries);
+        mAdapter.populate(entries);
     }
 
 }

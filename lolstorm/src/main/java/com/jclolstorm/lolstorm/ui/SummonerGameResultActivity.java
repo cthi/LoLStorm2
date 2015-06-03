@@ -36,8 +36,8 @@ public class SummonerGameResultActivity extends AppCompatActivity
     RecyclerView mRecyclerView;
     private SummonerGameResultHeader mHeader;
 
+    private BaseHeaderRecyclerViewAdapter<Player> mAdapter;
     private SummonerGameResultPresenter presenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +71,8 @@ public class SummonerGameResultActivity extends AppCompatActivity
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            BaseHeaderRecyclerViewAdapter<Player> adapter =
-                    new SummonerGameResultAdapter(this, new ArrayList<>(), mHeader);
-            mRecyclerView.setAdapter(adapter);
+            mAdapter = new SummonerGameResultAdapter(this, new ArrayList<>(), mHeader);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 
@@ -84,7 +83,7 @@ public class SummonerGameResultActivity extends AppCompatActivity
 
     @Override
     public void populateAdapter(List<Player> stats) {
-        ((BaseHeaderRecyclerViewAdapter)mRecyclerView.getAdapter()).populate(stats);
+        mAdapter.populate(stats);
     }
 
     @Override

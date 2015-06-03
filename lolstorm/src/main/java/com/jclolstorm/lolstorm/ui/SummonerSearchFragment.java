@@ -41,6 +41,8 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     @InjectView(R.id.summoner_search_rv)
     RecyclerView mRecyclerView;
     private View mHeader;
+
+    private BaseHeaderRecyclerViewAdapter<User> mAdapter;
     private EditText mSearchText;
     private Button mSearchButton;
 
@@ -60,7 +62,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
 
     @Override
     public void populateAdapter(List<User> users) {
-        ((BaseHeaderRecyclerViewAdapter) mRecyclerView.getAdapter()).populate(users);
+        mAdapter.populate(users);
     }
 
     public SummonerSearchFragment() {}
@@ -93,9 +95,8 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
             mHeader = LayoutInflater.from(getActivity())
                     .inflate(R.layout.header_summoner_search, mRecyclerView, false);
 
-            SummonerSearchAdapter adapter =
-                    new SummonerSearchAdapter(new ArrayList<>(), mHeader, this, getActivity());
-            mRecyclerView.setAdapter(adapter);
+            mAdapter = new SummonerSearchAdapter(new ArrayList<>(), mHeader, this, getActivity());
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 

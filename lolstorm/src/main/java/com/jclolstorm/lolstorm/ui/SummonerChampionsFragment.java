@@ -31,8 +31,9 @@ public class SummonerChampionsFragment extends Fragment implements
 
     @InjectView(R.id.summoner_champions_rv)
     RecyclerView mRecyclerView;
-
     private SummonerChampionsHeader header;
+
+    private BaseHeaderRecyclerViewAdapter<ChampionStats> mAdapter;
     private SummonerChampionsPresenter presenter;
 
     public static SummonerChampionsFragment newInstance(Bundle bundle) {
@@ -62,7 +63,7 @@ public class SummonerChampionsFragment extends Fragment implements
 
     @Override
     public void populateAdapter(List<ChampionStats> championStats) {
-        ((BaseHeaderRecyclerViewAdapter) mRecyclerView.getAdapter()).populate(championStats);
+        mAdapter.populate(championStats);
     }
 
     @Override
@@ -75,9 +76,8 @@ public class SummonerChampionsFragment extends Fragment implements
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            SummonerChampionsAdapter adapter =
-                    new SummonerChampionsAdapter(getActivity(), this, new ArrayList<>(), header);
-            mRecyclerView.setAdapter(adapter);
+            mAdapter = new SummonerChampionsAdapter(getActivity(), this, new ArrayList<>(), header);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 

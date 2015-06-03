@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jclolstorm.lolstorm.R;
+import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.jclolstorm.lolstorm.adapters.SummonerGamesAdapter;
 import com.jclolstorm.lolstorm.presenters.SummonerGamesPresenter;
 import com.jclolstorm.lolstorm.ui.widgets.headers.SummonerGamesHeader;
@@ -30,6 +31,7 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     RecyclerView mRecyclerView;
     private SummonerGamesHeader mHeader;
 
+    private BaseHeaderRecyclerViewAdapter<Game> mAdapter;
     private SummonerGamesPresenter presenter;
 
     public static SummonerGamesFragment newInstance(Bundle bundle) {
@@ -74,9 +76,8 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
             RecentGames rg = Parcels.unwrap(getArguments()
                     .getParcelable(Constants.RECENT_GAMES_TAG));
 
-            SummonerGamesAdapter adapter =
-                    new SummonerGamesAdapter(getActivity(), rg.getGames(), mHeader, this);
-            mRecyclerView.setAdapter(adapter);
+            mAdapter = new SummonerGamesAdapter(getActivity(), rg.getGames(), mHeader, this);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 
