@@ -3,6 +3,7 @@ package com.jclolstorm.lolstorm.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
@@ -48,14 +48,14 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
 
     @Override
     public void displaySummonerNotFoundError() {
-        Toast.makeText(getActivity(), getString(R.string.error_summoner_not_found),
-                Toast.LENGTH_SHORT).show();
+        Snackbar.make(mRecyclerView, R.string.error_summoner_not_found, Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Override
     public void displayInternetError() {
-        Toast.makeText(getActivity(), getString(R.string.error_internet_connection),
-                Toast.LENGTH_SHORT).show();
+        Snackbar.make(mRecyclerView, R.string.error_internet_connection, Snackbar.LENGTH_SHORT)
+                .show();
     }
 
     @Override
