@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
-    app:cardBackgroundColor="@color/blue_light"
+    app:cardBackgroundColor="@color/green_primary_light"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -22,7 +22,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="@string/header_summoner_search_title"
-            android:textColor="@color/blue"
+            android:textColor="@color/green_primary"
             android:textSize="16sp"/>
 
         <EditText

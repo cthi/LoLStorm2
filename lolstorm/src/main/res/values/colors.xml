@@ -19,9 +19,10 @@
     <color name="white">#ffffff</color>
     <color name="white_transparent">#66ffffff</color>
     <color name="black">#000000</color>
-    <color name="blue_light">#1976D2</color>
-    <color name="blue">#1565C0</color>
-    <color name="dark_blue">#0D47A1</color>
+
+    <color name="green_primary_light">#26A69A</color>
+    <color name="green_primary">#009688</color>
+    <color name="green_primary_dark">#006e60</color>
 
     <color name="game_red">#f44336</color>
     <color name="game_blue">#03a9f4</color>

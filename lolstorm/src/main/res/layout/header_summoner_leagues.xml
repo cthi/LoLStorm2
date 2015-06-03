@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
-    app:cardBackgroundColor="@color/blue_light"
+    app:cardBackgroundColor="@color/green_primary_light"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

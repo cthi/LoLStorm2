@@ -19,8 +19,8 @@
     <style name="Theme.LoLStorm" parent="Base.Theme.LoLStorm"/>
 
     <style name="Base.Theme.LoLStorm" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorPrimaryDark">@color/green_primary_dark</item>
         <item name="colorAccent">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorButtonNormal">@color/white</item>
