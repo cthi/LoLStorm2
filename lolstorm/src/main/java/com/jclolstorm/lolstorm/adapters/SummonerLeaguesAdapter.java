@@ -56,7 +56,7 @@ public class SummonerLeaguesAdapter extends BaseHeaderRecyclerViewAdapter<League
 
     @Override
     public int getItemCount() {
-        return mEntryList.size();
+        return mEntryList.size() + 1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

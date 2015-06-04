@@ -78,7 +78,7 @@ public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
 
     @Override
     public int getItemCount() {
-        return mGameList.size();
+        return mGameList.size() + 1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder  {
