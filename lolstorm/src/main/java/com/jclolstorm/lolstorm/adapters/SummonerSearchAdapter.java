@@ -17,7 +17,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import lolstormSDK.models.Summoner;
 
 public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
 

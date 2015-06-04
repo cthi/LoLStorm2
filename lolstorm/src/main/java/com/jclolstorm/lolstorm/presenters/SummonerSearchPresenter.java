@@ -123,7 +123,7 @@ public class SummonerSearchPresenter {
             }
         }
 
-        users.add(new User(summoner.getName(), "na", summoner.getProfileIconId()));
+        users.add(0, new User(summoner.getName(), "na", summoner.getProfileIconId()));
         savedSummonerList.updateSavedUsers(users);
     }
 }
