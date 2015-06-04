@@ -16,6 +16,9 @@
   -->
 
 <resources>
+    <dimen name="view_padding">4dp</dimen>
+    <dimen name="view_card_padding">1dp</dimen>
+
     <dimen name="tab_height">48dp</dimen>
 
     <dimen name="item_summoner_height">72dp</dimen>
