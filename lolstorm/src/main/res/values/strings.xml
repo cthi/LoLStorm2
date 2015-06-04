@@ -18,6 +18,8 @@
     <string name="app_name">LoLStorm</string>
 
     <string name="summoner_search_title">Search</string>
+    <string name="summoner_champions_title">Champions</string>
+    <string name="about_title">About</string>
 
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
@@ -27,8 +29,8 @@
 
     <string name="header_summoner_search_title">Search</string>
     <string name="header_summoner_champions_title">Ranked Statistics</string>
-    <!-- String Arrays -->
 
+    <!-- String Arrays -->
     <string-array name="home_pager_items">
         <item>Search</item>
         <item>Champions</item>
@@ -48,7 +50,6 @@
     </string-array>
 
     <!-- About -->
-    <string name="about_title">About</string>
     <string name="about_app_disclaimer">LoL Storm is free, ad free, and ONLY distributed on the Google Play Store. Distribution on other websites is prohibited.</string>
     <string name="about_riot_disclaimer">LoL Storm isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc."</string>
     <string name="about_open_source_libs_title">Open source libraries used:</string>
