@@ -75,6 +75,8 @@ public class HomeActivity extends AppCompatActivity {
                             fragment = SummonerSearchFragment.newInstance();
                         } else if (item.equals("About")) {
                             fragment = AboutFragment.newInstance();
+                        } else if (item.equals("Champions")) {
+                            fragment = ChampionsFragment.newInstance();
                         } else {
                             fragment = SummonerSearchFragment.newInstance();
                         }
