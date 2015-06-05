@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jclolstorm.lolstorm.R;
+import com.jclolstorm.lolstorm.adapters.ChampionsAdapter;
 
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,8 +26,8 @@ public class ChampionsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         View view = inflater.inflate(R.layout.champions_fragment, container, false);
 
         ButterKnife.inject(this, view);
@@ -39,6 +41,7 @@ public class ChampionsFragment extends Fragment {
         if (null != mRecyclerView) {
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecyclerView.setAdapter(new ChampionsAdapter(getActivity(), new ArrayList<>()));
         }
     }
 }
