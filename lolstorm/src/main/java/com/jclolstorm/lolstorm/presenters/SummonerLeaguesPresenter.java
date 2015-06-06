@@ -1,28 +1,31 @@
 package com.jclolstorm.lolstorm.presenters;
 
-import android.util.Log;
 
+import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.views.SummonerLeaguesView;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import lolstormSDK.GameConstants;
 import lolstormSDK.models.League;
 import lolstormSDK.models.LeagueEntry;
+import lolstormSDK.modules.RiotApiModule;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class SummonerLeaguesPresenter {
 
     private final static String QUEUE_TYPE = "RANKED_SOLO_5x5";
 
-
-    private SummonerLeaguesView view;
-
     private League currentLeague;
     private List<LeagueEntry> currentEntries;
-    private long summonerID;
     private int currentDivision;
+
+    private SummonerLeaguesView view;
 
     public SummonerLeaguesPresenter() {}
 
@@ -30,29 +33,52 @@ public class SummonerLeaguesPresenter {
         this.view = view;
     }
 
-    public void setSummonerID(long summonerID) {
-        this.summonerID = summonerID;
-    }
-
-    public void setLeagues(List<League> leagues) {
-        findQueue(leagues);
-
+    private void updateView() {
         view.populateAdapter(currentEntries);
         view.initHeaderData(currentLeague, currentDivision);
-        // set views here.
     }
 
-    private void findQueue(List<League> leagues) {
+    public void setUser(User user) {
+        if (null == currentEntries || null == currentLeague) {
+            getLeagues(user.getUserID());
+        } else {
+            updateView();
+        }
+    }
+
+    private void getLeagues(long userID) {
+        RiotApiModule.getSummonerLeagues(userID)
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(3)
+                .subscribe(new Subscriber<Map<String, List<League>>>() {
+                    @Override
+                    public void onCompleted() {
+                        updateView();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // TODO display error view
+                    }
+
+                    @Override
+                    public void onNext(Map<String, List<League>> stringListMap) {
+                        findQueue(stringListMap.get(Long.toString(userID)), userID);
+                    }
+                });
+    }
+
+    private void findQueue(List<League> leagues, long userID) {
         for (League league : leagues) {
             if (league.getQueue().equals(QUEUE_TYPE)) {
                 currentLeague = league;
-                sortEntriesIntoDivision(league.getEntries());
+                sortEntriesIntoDivision(league.getEntries(), userID);
                 break;
             }
         }
     }
 
-    private void sortEntriesIntoDivision(List<LeagueEntry> entries) {
+    private void sortEntriesIntoDivision(List<LeagueEntry> entries, long userID) {
         ArrayList<ArrayList<LeagueEntry>> sorted = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
@@ -73,10 +99,10 @@ public class SummonerLeaguesPresenter {
             }
         }
 
-        currentDivision = getCurrentDivision(sorted, summonerID);
-        Collections.sort(sorted.get(currentDivision -1));
+        currentDivision = getCurrentDivision(sorted, userID);
+        Collections.sort(sorted.get(currentDivision - 1));
 
-        currentEntries = sorted.get(currentDivision -1);
+        currentEntries = sorted.get(currentDivision - 1);
     }
 
     private int getCurrentDivision(ArrayList<ArrayList<LeagueEntry>> entries, Long id) {

@@ -55,8 +55,7 @@ public class SummonerChampionsFragment extends Fragment implements
 
         presenter = new SummonerChampionsPresenter();
         presenter.setView(this);
-        presenter.setRankedStats(Parcels.unwrap(getArguments()
-                .getParcelable(Constants.RANKED_STATS_TAG)));
+        presenter.setUser(Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG)));
 
         return view;
     }

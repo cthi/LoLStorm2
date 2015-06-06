@@ -21,7 +21,7 @@ public interface SummonerSearchView extends BaseView {
 
     void populateAdapter(List<User> users);
 
-    void startPlayerView(Summoner summoner, PlayerStatsSummaryList pss, RecentGames rg,
+    void startPlayerView(User user, Summoner summoner, PlayerStatsSummaryList pss, RecentGames rg,
                          RankedStats rs, List<League> leagues);
 
 }

@@ -121,7 +121,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     }
 
     @Override
-    public void startPlayerView(Summoner summoner, PlayerStatsSummaryList pss, RecentGames rg,
+    public void startPlayerView(User user, Summoner summoner, PlayerStatsSummaryList pss, RecentGames rg,
                                 RankedStats rs, List<League> leagues) {
 
         Intent intent = new Intent(getActivity(), SummonerPagerActivity.class);
@@ -132,6 +132,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
         bundle.putParcelable(Constants.RECENT_GAMES_TAG, Parcels.wrap(rg));
         bundle.putParcelable(Constants.RANKED_STATS_TAG, Parcels.wrap(rs));
         bundle.putParcelable(Constants.LEAGUES_TAG, Parcels.wrap(leagues));
+        bundle.putParcelable(Constants.USER_TAG, Parcels.wrap(user));
 
         intent.putExtras(bundle);
 

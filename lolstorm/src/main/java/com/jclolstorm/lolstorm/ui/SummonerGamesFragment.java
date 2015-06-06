@@ -12,17 +12,20 @@ import android.view.ViewGroup;
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.jclolstorm.lolstorm.adapters.SummonerGamesAdapter;
+import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.presenters.SummonerGamesPresenter;
 import com.jclolstorm.lolstorm.ui.widgets.headers.SummonerGamesHeader;
 import com.jclolstorm.lolstorm.utils.Constants;
 import com.jclolstorm.lolstorm.views.SummonerGamesView;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.Game;
-import lolstormSDK.models.RecentGames;
-import lolstormSDK.models.Summoner;
 
 public class SummonerGamesFragment extends Fragment implements SummonerGamesView,
         SummonerGamesAdapter.OnClick {
@@ -47,17 +50,17 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
         View view = inflater.inflate(R.layout.summoner_games_fragment, container, false);
 
         ButterKnife.inject(this, view);
+
+        initHeader();
         initRecyclerView();
+
+        User user = Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG));
 
         presenter = new SummonerGamesPresenter();
         presenter.setView(this);
+        presenter.setUser(user);
 
-        Summoner summoner = Parcels.unwrap(getArguments().getParcelable(Constants.SUMMONER_TAG));
-        presenter.setSummoner(summoner);
-        presenter.setLeauges(Parcels.unwrap(getArguments().getParcelable(Constants.LEAGUES_TAG)));
-        presenter.setPlayerStatsSummary(Parcels.unwrap(getArguments().getParcelable(Constants
-                .PLAYER_STATS_SUMMARY_TAG)));
-        presenter.initHeaderData();
+        mHeader.initHeaderData(user);
 
         return view;
     }
@@ -71,21 +74,9 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            initHeader();
-
-            RecentGames rg = Parcels.unwrap(getArguments()
-                    .getParcelable(Constants.RECENT_GAMES_TAG));
-
-            mAdapter = new SummonerGamesAdapter(getActivity(), rg.getGames(), mHeader, this);
+            mAdapter = new SummonerGamesAdapter(getActivity(), new ArrayList<>(), mHeader, this);
             mRecyclerView.setAdapter(mAdapter);
         }
-    }
-
-    @Override
-    public void initHeaderData(String name, String info, int profileImage){
-        mHeader.setPlayerName(name);
-        mHeader.setPlayerInfo(info);
-        mHeader.setPlayerIcon(profileImage);
     }
 
     @Override
@@ -97,6 +88,12 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
 
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void populate(List<Game> gameList) {
+        mAdapter.populate(gameList);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

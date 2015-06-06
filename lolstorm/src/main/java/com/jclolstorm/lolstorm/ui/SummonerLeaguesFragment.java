@@ -54,13 +54,21 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
         initHeader();
         initRecyclerView();
 
+        if (null == savedInstanceState) {
+            System.out.println("NEW FRAGMENT");
+        } else {
+
+        }
         presenter = new SummonerLeaguesPresenter();
         presenter.setView(this);
-        Summoner summoner = Parcels.unwrap(getArguments().getParcelable(Constants.SUMMONER_TAG));
-        presenter.setSummonerID(summoner.getId());
-        presenter.setLeagues(Parcels.unwrap(getArguments().getParcelable(Constants.LEAGUES_TAG)));
+        presenter.setUser(Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG)));
 
         return view;
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(Constants.PRESENTER_TAG, 2);
     }
 
     private void initHeader() {
@@ -71,8 +79,6 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
         if (null != mRecyclerView) {
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-            initHeader();
 
             mAdapter = new SummonerLeaguesAdapter(getActivity(), new ArrayList<>(), mHeader);
             mRecyclerView.setAdapter(mAdapter);
@@ -87,5 +93,4 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
     public void populateAdapter(List<LeagueEntry> entries) {
         mAdapter.populate(entries);
     }
-
 }

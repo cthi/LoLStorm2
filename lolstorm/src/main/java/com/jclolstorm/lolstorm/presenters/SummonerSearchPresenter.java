@@ -92,7 +92,8 @@ public class SummonerSearchPresenter {
 
                     @Override
                     public void onCompleted() {
-                        view.startPlayerView(summoner, stats,games, rstats, leagues);
+                        User user = new User(summoner.getName(), "na", summoner.getProfileIconId(), summoner.getSummonerLevel(), summoner.getId());
+                        view.startPlayerView(user, summoner, stats, games, rstats, leagues);
                     }
 
                     @Override

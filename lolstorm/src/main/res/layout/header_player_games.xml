@@ -32,32 +32,23 @@
         <TextView
             android:id="@+id/header_player_games_player_name"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_toEndOf="@id/header_player_games_player_icon"
             android:layout_toRightOf="@id/header_player_games_player_icon"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="28sp"
             tools:text="Exodarkr"/>
 
-        <ImageView
-            android:id="@+id/header_player_games_player_rank"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/header_player_games_player_name"
-            android:padding="3dp"/>
-
         <TextView
-            android:id="@+id/header_player_games_player_info"
+            android:id="@+id/header_player_games_player_level"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/header_player_games_player_name"
+            android:layout_toEndOf="@id/header_player_games_player_icon"
+            android:layout_toRightOf="@id/header_player_games_player_icon"
             android:gravity="center_vertical"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:textColor="@color/white"
             android:textSize="16sp"
-            tools:text="Level 30  Diamond 5  8999 Wins"/>
+            tools:text="Level 30"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

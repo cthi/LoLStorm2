@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jclolstorm.lolstorm.R;
+import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.utils.ResourceUtils;
-
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -18,12 +18,10 @@ public class SummonerGamesHeader extends RelativeLayout {
 
     @InjectView(R.id.header_player_games_player_name)
     TextView mPlayerName;
-    @InjectView(R.id.header_player_games_player_info)
-    TextView mPlayerInfo;
+    @InjectView(R.id.header_player_games_player_level)
+    TextView mPlayerLevel;
     @InjectView(R.id.header_player_games_player_icon)
     ImageView mPlayerIcon;
-    @InjectView(R.id.header_player_games_player_rank)
-    ImageView mPlayerRank;
 
     public SummonerGamesHeader(Context context) {
         super(context, null);
@@ -40,21 +38,15 @@ public class SummonerGamesHeader extends RelativeLayout {
         init();
     }
 
-    public void setPlayerName(String name) {
-        mPlayerName.setText(name);
-    }
-
-    public void setPlayerInfo(String info) {
-        mPlayerInfo.setText(info);
-    }
-
-    public void setPlayerIcon(int resource) {
-        Glide.with(getContext()).load(ResourceUtils.numberedDrawableFromID(resource, getContext()))
-                .into(mPlayerIcon);
-    }
-
     private void init() {
         inflate(getContext(), R.layout.header_player_games, this);
         ButterKnife.inject(this);
+    }
+
+    public void initHeaderData(User user) {
+        mPlayerName.setText(user.getName());
+        mPlayerLevel.setText(Long.toString(user.getLevel()));
+        Glide.with(getContext()).load(ResourceUtils.numberedDrawableFromID(user.getIconID(),
+                getContext())).into(mPlayerIcon);
     }
 }
