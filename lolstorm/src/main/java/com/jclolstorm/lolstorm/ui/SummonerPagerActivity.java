@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.SummonerPagerAdapter;
+import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.utils.Constants;
 
 import org.parceler.Parcels;
@@ -41,9 +42,9 @@ public class SummonerPagerActivity extends AppCompatActivity {
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            Summoner summoner = Parcels.unwrap(getIntent()
-                    .getExtras().getParcelable(Constants.SUMMONER_TAG));
-            getSupportActionBar().setTitle(RiotEndpoint.getInstance().getRegion().toUpperCase() + " " + summoner.getName());
+            User user = Parcels.unwrap(getIntent()
+                    .getExtras().getParcelable(Constants.USER_TAG));
+            getSupportActionBar().setTitle(RiotEndpoint.getInstance().getRegion().toUpperCase() + " " + user.getName());
         }
     }
 

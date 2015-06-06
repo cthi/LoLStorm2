@@ -54,11 +54,6 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
         initHeader();
         initRecyclerView();
 
-        if (null == savedInstanceState) {
-            System.out.println("NEW FRAGMENT");
-        } else {
-
-        }
         presenter = new SummonerLeaguesPresenter();
         presenter.setView(this);
         presenter.setUser(Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG)));
@@ -68,7 +63,6 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(Constants.PRESENTER_TAG, 2);
     }
 
     private void initHeader() {
