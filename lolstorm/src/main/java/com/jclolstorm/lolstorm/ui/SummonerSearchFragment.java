@@ -116,6 +116,11 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     }
 
     @Override
+    public void onFavorited(int position) {
+
+    }
+
+    @Override
     public boolean hasConnection() {
         return NetworkUtils.hasConnection(getActivity());
     }

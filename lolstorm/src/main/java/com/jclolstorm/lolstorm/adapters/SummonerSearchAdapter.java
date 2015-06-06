@@ -27,6 +27,8 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
 
     public interface OnClick {
         void onClick(int position);
+
+        void onFavorited(int position);
     }
 
     public SummonerSearchAdapter(List<User> userList, View header, OnClick listener, Context context) {
@@ -73,6 +75,8 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
         TextView mRegion;
         @InjectView(R.id.item_summoner_img)
         ImageView mIcon;
+        @InjectView(R.id.item_summoner_fav)
+        ImageView mFav;
 
         public ViewHolder(View view) {
             super(view);
@@ -80,6 +84,13 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
             ButterKnife.inject(this, view);
 
             view.setOnClickListener(this);
+
+            mFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onFavorited(getAdapterPosition());
+                }
+            });
         }
 
         @Override
