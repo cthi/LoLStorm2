@@ -69,6 +69,7 @@ public class SummonerSearchPresenter {
 
     private void saveUser(User newUser) {
         for (User user : users) {
+
             if (user.getName().equals(newUser.getName()) &&
                     user.getRegion().equals("na")) {
                 return;
