@@ -37,6 +37,7 @@ public class SummonerChampionsPresenter {
     private void updateView() {
         mView.populateAdapter(mStatList);
         mView.setHeaderData(mHeaderStat);
+        mView.hideLoading();
     }
 
     private void getRankedStats(long userID) {

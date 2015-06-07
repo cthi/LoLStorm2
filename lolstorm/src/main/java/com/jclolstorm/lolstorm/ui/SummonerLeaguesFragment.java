@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
@@ -30,6 +31,8 @@ import lolstormSDK.models.Summoner;
 
 public class SummonerLeaguesFragment extends Fragment implements SummonerLeaguesView {
 
+    @InjectView(R.id.summoner_leagues_progress)
+    ProgressBar mProgressBar;
     @InjectView(R.id.summoner_leagues_rv)
     RecyclerView mRecyclerView;
     private SummonerLeaguesHeader mHeader;
@@ -51,6 +54,8 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
 
         ButterKnife.inject(this, view);
 
+        showLoading();
+
         initHeader();
         initRecyclerView();
 
@@ -61,8 +66,14 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
         return view;
     }
 
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    private void showLoading() {
+        mRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgressBar.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
     private void initHeader() {

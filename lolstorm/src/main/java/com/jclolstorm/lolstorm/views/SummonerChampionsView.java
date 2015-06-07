@@ -10,4 +10,6 @@ public interface SummonerChampionsView {
     void populateAdapter(List<ChampionStats> championStats);
 
     void setHeaderData(ChampionStats championStat);
+
+    void hideLoading();
 }

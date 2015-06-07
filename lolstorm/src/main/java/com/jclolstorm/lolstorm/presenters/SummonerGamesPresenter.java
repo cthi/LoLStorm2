@@ -25,6 +25,7 @@ public class SummonerGamesPresenter {
 
     private void updateView() {
         view.populate(gameList);
+        view.hideLoading();
     }
 
     public void setUser(User user) {

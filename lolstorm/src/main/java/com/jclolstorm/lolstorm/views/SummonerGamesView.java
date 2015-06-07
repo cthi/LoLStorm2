@@ -8,4 +8,6 @@ import lolstormSDK.models.Game;
 public interface SummonerGamesView extends BaseView {
 
     void populate(List<Game> gameList);
+
+    void hideLoading();
 }

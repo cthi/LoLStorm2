@@ -9,4 +9,6 @@ public interface SummonerLeaguesView {
     void populateAdapter(List<LeagueEntry> entries);
 
     void initHeaderData(League league, int division);
+
+    void hideLoading();
 }

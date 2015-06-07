@@ -36,6 +36,7 @@ public class SummonerLeaguesPresenter {
     private void updateView() {
         view.populateAdapter(currentEntries);
         view.initHeaderData(currentLeague, currentDivision);
+        view.hideLoading();
     }
 
     public void setUser(User user) {
