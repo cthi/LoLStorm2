@@ -1,6 +1,7 @@
 package com.jclolstorm.lolstorm.ui;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -29,12 +30,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import lolstormSDK.models.League;
-import lolstormSDK.models.PlayerStatsSummaryList;
-import lolstormSDK.models.RankedStats;
-import lolstormSDK.models.RecentGames;
-import lolstormSDK.models.Summoner;
-
 
 public class SummonerSearchFragment extends Fragment implements SummonerSearchView, SummonerSearchAdapter.OnClick{
 
@@ -42,11 +37,26 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     RecyclerView mRecyclerView;
     private View mHeader;
 
+    private OnFavorite mFavoriteCallback;
     private BaseHeaderRecyclerViewAdapter<User> mAdapter;
     private EditText mSearchText;
     private Button mSearchButton;
 
     SummonerSearchPresenter mPresenter;
+
+    public interface OnFavorite {
+        void onFavorite(User user);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mFavoriteCallback = (OnFavorite) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onFavorite");
+        }
+    }
 
     @Override
     public void displaySummonerNotFoundError() {
@@ -116,8 +126,8 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     }
 
     @Override
-    public void onFavorited(int position) {
-
+    public void onFavorite(User user) {
+        mFavoriteCallback.onFavorite(user);
     }
 
     @Override

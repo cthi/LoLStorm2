@@ -12,11 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.jclolstorm.lolstorm.R;
+import com.jclolstorm.lolstorm.models.User;
+import com.jclolstorm.lolstorm.ui.widgets.headers.NavViewHeader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lolstormSDK.modules.SavedDrawerUser;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements SummonerSearchFragment.OnFavorite {
 
     @InjectView(R.id.home_activity_toolbar)
     Toolbar mToolbar;
@@ -24,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     @InjectView(R.id.home_drawer)
     NavigationView mNavView;
+    private NavViewHeader mHeader;
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
@@ -33,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         initToolbar();
+        initHeader();
         initNavDrawer();
         linkDrawer();
         initView();
@@ -50,6 +55,12 @@ public class HomeActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onFavorite(User user) {
+        new SavedDrawerUser(this).updateSavedDrawerUser(user);
+        mHeader.setUser(user);
+    }
+
     private void initToolbar() {
         if (null != mToolbar) {
             setSupportActionBar(mToolbar);
@@ -57,8 +68,18 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    private void initHeader() {
+        mHeader = new NavViewHeader(this);
+
+        SavedDrawerUser savedDrawerUser = new SavedDrawerUser(this);
+        User savedUser = savedDrawerUser.getSavedDrawerUser();
+
+        mHeader.setUser(savedUser);
+    }
+
     private void initNavDrawer() {
         if (null != mNavView) {
+            mNavView.addHeaderView(mHeader);
             mNavView.setNavigationItemSelectedListener((menuItem -> {
                 menuItem.setChecked(true);
 

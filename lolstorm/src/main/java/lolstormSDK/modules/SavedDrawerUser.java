@@ -10,6 +10,7 @@ import com.jclolstorm.lolstorm.models.User;
 public class SavedDrawerUser {
 
     private final String DRAWER_USER_TAG = "drawer_user_tag";
+    private User defaultUser;
 
     private SharedPreferences mPreferences;
 
@@ -29,9 +30,17 @@ public class SavedDrawerUser {
         String historyAsJson = mPreferences.getString(DRAWER_USER_TAG, null);
 
         if (null == historyAsJson) {
-            return null;
+            return getDefaultUser();
         } else {
             return new Gson().fromJson(historyAsJson, User.class);
         }
+    }
+
+    private User getDefaultUser() {
+        if (null == defaultUser) {
+            defaultUser = new User("LoLStorm", "na", 502);
+        }
+
+        return defaultUser;
     }
 }

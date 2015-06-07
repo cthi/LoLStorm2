@@ -28,7 +28,7 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
     public interface OnClick {
         void onClick(int position);
 
-        void onFavorited(int position);
+        void onFavorite(User user);
     }
 
     public SummonerSearchAdapter(List<User> userList, View header, OnClick listener, Context context) {
@@ -88,7 +88,7 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
             mFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onFavorited(getAdapterPosition());
+                    mListener.onFavorite(mUserList.get(getAdapterPosition() -1));
                 }
             });
         }
