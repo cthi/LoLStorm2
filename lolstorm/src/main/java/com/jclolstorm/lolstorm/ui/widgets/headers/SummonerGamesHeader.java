@@ -45,8 +45,12 @@ public class SummonerGamesHeader extends RelativeLayout {
 
     public void initHeaderData(User user) {
         mPlayerName.setText(user.getName());
-        mPlayerLevel.setText(Long.toString(user.getLevel()));
+        mPlayerLevel.setText(formatLevel(user.getLevel()));
         Glide.with(getContext()).load(ResourceUtils.numberedDrawableFromID(user.getIconID(),
                 getContext())).into(mPlayerIcon);
+    }
+
+    private String formatLevel(long level) {
+        return String.format("Level %d", level);
     }
 }

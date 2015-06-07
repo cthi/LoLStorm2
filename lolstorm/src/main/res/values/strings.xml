@@ -28,7 +28,6 @@
     <string name="error_summoner_not_found">The summoner was not found.</string>
 
     <string name="header_summoner_search_title">Search</string>
-    <string name="header_summoner_champions_title">Ranked Statistics</string>
 
     <!-- String Arrays -->
     <string-array name="home_pager_items">

@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.jclolstorm.lolstorm.R;
 
+import java.text.DecimalFormat;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.AggregatedStats;
@@ -36,6 +38,7 @@ public class SummonerChampionsHeader extends RelativeLayout {
 
     public void setStats(ChampionStats championStats) {
         mSummonerTotalKda.setText(formatKDA(championStats.getStats()));
+        System.out.println(formatStats(championStats.getStats()));
         mSummonerTotalGames.setText(formatStats(championStats.getStats()));
     }
 
@@ -54,10 +57,14 @@ public class SummonerChampionsHeader extends RelativeLayout {
     }
 
     private String formatStats(AggregatedStats stats) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
         int played = stats.getTotalSessionsPlayed();
         int won = stats.getTotalSessionsWon();
         int lost = stats.getTotalSessionsLost();
+        float wonPct = (float) won / played * 100;
+        float lostPct = (float) lost / played * 100;
 
-        return String.format(String.format("Games: %d Won: %d Lost: %d", played, won, lost));
+        return String.format("W: %d - %s%% L: %d - %s%%", won, decimalFormat.format(wonPct),
+                lost, decimalFormat.format(lostPct));
     }
 }
