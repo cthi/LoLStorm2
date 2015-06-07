@@ -50,6 +50,7 @@ public class SummonerPagerActivity extends AppCompatActivity {
 
     private void initPager() {
         if (null != mTabLayout) {
+            mViewPager.setOffscreenPageLimit(2);
             mViewPager.setAdapter(new SummonerPagerAdapter(this, getSupportFragmentManager(),
                     getIntent().getExtras()));
 
