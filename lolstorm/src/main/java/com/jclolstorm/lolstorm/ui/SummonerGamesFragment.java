@@ -37,6 +37,8 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     private BaseHeaderRecyclerViewAdapter<Game> mAdapter;
     private SummonerGamesPresenter presenter;
 
+    private User user;
+
     public static SummonerGamesFragment newInstance(Bundle bundle) {
         SummonerGamesFragment fragment = new SummonerGamesFragment();
         fragment.setArguments(bundle);
@@ -54,7 +56,7 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
         initHeader();
         initRecyclerView();
 
-        User user = Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG));
+        user = Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG));
 
         presenter = new SummonerGamesPresenter();
         presenter.setView(this);
@@ -85,6 +87,7 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.GAME_TAG, Parcels.wrap(game));
+        bundle.putParcelable(Constants.USER_TAG, Parcels.wrap(user));
 
         intent.putExtras(bundle);
         startActivity(intent);

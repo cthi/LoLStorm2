@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jclolstorm.lolstorm.R;
+import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.utils.ResourceUtils;
 
 import butterknife.ButterKnife;
@@ -103,6 +104,9 @@ public class SummonerGameResultHeader extends RelativeLayout {
                 .setColorFilter(formatResultIndicator(stats.getWin()), PorterDuff.Mode.MULTIPLY);
     }
 
+    public void setUser(User user) {
+        mSummonerName.setText(user.getName());
+    }
     private void init() {
         inflate(getContext(), R.layout.header_game_result, this);
         ButterKnife.inject(this);

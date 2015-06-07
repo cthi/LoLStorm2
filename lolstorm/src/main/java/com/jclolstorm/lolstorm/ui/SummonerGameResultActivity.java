@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.jclolstorm.lolstorm.adapters.SummonerGameResultAdapter;
+import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.presenters.SummonerGameResultPresenter;
 import com.jclolstorm.lolstorm.ui.widgets.headers.SummonerGameResultHeader;
 import com.jclolstorm.lolstorm.utils.Constants;
@@ -57,6 +58,9 @@ public class SummonerGameResultActivity extends AppCompatActivity
         setTitle(GameConstants.GAME_TYPES.get(game.getSubType()));
         presenter.setGame(game);
         mHeader.setGame(game);
+
+        User user = Parcels.unwrap(getIntent().getExtras().getParcelable(Constants.USER_TAG));
+        mHeader.setUser(user);
     }
 
     private void initToolbar() {

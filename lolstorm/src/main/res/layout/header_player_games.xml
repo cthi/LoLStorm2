@@ -19,8 +19,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/header_player_games_player_icon"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"

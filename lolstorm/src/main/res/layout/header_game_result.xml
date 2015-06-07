@@ -20,8 +20,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/header_game_result_champion_image"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -38,10 +38,10 @@
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/header_game_result_champion_image"
             android:layout_toRightOf="@id/header_game_result_champion_image"
-            android:paddingTop="16dp"
             android:textColor="@color/white"
             android:textSize="16sp"
-            tools:text="HotShotGG"/>
+            tools:text="HotShotGG"
+            android:paddingTop="8dp"/>
 
         <TextView
             android:id="@+id/header_game_result_champion"
