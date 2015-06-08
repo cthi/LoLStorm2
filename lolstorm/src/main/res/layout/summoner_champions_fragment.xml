@@ -3,18 +3,22 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/summoner_champions_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:visibility="invisible"
         android:padding="@dimen/view_padding"/>
 
-    <ProgressBar
+    <com.jclolstorm.lolstorm.ui.widgets.ColoredProgressBar
         android:id="@+id/summoner_champions_progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="?android:attr/progressBarStyleLarge"/>
 
 </FrameLayout>

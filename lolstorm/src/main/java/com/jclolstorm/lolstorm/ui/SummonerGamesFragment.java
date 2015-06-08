@@ -56,8 +56,6 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
 
         ButterKnife.inject(this, view);
 
-        showLoading();
-
         initHeader();
         initRecyclerView();
 
@@ -70,10 +68,6 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
         mHeader.initHeaderData(user);
 
         return view;
-    }
-
-    private void showLoading() {
-        mRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
