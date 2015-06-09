@@ -51,7 +51,7 @@ public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
 
             viewHolder.mGameTitle.setText(GameConstants.GAME_TYPES.get(game.getSubType()));
             viewHolder.mGameDate.setText(DateUtils.getTimeElapsed(game.getCreateDate()));
-            viewHolder.mGameScore.setText(formatScore(game.getLevel(), stats.getChampionsKilled(),
+            viewHolder.mGameScore.setText(formatScore(game.getStats().getLevel(), stats.getChampionsKilled(),
                     stats.getNumDeaths(), stats.getAssists()));
             Glide.with(mContext).load(ResourceUtils
                     .championDrawableFromID(game.getChampionId(), mContext))
