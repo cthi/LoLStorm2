@@ -46,7 +46,8 @@ public class SummonerGamesPresenter {
 
             @Override
             public void onError(Throwable e) {
-                // TODO show error view
+                System.out.println("ERRRRRRRRRRRRRRRRor");
+                view.showNoDataView();
             }
 
             @Override

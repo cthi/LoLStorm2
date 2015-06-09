@@ -50,7 +50,7 @@ public class SummonerChampionsPresenter {
 
             @Override
             public void onError(Throwable e) {
-                // TODO display error view
+                mView.showNoDataView();
             }
 
 

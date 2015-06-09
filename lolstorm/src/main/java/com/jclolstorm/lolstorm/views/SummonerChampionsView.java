@@ -12,4 +12,7 @@ public interface SummonerChampionsView {
     void setHeaderData(ChampionStats championStat);
 
     void hideLoading();
+
+    void showNoDataView();
+
 }

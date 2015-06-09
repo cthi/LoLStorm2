@@ -11,4 +11,6 @@ public interface SummonerLeaguesView {
     void initHeaderData(League league, int division);
 
     void hideLoading();
+
+    void showNoDataView();
 }

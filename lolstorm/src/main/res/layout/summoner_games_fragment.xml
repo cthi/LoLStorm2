@@ -11,14 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:visibility="invisible"
-        android:padding="@dimen/view_padding"/>
+        android:padding="@dimen/view_padding"
+        android:visibility="invisible"/>
 
     <com.jclolstorm.lolstorm.ui.widgets.ColoredProgressBar
         android:id="@+id/summoner_games_progress"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        style="?android:attr/progressBarStyleLarge"/>
+        android:layout_gravity="center"/>
+
+    <include
+        layout="@layout/no_info_error"/>
 
 </FrameLayout>

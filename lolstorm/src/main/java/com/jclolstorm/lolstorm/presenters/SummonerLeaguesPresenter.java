@@ -59,7 +59,7 @@ public class SummonerLeaguesPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        // TODO display error view
+                        view.showNoDataView();
                     }
 
                     @Override

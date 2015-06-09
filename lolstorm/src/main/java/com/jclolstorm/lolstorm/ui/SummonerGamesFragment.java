@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
@@ -31,6 +32,8 @@ import lolstormSDK.models.Game;
 public class SummonerGamesFragment extends Fragment implements SummonerGamesView,
         SummonerGamesAdapter.OnClick {
 
+    @InjectView(R.id.no_info_error)
+    TextView mNoData;
     @InjectView(R.id.summoner_games_progress)
     ProgressBar mProgressBar;
     @InjectView(R.id.summoner_games_rv)
@@ -74,6 +77,13 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     public void hideLoading() {
         mProgressBar.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showNoDataView() {
+        mNoData.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void initHeader() {

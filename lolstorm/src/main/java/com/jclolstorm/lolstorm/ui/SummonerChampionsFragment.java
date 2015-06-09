@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
@@ -30,6 +31,8 @@ import lolstormSDK.models.ChampionStats;
 public class SummonerChampionsFragment extends Fragment implements
         SummonerChampionsView, SummonerChampionsAdapter.OnClick {
 
+    @InjectView(R.id.no_info_error)
+    TextView mNoData;
     @InjectView(R.id.summoner_champions_progress)
     ProgressBar mProgressBar;
     @InjectView(R.id.summoner_champions_rv)
@@ -53,8 +56,6 @@ public class SummonerChampionsFragment extends Fragment implements
 
         ButterKnife.inject(this, view);
 
-        showLoading();
-
         header = new SummonerChampionsHeader(getActivity());
         initRecyclerView();
 
@@ -75,8 +76,11 @@ public class SummonerChampionsFragment extends Fragment implements
         header.setStats(championStat);
     }
 
-    private void showLoading() {
+    @Override
+    public void showNoDataView() {
+        mNoData.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override

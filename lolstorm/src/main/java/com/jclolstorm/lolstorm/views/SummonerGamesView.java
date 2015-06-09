@@ -10,4 +10,6 @@ public interface SummonerGamesView extends BaseView {
     void populate(List<Game> gameList);
 
     void hideLoading();
+
+    void showNoDataView();
 }
