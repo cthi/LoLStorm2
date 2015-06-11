@@ -94,10 +94,10 @@ public class SummonerGameResultHeader extends RelativeLayout {
                 .load(ResourceUtils.numberedDrawableFromID(stats.getItem6(), getContext()))
                 .into(mSpell07);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(game.getSpell1(), getContext()))
+                .load(ResourceUtils.spellDrawableFromID(game.getSpell1(), getContext()))
                 .into(mSpell08);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(game.getSpell2(), getContext()))
+                .load(ResourceUtils.spellDrawableFromID(game.getSpell2(), getContext()))
                 .into(mSpell09);
 
         mResultIndicator.getBackground()

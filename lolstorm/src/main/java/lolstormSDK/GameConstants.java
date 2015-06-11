@@ -8,6 +8,7 @@ public class GameConstants {
     public static final Map<String, String> GAME_TYPES;
     public static final Map<String, String> CHAMPION_KEY_MAP;
     public static final Map<String, String> CHAMPION_NAME_MAP;
+    public static final Map<Integer, String> SPELL_ID_MAP;
 
     public final static String DIV_1 = "I";
     public final static String DIV_2 = "II";
@@ -322,5 +323,27 @@ public class GameConstants {
         championMap.put("143","Zyra");
 
         CHAMPION_NAME_MAP = Collections.unmodifiableMap(championMap);
+    }
+
+    static {
+        Map<Integer, String> spellIDMap = new HashMap<>();
+
+        spellIDMap.put(1, "summonerboost");
+        spellIDMap.put(12, "summonerteleport");
+        spellIDMap.put(30, "summonerpororecall");
+        spellIDMap.put(14, "summonerdot");
+        spellIDMap.put(6, "summonerhaste");
+        spellIDMap.put(32, "summonersnowball");
+        spellIDMap.put(7, "summonerheal");
+        spellIDMap.put(11, "summonersmite");
+        spellIDMap.put(3, "summonerexhaust");
+        spellIDMap.put(31, "summonerporothrow");
+        spellIDMap.put(13, "summonermana");
+        spellIDMap.put(2, "summonerclairvoyance");
+        spellIDMap.put(21, "summonerbarrier");
+        spellIDMap.put(4, "summonerFlash");
+        spellIDMap.put(17, "summonerOdinGarrison");
+
+        SPELL_ID_MAP = Collections.unmodifiableMap(spellIDMap);
     }
 }
