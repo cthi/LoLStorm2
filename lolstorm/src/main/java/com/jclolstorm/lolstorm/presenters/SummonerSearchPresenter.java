@@ -23,7 +23,6 @@ public class SummonerSearchPresenter {
         this.view = view;
 
         savedSummonerList = new SavedSummonerList(((SummonerSearchFragment) view).getActivity());
-        initSummonerList();
     }
 
     private void initSummonerList() {
@@ -46,6 +45,7 @@ public class SummonerSearchPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Map<String, Summoner>>() {
                     User newUser;
+
                     @Override
                     public void onCompleted() {
                         view.startPlayerView(newUser);
@@ -60,7 +60,8 @@ public class SummonerSearchPresenter {
                     @Override
                     public void onNext(Map<String, Summoner> stringSummonerMap) {
                         Summoner summoner = stringSummonerMap.get(filteredName);
-                        newUser = new User(summoner.getName(), "na", summoner.getProfileIconId(), summoner.getSummonerLevel(), summoner.getId());
+                        newUser = new User(summoner.getName(), "na", summoner.getProfileIconId(),
+                                summoner.getSummonerLevel(), summoner.getId());
 
                         saveUser(newUser);
                     }
@@ -88,5 +89,9 @@ public class SummonerSearchPresenter {
 
         users.add(0, newUser);
         savedSummonerList.updateSavedUsers(users);
+    }
+
+    public void onResume() {
+        initSummonerList();
     }
 }

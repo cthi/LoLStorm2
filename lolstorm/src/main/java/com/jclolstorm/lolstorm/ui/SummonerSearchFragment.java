@@ -48,6 +48,12 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
         void onFavorite(User user);
     }
 
+    public SummonerSearchFragment() {}
+
+    public static SummonerSearchFragment newInstance() {
+        return new SummonerSearchFragment();
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -56,6 +62,28 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement onFavorite");
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.summoner_search_fragment, container, false);
+
+        ButterKnife.inject(this, view);
+
+        initRecyclerView();
+        initHeaderClick();
+
+        mPresenter = new SummonerSearchPresenter(this);
+
+        getActivity().setTitle(getString(R.string.summoner_search_title));
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.onResume();
     }
 
     @Override
@@ -73,28 +101,6 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     @Override
     public void populateAdapter(List<User> users) {
         mAdapter.populate(users);
-    }
-
-    public SummonerSearchFragment() {}
-
-    public static SummonerSearchFragment newInstance() {
-        return new SummonerSearchFragment();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.summoner_search_fragment, container, false);
-
-        ButterKnife.inject(this, view);
-
-        initRecyclerView();
-        initHeaderClick();
-
-        mPresenter = new SummonerSearchPresenter(this);
-
-        getActivity().setTitle(getString(R.string.summoner_search_title));
-        return view;
     }
 
     private void initRecyclerView() {
