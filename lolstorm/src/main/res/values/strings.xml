@@ -30,6 +30,9 @@
 
     <string name="header_summoner_search_title">Search</string>
 
+    <!-- Summoner Search Fragment -->
+    <string name="player_updated">Your favorite player has been updated.</string>
+
     <!-- String Arrays -->
     <string-array name="home_pager_items">
         <item>Search</item>
@@ -62,5 +65,9 @@
         <item>o.reactivex:rxandroid:0.24.0</item>
         <item>org.parceler:parceler-api:1.0.0</item>
     </string-array>
+
+    <!-- Menu -->
+    <string name="summoner_menu_fav">Favorite</string>
+    <string name="summoner_menu_remove">Remove</string>
 
 </resources>

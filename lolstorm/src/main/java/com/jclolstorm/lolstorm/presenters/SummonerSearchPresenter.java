@@ -67,16 +67,26 @@ public class SummonerSearchPresenter {
                 });
     }
 
+    public void removeUser(User toRemove) {
+        for (User user : users) {
+            if (user.getName().equals(toRemove.getName()) &&
+                    user.getRegion().equals("na")) {
+                users.remove(user);
+                savedSummonerList.updateSavedUsers(users);
+                return;
+            }
+        }
+    }
+
     private void saveUser(User newUser) {
         for (User user : users) {
-
             if (user.getName().equals(newUser.getName()) &&
                     user.getRegion().equals("na")) {
                 return;
             }
         }
 
-        users.add(newUser);
+        users.add(0, newUser);
         savedSummonerList.updateSavedUsers(users);
     }
 }

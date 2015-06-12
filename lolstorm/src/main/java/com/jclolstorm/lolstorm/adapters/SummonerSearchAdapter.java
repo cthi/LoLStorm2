@@ -1,10 +1,13 @@
 package com.jclolstorm.lolstorm.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,9 +32,12 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
         void onClick(int position);
 
         void onFavorite(User user);
+
+        void onRemove(User user);
     }
 
-    public SummonerSearchAdapter(List<User> userList, View header, OnClick listener, Context context) {
+    public SummonerSearchAdapter(List<User> userList, View header, OnClick listener, Context
+            context) {
         this.mUserList = userList;
         this.mHeader = header;
         this.mListener = listener;
@@ -47,12 +53,12 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) != HEADER) {
             ViewHolder viewHolder = (ViewHolder) holder;
-            User user = mUserList.get(position -1);
+            User user = mUserList.get(position - 1);
 
             viewHolder.mName.setText(user.getName());
             viewHolder.mRegion.setText(user.getRegion());
-            Glide.with(mContext).load(ResourceUtils.numberedDrawableFromID(user.getIconID(), mContext))
-            .into(viewHolder.mIcon);
+            Glide.with(mContext).load(ResourceUtils.numberedDrawableFromID(user.getIconID(),
+                    mContext)).into(viewHolder.mIcon);
         }
     }
 
@@ -61,8 +67,8 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
         if (getItemViewType(position) == HEADER) {
             return new HeaderViewHolder(mHeader);
         } else {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_summoner, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_summoner,
+                    parent, false);
 
             return new ViewHolder(view);
         }
@@ -76,7 +82,7 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
         @InjectView(R.id.item_summoner_img)
         ImageView mIcon;
         @InjectView(R.id.item_summoner_fav)
-        ImageView mFav;
+        ImageButton mFav;
 
         public ViewHolder(View view) {
             super(view);
@@ -84,13 +90,7 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
             ButterKnife.inject(this, view);
 
             view.setOnClickListener(this);
-
-            mFav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onFavorite(mUserList.get(getAdapterPosition() -1));
-                }
-            });
+            mFav.setOnClickListener(new OnSummonerMenuClickedListener(this));
         }
 
         @Override
@@ -103,5 +103,37 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
     public void populate(List<User> users) {
         mUserList = users;
         notifyDataSetChanged();
+    }
+
+    private class OnSummonerMenuClickedListener implements View.OnClickListener, PopupMenu
+            .OnMenuItemClickListener {
+        RecyclerView.ViewHolder viewHolder;
+
+        public OnSummonerMenuClickedListener(RecyclerView.ViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View v) {
+            PopupMenu popupMenu = new PopupMenu(mContext, v);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.inflate(R.menu.summoner_menu);
+            popupMenu.show();
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.summoner_menu_fav:
+                    mListener.onFavorite(mUserList.get(viewHolder.getAdapterPosition() - 1));
+                    return true;
+                case R.id.summoner_menu_remove:
+                    mListener.onRemove(mUserList.get(viewHolder.getAdapterPosition() - 1));
+                    notifyItemRemoved(viewHolder.getLayoutPosition());
+                    return true;
+                default:
+                    return false;
+            }
+        }
     }
 }

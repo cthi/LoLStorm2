@@ -127,7 +127,13 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
 
     @Override
     public void onFavorite(User user) {
+        Snackbar.make(mRecyclerView, R.string.player_updated, Snackbar.LENGTH_SHORT).show();
         mFavoriteCallback.onFavorite(user);
+    }
+
+    @Override
+    public void onRemove(User user) {
+        mPresenter.removeUser(user);
     }
 
     @Override
