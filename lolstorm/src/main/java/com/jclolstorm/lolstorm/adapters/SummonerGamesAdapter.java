@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jclolstorm.lolstorm.R;
-import com.jclolstorm.lolstorm.utils.ResourceUtils;
 import com.jclolstorm.lolstorm.utils.DateUtils;
+import com.jclolstorm.lolstorm.utils.ResourceUtils;
 
 import java.util.List;
 
@@ -24,64 +24,24 @@ import lolstormSDK.models.RawStats;
 
 public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
 
-    private List<Game> mGameList;
-    private OnClick mCallback;
-    private View mHeader;
     private Context mContext;
-    private View.OnClickListener mOnClickListener;
+    private List<Game> mGameList;
+    private View mHeader;
+    private OnGameItemClick mListener;
 
-    public interface OnClick {
-        void onClick(Game game);
+    public interface OnGameItemClick {
+        void onGameClick(Game game);
     }
 
-    public SummonerGamesAdapter(Context context, List<Game> gameList, View header, OnClick listener) {
+    public SummonerGamesAdapter(Context context, List<Game> gameList, View header,
+                                OnGameItemClick listener) {
         this.mGameList = gameList;
         this.mHeader = header;
-        this.mCallback = listener;
+        this.mListener = listener;
         this.mContext = context;
-        this.mOnClickListener = (View v) -> mCallback.onClick(mGameList.get(((ViewHolder)v.getTag()).getAdapterPosition() -1));
     }
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) != HEADER) {
-            ViewHolder viewHolder = (ViewHolder) holder;
-            Game game = mGameList.get(position - 1);
-            RawStats stats = game.getStats();
-
-            viewHolder.mGameTitle.setText(GameConstants.GAME_TYPES.get(game.getSubType()));
-            viewHolder.mGameDate.setText(DateUtils.getTimeElapsed(game.getCreateDate()));
-            viewHolder.mGameScore.setText(formatScore(game.getStats().getLevel(), stats.getChampionsKilled(),
-                    stats.getNumDeaths(), stats.getAssists()));
-            Glide.with(mContext).load(ResourceUtils
-                    .championDrawableFromID(game.getChampionId(), mContext))
-                    .into(viewHolder.mChampionIcon);
-
-            viewHolder.mGameResult.
-                    getBackground().setColorFilter(formatColor(game), PorterDuff.Mode.MULTIPLY);
-        }
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
-        if (getItemViewType(position) == HEADER) {
-            return new HeaderViewHolder(mHeader);
-        } else {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_player_game, parent, false);
-
-            view.setOnClickListener(mOnClickListener);
-
-            return new ViewHolder(view);
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mGameList.size() + 1;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder  {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.item_player_game_icon)
         ImageView mChampionIcon;
         @InjectView(R.id.item_player_game_title)
@@ -97,8 +57,58 @@ public class SummonerGamesAdapter extends BaseHeaderRecyclerViewAdapter<Game> {
             super(view);
 
             ButterKnife.inject(this, view);
+        }
+    }
 
-            view.setTag(this);
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
+        if (getItemViewType(position) == HEADER) {
+            return new HeaderViewHolder(mHeader);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
+                    .item_player_game, parent, false);
+
+            ViewHolder viewHolder = new ViewHolder(view);
+            view.setOnClickListener(new OnGameClickedListener(viewHolder));
+
+            return viewHolder;
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position) != HEADER) {
+            ViewHolder viewHolder = (ViewHolder) holder;
+            Game game = mGameList.get(position - 1);
+            RawStats stats = game.getStats();
+
+            viewHolder.mGameTitle.setText(GameConstants.GAME_TYPES.get(game.getSubType()));
+            viewHolder.mGameDate.setText(DateUtils.getTimeElapsed(game.getCreateDate()));
+            viewHolder.mGameScore.setText(formatScore(game.getStats().getLevel(), stats
+                    .getChampionsKilled(), stats.getNumDeaths(), stats.getAssists()));
+            Glide.with(mContext).load(ResourceUtils.championDrawableFromID(game.getChampionId(),
+                    mContext)).into(viewHolder.mChampionIcon);
+
+            viewHolder.mGameResult.
+                    getBackground().setColorFilter(formatColor(game), PorterDuff.Mode.MULTIPLY);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mGameList.size() + 1;
+    }
+
+    private class OnGameClickedListener implements View.OnClickListener {
+        RecyclerView.ViewHolder viewHolder;
+
+        public OnGameClickedListener(RecyclerView.ViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onGameClick(mGameList.get(viewHolder.getAdapterPosition() - 1));
         }
     }
 

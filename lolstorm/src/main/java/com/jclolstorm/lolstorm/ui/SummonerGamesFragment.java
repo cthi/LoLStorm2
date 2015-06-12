@@ -29,8 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.Game;
 
-public class SummonerGamesFragment extends Fragment implements SummonerGamesView,
-        SummonerGamesAdapter.OnClick {
+public class SummonerGamesFragment extends Fragment implements SummonerGamesView, SummonerGamesAdapter.OnGameItemClick {
 
     @InjectView(R.id.no_info_error)
     TextView mNoData;
@@ -101,7 +100,7 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     }
 
     @Override
-    public void onClick(Game game) {
+    public void onGameClick(Game game) {
         Intent intent = new Intent(getActivity(), SummonerGameResultActivity.class);
 
         Bundle bundle = new Bundle();
