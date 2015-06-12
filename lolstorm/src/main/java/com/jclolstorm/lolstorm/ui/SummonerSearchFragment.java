@@ -31,7 +31,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class SummonerSearchFragment extends Fragment implements SummonerSearchView, SummonerSearchAdapter.OnClick{
+public class SummonerSearchFragment extends Fragment implements SummonerSearchView, SummonerSearchAdapter.OnSummonerItemClick {
 
     @InjectView(R.id.summoner_search_rv)
     RecyclerView mRecyclerView;
@@ -60,7 +60,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
         try {
             mFavoriteCallback = (OnFavorite) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement onFavorite");
+            throw new ClassCastException(activity.toString() + " must implement onSummonerFavorite");
         }
     }
 
@@ -127,18 +127,18 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     }
 
     @Override
-    public void onClick(int position) {
-
+    public void onSummonerClick(User user) {
+        startPlayerView(user);
     }
 
     @Override
-    public void onFavorite(User user) {
+    public void onSummonerFavorite(User user) {
         Snackbar.make(mRecyclerView, R.string.player_updated, Snackbar.LENGTH_SHORT).show();
         mFavoriteCallback.onFavorite(user);
     }
 
     @Override
-    public void onRemove(User user) {
+    public void onSummonerRemove(User user) {
         mPresenter.removeUser(user);
     }
 

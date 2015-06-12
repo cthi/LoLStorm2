@@ -23,20 +23,20 @@ import butterknife.InjectView;
 
 public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
 
-    private List<User> mUserList;
-    private OnClick mListener;
-    private View mHeader;
     private Context mContext;
+    private List<User> mUserList;
+    private View mHeader;
+    private OnSummonerItemClick mListener;
 
-    public interface OnClick {
-        void onClick(int position);
+    public interface OnSummonerItemClick {
+        void onSummonerClick(User user);
 
-        void onFavorite(User user);
+        void onSummonerFavorite(User user);
 
-        void onRemove(User user);
+        void onSummonerRemove(User user);
     }
 
-    public SummonerSearchAdapter(List<User> userList, View header, OnClick listener, Context
+    public SummonerSearchAdapter(List<User> userList, View header, OnSummonerItemClick listener, Context
             context) {
         this.mUserList = userList;
         this.mHeader = header;
@@ -44,9 +44,37 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
         this.mContext = context;
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.item_summoner_league_name)
+        TextView mName;
+        @InjectView(R.id.item_summoner_region)
+        TextView mRegion;
+        @InjectView(R.id.item_summoner_img)
+        ImageView mIcon;
+        @InjectView(R.id.item_summoner_fav)
+        ImageButton mFav;
+
+        public ViewHolder(View view) {
+            super(view);
+
+            ButterKnife.inject(this, view);
+        }
+    }
+
     @Override
-    public int getItemCount() {
-        return mUserList.size() + 1;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
+        if (getItemViewType(position) == HEADER) {
+            return new HeaderViewHolder(mHeader);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_summoner,
+                    parent, false);
+
+            ViewHolder viewHolder = new ViewHolder(view);
+            view.setOnClickListener(new OnSummonerClickedListener(viewHolder));
+            viewHolder.mFav.setOnClickListener(new OnSummonerMenuClickedListener(viewHolder));
+
+            return viewHolder;
+        }
     }
 
     @Override
@@ -63,46 +91,21 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
-        if (getItemViewType(position) == HEADER) {
-            return new HeaderViewHolder(mHeader);
-        } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_summoner,
-                    parent, false);
-
-            return new ViewHolder(view);
-        }
+    public int getItemCount() {
+        return mUserList.size() + 1;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @InjectView(R.id.item_summoner_league_name)
-        TextView mName;
-        @InjectView(R.id.item_summoner_region)
-        TextView mRegion;
-        @InjectView(R.id.item_summoner_img)
-        ImageView mIcon;
-        @InjectView(R.id.item_summoner_fav)
-        ImageButton mFav;
+    private class OnSummonerClickedListener implements View.OnClickListener {
+        RecyclerView.ViewHolder viewHolder;
 
-        public ViewHolder(View view) {
-            super(view);
-
-            ButterKnife.inject(this, view);
-
-            view.setOnClickListener(this);
-            mFav.setOnClickListener(new OnSummonerMenuClickedListener(this));
+        public OnSummonerClickedListener(RecyclerView.ViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
         }
 
         @Override
-        public void onClick(View view) {
-            mListener.onClick(getAdapterPosition());
+        public void onClick(View v) {
+            mListener.onSummonerClick(mUserList.get(viewHolder.getAdapterPosition() - 1));
         }
-    }
-
-    @Override
-    public void populate(List<User> users) {
-        mUserList = users;
-        notifyDataSetChanged();
     }
 
     private class OnSummonerMenuClickedListener implements View.OnClickListener, PopupMenu
@@ -125,15 +128,21 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.summoner_menu_fav:
-                    mListener.onFavorite(mUserList.get(viewHolder.getAdapterPosition() - 1));
+                    mListener.onSummonerFavorite(mUserList.get(viewHolder.getAdapterPosition() - 1));
                     return true;
                 case R.id.summoner_menu_remove:
-                    mListener.onRemove(mUserList.get(viewHolder.getAdapterPosition() - 1));
+                    mListener.onSummonerRemove(mUserList.get(viewHolder.getAdapterPosition() - 1));
                     notifyItemRemoved(viewHolder.getLayoutPosition());
                     return true;
                 default:
                     return false;
             }
         }
+    }
+
+    @Override
+    public void populate(List<User> users) {
+        mUserList = users;
+        notifyDataSetChanged();
     }
 }
