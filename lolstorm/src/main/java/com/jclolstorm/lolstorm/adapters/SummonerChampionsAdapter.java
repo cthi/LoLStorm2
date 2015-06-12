@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.GameConstants;
 import lolstormSDK.models.AggregatedStats;
-import lolstormSDK.models.ChampionStat;
 import lolstormSDK.models.ChampionStats;
 
 public class SummonerChampionsAdapter extends BaseHeaderRecyclerViewAdapter<ChampionStats> {
@@ -26,55 +25,18 @@ public class SummonerChampionsAdapter extends BaseHeaderRecyclerViewAdapter<Cham
     private Context mContext;
     private List<ChampionStats> mChampionStatList;
     private View mHeader;
-    private OnClick mCallback;
-    private View.OnClickListener mOnClickListener;
+    private OnChampionItemClick mListener;
 
-    public interface OnClick {
-        void onClick(ChampionStats chapionStat);
+    public interface OnChampionItemClick {
+        void onChampionClick(ChampionStats championStats);
     }
 
-    public SummonerChampionsAdapter(Context context, OnClick callback, List<ChampionStats> championStatList,
-                                    View header) {
+    public SummonerChampionsAdapter(Context context, OnChampionItemClick callback, List<ChampionStats>
+            championStatList, View header) {
         this.mContext = context;
-        this.mCallback = callback;
+        this.mListener = callback;
         this.mChampionStatList = championStatList;
         this.mHeader = header;
-        this.mOnClickListener = (View v) -> mCallback.onClick(getChampionStat(v));
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
-        if (getItemViewType(position) == HEADER) {
-            return new HeaderViewHolder(mHeader);
-        } else {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_summoner_champion, parent, false);
-
-            view.setOnClickListener(mOnClickListener);
-
-            return new ViewHolder(view);
-        }
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (getItemViewType(position) != HEADER) {
-            ViewHolder viewHolder = (ViewHolder) holder;
-            ChampionStats currentStat = mChampionStatList.get(position - 1);
-
-            Glide.with(mContext)
-                    .load(ResourceUtils.championDrawableFromID(currentStat.getId(), mContext))
-                    .into(viewHolder.mChampionImage);
-            viewHolder.mChampionName.setText(GameConstants.CHAMPION_NAME_MAP
-                    .get(Integer.toString(currentStat.getId())));
-            viewHolder.mChampionKda.setText(formatKDA(currentStat.getStats()));
-            viewHolder.mChampionStats.setText(formatStats(currentStat.getStats()));
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mChampionStatList.size() + 1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -91,7 +53,54 @@ public class SummonerChampionsAdapter extends BaseHeaderRecyclerViewAdapter<Cham
             super(view);
 
             ButterKnife.inject(this, view);
-            view.setTag(this);
+        }
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
+        if (getItemViewType(position) == HEADER) {
+            return new HeaderViewHolder(mHeader);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout
+                    .item_summoner_champion, parent, false);
+
+            ViewHolder viewHolder = new ViewHolder(view);
+            view.setOnClickListener(new OnChampionClickedListener(viewHolder));
+
+            return viewHolder;
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position) != HEADER) {
+            ViewHolder viewHolder = (ViewHolder) holder;
+            ChampionStats currentStat = mChampionStatList.get(position - 1);
+
+            Glide.with(mContext).load(ResourceUtils.championDrawableFromID(currentStat.getId(),
+                    mContext)).into(viewHolder.mChampionImage);
+            viewHolder.mChampionName.setText(GameConstants.CHAMPION_NAME_MAP.get(Integer.toString
+                    (currentStat.getId())));
+            viewHolder.mChampionKda.setText(formatKDA(currentStat.getStats()));
+            viewHolder.mChampionStats.setText(formatStats(currentStat.getStats()));
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mChampionStatList.size() + 1;
+    }
+
+    private class OnChampionClickedListener implements View.OnClickListener {
+        RecyclerView.ViewHolder viewHolder;
+
+        public OnChampionClickedListener(RecyclerView.ViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onChampionClick(mChampionStatList.get(viewHolder.getAdapterPosition() - 1));
         }
     }
 
@@ -115,10 +124,6 @@ public class SummonerChampionsAdapter extends BaseHeaderRecyclerViewAdapter<Cham
         int won = stats.getTotalSessionsWon();
         int lost = stats.getTotalSessionsLost();
 
-        return String.format(String.format("Games: %d Won: %d Lost: %d", played, won, lost));
-    }
-
-    private ChampionStats getChampionStat(View view) {
-        return mChampionStatList.get(((ViewHolder)view.getTag()).getAdapterPosition() - 1);
+        return String.format("Games: %d Won: %d Lost: %d", played, won, lost);
     }
 }

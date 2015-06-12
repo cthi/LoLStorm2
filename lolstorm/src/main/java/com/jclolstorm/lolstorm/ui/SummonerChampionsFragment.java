@@ -29,7 +29,7 @@ import butterknife.InjectView;
 import lolstormSDK.models.ChampionStats;
 
 public class SummonerChampionsFragment extends Fragment implements
-        SummonerChampionsView, SummonerChampionsAdapter.OnClick {
+        SummonerChampionsView, SummonerChampionsAdapter.OnChampionItemClick {
 
     @InjectView(R.id.no_info_error)
     TextView mNoData;
@@ -100,7 +100,7 @@ public class SummonerChampionsFragment extends Fragment implements
     }
 
     @Override
-    public void onClick(ChampionStats championStats) {
+    public void onChampionClick(ChampionStats championStats) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.RANKED_CHAMPION_STATS_TAG,Parcels.wrap(championStats));
 
