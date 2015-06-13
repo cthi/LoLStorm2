@@ -1,5 +1,7 @@
 package com.jclolstorm.lolstorm.views;
 
+import com.jclolstorm.lolstorm.models.User;
+
 import java.util.List;
 
 import lolstormSDK.models.League;
@@ -13,4 +15,8 @@ public interface SummonerLeaguesView {
     void hideLoading();
 
     void showNoDataView();
+
+    void startPlayerView(User user);
+
+    void displaySummonerNotFoundError();
 }

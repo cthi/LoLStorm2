@@ -13,6 +13,7 @@ import java.util.Map;
 import lolstormSDK.GameConstants;
 import lolstormSDK.models.League;
 import lolstormSDK.models.LeagueEntry;
+import lolstormSDK.models.Summoner;
 import lolstormSDK.modules.RiotApiModule;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -31,6 +32,10 @@ public class SummonerLeaguesPresenter {
 
     public void setView(SummonerLeaguesView view) {
         this.view = view;
+    }
+
+    public void onSearch(String summonerName) {
+        getSummonerFromName(summonerName);
     }
 
     private void updateView() {
@@ -69,6 +74,33 @@ public class SummonerLeaguesPresenter {
                 });
     }
 
+    private void getSummonerFromName(String summonerName) {
+        final String filteredName = summonerName.replaceAll("\\s","").toLowerCase();
+
+        RiotApiModule.getSummonersByName(summonerName)
+                .observeOn(AndroidSchedulers.mainThread())
+                .retry(3)
+                .subscribe(new Subscriber<Map<String, Summoner>>() {
+                    User user;
+                    @Override
+                    public void onCompleted() {
+                        view.startPlayerView(user);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.displaySummonerNotFoundError();
+                    }
+
+                    @Override
+                    public void onNext(Map<String, Summoner> stringSummonerMap) {
+                        Summoner summoner = stringSummonerMap.get(filteredName);
+                        user = new User(summoner.getName(), "na", summoner.getProfileIconId(),
+                                summoner.getSummonerLevel(), summoner.getId());
+
+                    }
+                });
+    }
     private void findQueue(List<League> leagues, long userID) {
         for (League league : leagues) {
             if (league.getQueue().equals(QUEUE_TYPE)) {
