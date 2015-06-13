@@ -10,6 +10,7 @@ import java.util.Map;
 
 import lolstormSDK.models.Game;
 import lolstormSDK.models.Player;
+import lolstormSDK.models.Summoner;
 import lolstormSDK.modules.RiotApiModule;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,12 +19,12 @@ public class SummonerGameResultPresenter {
 
     private SummonerGameResultView view;
     private Game game;
-    private Map<String, String> summonerNameIdMap;
+    private Map<String, Summoner> summonerMap;
 
     private Comparator<Player> winsComparator;
     private Comparator<Player> lossComparator;
 
-    public SummonerGameResultPresenter () {
+    public SummonerGameResultPresenter() {
         initComparator();
     }
 
@@ -39,34 +40,32 @@ public class SummonerGameResultPresenter {
     private void loadPlayersFromId(List<Player> playerList) {
         String playerIdList = constructQueryList(playerList);
 
-        RiotApiModule.getSummonerNamesFromId(playerIdList)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Map<String, String>>() {
-                    @Override
-                    public void onCompleted() {
-                        setPlayerNames(game.getFellowPlayers(), summonerNameIdMap);
-                        setPlayerWinningTeam(game.getFellowPlayers(), game.getStats().getWin(),
-                                game.getTeamId());
-                        sort(game.getFellowPlayers(), game.getStats().getWin());
+        RiotApiModule.getSummonersById(playerIdList).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Map<String, Summoner>>() {
+            @Override
+            public void onCompleted() {
+                setPlayerInfo(game.getFellowPlayers(), summonerMap, game.getStats().getWin(),
+                        game.getTeamId());
+                sort(game.getFellowPlayers(), game.getStats().getWin());
 
-                        view.populateAdapter(game.getFellowPlayers());
-                    }
+                view.populateAdapter(game.getFellowPlayers());
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        // display error view
-                    }
+            @Override
+            public void onError(Throwable e) {
 
-                    @Override
-                    public void onNext(Map<String, String> resultMap) {
-                        summonerNameIdMap = resultMap;
-                    }
-                });
+            }
+
+            @Override
+            public void onNext(Map<String, Summoner> stringSummonerMap) {
+                summonerMap = stringSummonerMap;
+            }
+        });
     }
 
     private void initComparator() {
         winsComparator = (lhs, rhs) -> {
-            if (lhs.isWinner() && !rhs.isWinner()){
+            if (lhs.isWinner() && !rhs.isWinner()) {
                 return -1;
             } else if (!lhs.isWinner() && rhs.isWinner()) {
                 return 1;
@@ -75,8 +74,8 @@ public class SummonerGameResultPresenter {
             }
         };
 
-        lossComparator = (lhs , rhs) -> {
-            if (lhs.isWinner() && !rhs.isWinner()){
+        lossComparator = (lhs, rhs) -> {
+            if (lhs.isWinner() && !rhs.isWinner()) {
                 return 1;
             } else if (!lhs.isWinner() && rhs.isWinner()) {
                 return -1;
@@ -89,7 +88,7 @@ public class SummonerGameResultPresenter {
     private String constructQueryList(List<Player> playerList) {
         String playerIdList = "";
 
-        if (playerList != null){
+        if (playerList != null) {
             for (Player i : playerList) {
                 playerIdList += i.getSummonerId() + ",";
             }
@@ -98,14 +97,13 @@ public class SummonerGameResultPresenter {
         return playerIdList;
     }
 
-    private void setPlayerNames(List<Player> playerList, Map<String, String> summonerNameIdMap) {
+    private void setPlayerInfo(List<Player> playerList, Map<String, Summoner> summonerInfoMap,
+                               boolean creatorWon, int creatorId) {
         for (Player player : playerList) {
-            player.setSummonerName(summonerNameIdMap.get(Long.toString(player.getSummonerId())));
-        }
-    }
-
-    private void setPlayerWinningTeam(List<Player> playerList, boolean creatorWon, int creatorId) {
-        for (Player player : playerList) {
+            Summoner playerAsSummoner = summonerInfoMap.get(Long.toString(player.getSummonerId()));
+            player.setSummonerName(playerAsSummoner.getName());
+            player.setLevel(playerAsSummoner.getSummonerLevel());
+            player.setProfileIcon(playerAsSummoner.getProfileIconId());
             player.setIsWinner(creatorWon && player.getTeamId() == creatorId || !creatorWon &&
                     player.getTeamId() != creatorId);
         }

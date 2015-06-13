@@ -1,5 +1,6 @@
 package com.jclolstorm.lolstorm.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +17,6 @@ import com.jclolstorm.lolstorm.utils.Constants;
 import com.jclolstorm.lolstorm.utils.NetworkUtils;
 import com.jclolstorm.lolstorm.views.SummonerGameResultView;
 
-
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ import lolstormSDK.GameConstants;
 import lolstormSDK.models.Game;
 import lolstormSDK.models.Player;
 
-public class SummonerGameResultActivity extends AppCompatActivity
-        implements SummonerGameResultView {
+public class SummonerGameResultActivity extends AppCompatActivity implements
+        SummonerGameResultView, SummonerGameResultAdapter.OnSummonerItemClick {
 
     @InjectView(R.id.summoner_game_result_toolbar)
     Toolbar mToolbar;
@@ -75,14 +75,29 @@ public class SummonerGameResultActivity extends AppCompatActivity
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            mAdapter = new SummonerGameResultAdapter(this, new ArrayList<>(), mHeader);
+            mAdapter = new SummonerGameResultAdapter(this, this, new ArrayList<>(), mHeader);
             mRecyclerView.setAdapter(mAdapter);
         }
     }
 
     @Override
+    public void onSummonerClick(Player player) {
+        Intent intent = new Intent(this, SummonerPagerActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.USER_TAG, Parcels.wrap(new User(player.getSummonerName(),
+                "na", player.getProfileIcon(), player.getLevel(), player.getSummonerId())));
+
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
+
+    @Override
     public void setTitle(String string) {
-        getSupportActionBar().setTitle(string);
+        if (null != getSupportActionBar()) {
+            getSupportActionBar().setTitle(string);
+        }
     }
 
     @Override

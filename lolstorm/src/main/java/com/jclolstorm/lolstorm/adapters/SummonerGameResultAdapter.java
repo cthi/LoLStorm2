@@ -25,9 +25,15 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
     private Context mContext;
     private List<Player> mPlayerList;
     private View mHeader;
+    private OnSummonerItemClick mListener;
 
-    public SummonerGameResultAdapter(Context context, List<Player> playerList, View header) {
+    public interface OnSummonerItemClick {
+        void onSummonerClick(Player player);
+    }
+
+    public SummonerGameResultAdapter(Context context, OnSummonerItemClick listener, List<Player> playerList, View header) {
         this.mContext = context;
+        this.mListener = listener;
         this.mPlayerList = playerList;
         this.mHeader = header;
     }
@@ -57,7 +63,10 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_game_summoner, parent, false);
 
-            return new ViewHolder(view);
+            ViewHolder viewHolder = new ViewHolder(view);
+            view.setOnClickListener(new OnSummonerClickedListener(viewHolder));
+
+            return viewHolder;
         }
     }
 
@@ -86,6 +95,19 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
     public void populate(List<Player> playerList) {
         this.mPlayerList = playerList;
         notifyDataSetChanged();
+    }
+
+    private class OnSummonerClickedListener implements View.OnClickListener {
+        RecyclerView.ViewHolder viewHolder;
+
+        public OnSummonerClickedListener(RecyclerView.ViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onSummonerClick(mPlayerList.get(viewHolder.getAdapterPosition() - 1));
+        }
     }
 
     private int formatResultIndicator(boolean playerWon) {

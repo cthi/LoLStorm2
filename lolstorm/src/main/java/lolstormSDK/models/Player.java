@@ -29,13 +29,22 @@ public class Player {
         this.summonerName = summonerName;
     }
 
-     String matchHistoryUri;
-     int profileIcon;
-     String summonerName;
-     int championId;
-     long summonerId;
-     int teamId;
+    String matchHistoryUri;
+    int profileIcon;
+    String summonerName;
+    int championId;
+    long summonerId;
+    int teamId;
     boolean isWinner;
+    long level;
+
+    public long getLevel() {
+        return level;
+    }
+
+    public void setLevel(long level) {
+        this.level = level;
+    }
 
     public int getChampionId() {
         return championId;
@@ -55,10 +64,6 @@ public class Player {
 
     public int getTeamId() {
         return teamId;
-    }
-
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
     }
 
     public boolean isWinner() {
