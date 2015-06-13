@@ -18,7 +18,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.GameConstants;
-import lolstormSDK.models.Game;
 import lolstormSDK.models.Player;
 
 public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Player> {
@@ -33,10 +32,21 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
         this.mHeader = header;
     }
 
-    @Override
-    public void populate(List<Player> playerList) {
-        this.mPlayerList = playerList;
-        notifyDataSetChanged();
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.item_game_summoner_champion_image)
+        ImageView summonerChampionImage;
+        @InjectView(R.id.item_game_summoner_result)
+        ImageView summonerGameResult;
+        @InjectView(R.id.item_game_summoner_name)
+        TextView summonerName;
+        @InjectView(R.id.item_game_summoner_champion_name)
+        TextView summonerChampionName;
+
+        public ViewHolder(View view) {
+            super(view);
+
+            ButterKnife.inject(this, view);
+        }
     }
 
     @Override
@@ -72,21 +82,10 @@ public class SummonerGameResultAdapter extends BaseHeaderRecyclerViewAdapter<Pla
         return mPlayerList.size() + 1;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.item_game_summoner_champion_image)
-        ImageView summonerChampionImage;
-        @InjectView(R.id.item_game_summoner_result)
-        ImageView summonerGameResult;
-        @InjectView(R.id.item_game_summoner_name)
-        TextView summonerName;
-        @InjectView(R.id.item_game_summoner_champion_name)
-        TextView summonerChampionName;
-
-        public ViewHolder(View view) {
-            super(view);
-
-            ButterKnife.inject(this, view);
-        }
+    @Override
+    public void populate(List<Player> playerList) {
+        this.mPlayerList = playerList;
+        notifyDataSetChanged();
     }
 
     private int formatResultIndicator(boolean playerWon) {
