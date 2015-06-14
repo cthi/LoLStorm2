@@ -73,25 +73,25 @@ public class SummonerGameResultHeader extends RelativeLayout {
                 .load(ResourceUtils.championDrawableFromID(game.getChampionId(), getContext()))
                 .into(mChampionImage);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem0(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem0(), getContext()))
                 .into(mSpell01);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem1(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem1(), getContext()))
                 .into(mSpell02);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem2(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem2(), getContext()))
                 .into(mSpell03);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem3(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem3(), getContext()))
                 .into(mSpell04);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem4(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem4(), getContext()))
                 .into(mSpell05);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem5(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem5(), getContext()))
                 .into(mSpell06);
         Glide.with(getContext())
-                .load(ResourceUtils.numberedDrawableFromID(stats.getItem6(), getContext()))
+                .load(ResourceUtils.numberedItemDrawableFromID(stats.getItem6(), getContext()))
                 .into(mSpell07);
         Glide.with(getContext())
                 .load(ResourceUtils.spellDrawableFromID(game.getSpell1(), getContext()))

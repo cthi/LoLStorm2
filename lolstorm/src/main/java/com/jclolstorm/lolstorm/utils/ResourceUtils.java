@@ -3,6 +3,8 @@ package com.jclolstorm.lolstorm.utils;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.jclolstorm.lolstorm.R;
+
 import lolstormSDK.GameConstants;
 
 public class ResourceUtils {
@@ -26,6 +28,13 @@ public class ResourceUtils {
                 .getPackageName());
     }
 
+    public static int numberedItemDrawableFromID(int id, Context context) {
+        if (id == 0) {
+            return R.drawable.no_item;
+        } else {
+            return numberedDrawableFromID(id, context);
+        }
+    }
     public static int tierDrawableFromTierAndDivision(String tier, String division, Context
             context) {
         Resources resources = context.getResources();

@@ -341,7 +341,7 @@ public class GameConstants {
         spellIDMap.put(13, "summonermana");
         spellIDMap.put(2, "summonerclairvoyance");
         spellIDMap.put(21, "summonerbarrier");
-        spellIDMap.put(4, "summonerFlash");
+        spellIDMap.put(4, "summonerflash");
         spellIDMap.put(17, "summonerOdinGarrison");
 
         SPELL_ID_MAP = Collections.unmodifiableMap(spellIDMap);
