@@ -24,6 +24,7 @@
         <item name="colorAccent">@color/white</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="colorButtonNormal">@color/white</item>
+        <item name="android:textColorTertiary">@color/black</item>
     </style>
 
 </resources>
