@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
@@ -61,6 +62,16 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
 
         User user = Parcels.unwrap(getIntent().getExtras().getParcelable(Constants.USER_TAG));
         mHeader.setUser(user);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initToolbar() {

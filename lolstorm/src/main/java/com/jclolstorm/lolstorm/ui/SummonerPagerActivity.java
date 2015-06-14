@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.SummonerPagerAdapter;
@@ -35,6 +36,16 @@ public class SummonerPagerActivity extends AppCompatActivity {
 
         initToolbar();
         initPager();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initToolbar() {
