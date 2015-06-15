@@ -29,6 +29,19 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.mChampionList = championList;
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.item_champion_image)
+        ImageView mChampionImage;
+        @InjectView(R.id.item_champion_name)
+        TextView mChampionName;
+
+        public ViewHolder(View view) {
+            super(view);
+
+            ButterKnife.inject(this, view);
+        }
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_champion,
@@ -46,27 +59,11 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 .load(ResourceUtils.championDrawableFromID((int) currentChampion
                 .getId(), mContext)).into(viewHolder.mChampionImage);
         viewHolder.mChampionName.setText(currentChampion.getName());
-        viewHolder.mChampionTitle.setText(currentChampion.getTitle());
     }
 
     @Override
     public int getItemCount() {
         return mChampionList.size();
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.item_stat_image)
-        ImageView mChampionImage;
-        @InjectView(R.id.item_stat_label)
-        TextView mChampionName;
-        @InjectView(R.id.item_stat_value)
-        TextView mChampionTitle;
-
-        public ViewHolder(View view) {
-            super(view);
-
-            ButterKnife.inject(this, view);
-        }
     }
 
     public void populate(List<Champion> championList) {

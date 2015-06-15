@@ -30,6 +30,13 @@ public class Champion {
      Passive passive;
      Stats stats;
 
+    public Champion() {}
+
+    public Champion (String name, long id) {
+        this.name = name;
+        this.id = id;
+    }
+
     public boolean getActive() {
         return active;
     }

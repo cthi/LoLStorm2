@@ -62,4 +62,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:0.24.0'
     compile "org.parceler:parceler-api:1.0.0"
     provided "org.parceler:parceler:1.0.0"
+    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }
