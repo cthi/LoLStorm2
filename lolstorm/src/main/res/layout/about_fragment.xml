@@ -7,21 +7,31 @@
     android:orientation="vertical"
     android:padding="@dimen/view_padding">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:src="@mipmap/ic_launcher"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/about_app_disclaimer"
         android:layout_marginBottom="4dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/about_riot_disclaimer"
         android:layout_marginBottom="4dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="@string/about_open_source_libs_title"
         android:layout_marginBottom="4dp"/>
 
