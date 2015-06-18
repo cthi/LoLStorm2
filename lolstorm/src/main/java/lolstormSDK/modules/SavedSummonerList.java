@@ -9,9 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import com.jclolstorm.lolstorm.models.User;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class SavedSummonerList {
 

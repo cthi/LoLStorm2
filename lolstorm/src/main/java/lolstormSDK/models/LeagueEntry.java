@@ -2,8 +2,6 @@ package lolstormSDK.models;
 
 import org.parceler.Parcel;
 
-import java.util.Comparator;
-
 @Parcel
 public class LeagueEntry implements Comparable<LeagueEntry> {
 

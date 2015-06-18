@@ -17,7 +17,6 @@ import org.parceler.Parcels;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.RiotEndpoint;
-import lolstormSDK.models.Summoner;
 
 public class SummonerPagerActivity extends AppCompatActivity {
 
