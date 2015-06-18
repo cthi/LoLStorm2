@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/item_champion_spell_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            tools:src="@drawable/_1006"/>
+
+        <TextView
+            android:id="@+id/item_champion_spell_name"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/item_champion_spell_image"
+            android:layout_toRightOf="@id/item_champion_spell_image"
+            android:textSize="16sp"
+            tools:text="Lizards Tail"/>
+
+        <TextView
+            android:id="@+id/item_champion_spell_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_champion_spell_name"
+            android:layout_toEndOf="@id/item_champion_spell_image"
+            android:layout_toRightOf="@id/item_champion_spell_image"
+            tools:text="124 Mana"/>
+
+        <TextView
+            android:id="@+id/item_champion_spell_cd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_champion_spell_cost"
+            android:layout_toEndOf="@id/item_champion_spell_image"
+            android:layout_toRightOf="@id/item_champion_spell_image"
+            tools:text="120 Seconds"/>
+
+        <TextView
+            android:id="@+id/item_champion_spell_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_champion_spell_image"
+            tools:text="The quick brown fox jumps over the lazy cat."/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

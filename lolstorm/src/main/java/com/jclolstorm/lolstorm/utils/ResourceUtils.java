@@ -16,9 +16,15 @@ public class ResourceUtils {
                 .toLowerCase(), DRAWABLE, context.getPackageName());
     }
 
-    public static int spellDrawableFromID(int id, Context context) {
+    public static int summonerSpellDrawableFromID(int id, Context context) {
         Resources resources = context.getResources();
         return resources.getIdentifier(GameConstants.SPELL_ID_MAP.get(id), DRAWABLE, context
+                .getPackageName());
+    }
+
+    public static int spellDrawableFromName(String name, Context context) {
+        Resources resources = context.getResources();
+        return resources.getIdentifier(name.toLowerCase(), DRAWABLE, context
                 .getPackageName());
     }
 

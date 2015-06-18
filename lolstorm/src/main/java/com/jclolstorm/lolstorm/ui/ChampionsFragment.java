@@ -1,5 +1,6 @@
 package com.jclolstorm.lolstorm.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.ChampionsAdapter;
 import com.jclolstorm.lolstorm.presenters.ChampionsPresenter;
+import com.jclolstorm.lolstorm.utils.Constants;
 import com.jclolstorm.lolstorm.views.ChampionsView;
 
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.Champion;
 
-public class ChampionsFragment extends Fragment implements ChampionsView {
+public class ChampionsFragment extends Fragment implements ChampionsView, ChampionsAdapter
+        .OnChampionItemClick {
 
     @InjectView(R.id.champions_rv)
     RecyclerView mRecyclerView;
@@ -44,7 +47,8 @@ public class ChampionsFragment extends Fragment implements ChampionsView {
         mPresenter = new ChampionsPresenter();
         mPresenter.setView(this);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.summoner_champions_title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string
+                .summoner_champions_title);
         return view;
     }
 
@@ -52,7 +56,7 @@ public class ChampionsFragment extends Fragment implements ChampionsView {
         if (null != mRecyclerView) {
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-            mAdapter = new ChampionsAdapter(getActivity(), new ArrayList<>());
+            mAdapter = new ChampionsAdapter(getActivity(), this, new ArrayList<>());
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -60,5 +64,16 @@ public class ChampionsFragment extends Fragment implements ChampionsView {
     @Override
     public void populate(List<Champion> championList) {
         mAdapter.populate(championList);
+    }
+
+    @Override
+    public void onChampionClick(long championId) {
+        Intent intent = new Intent(getActivity(), ChampionSpellActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.CHAMPION_ID_TAG, (int) championId);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

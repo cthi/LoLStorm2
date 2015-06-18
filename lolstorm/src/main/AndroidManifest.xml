@@ -32,5 +32,9 @@
         <activity
             android:name=".ui.SummonerGameResultActivity">
         </activity>
+
+        <activity
+            android:name=".ui.ChampionSpellActivity">
+        </activity>
     </application>
 </manifest>

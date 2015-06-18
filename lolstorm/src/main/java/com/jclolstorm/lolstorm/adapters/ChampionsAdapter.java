@@ -23,9 +23,15 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Context mContext;
     private List<Champion> mChampionList;
+    private OnChampionItemClick mListener;
 
-    public ChampionsAdapter(Context context, List<Champion> championList) {
+    public interface OnChampionItemClick {
+        void onChampionClick(long championId);
+    }
+
+    public ChampionsAdapter(Context context, OnChampionItemClick listener, List<Champion> championList) {
         this.mContext = context;
+        this.mListener = listener;
         this.mChampionList = championList;
     }
 
@@ -47,7 +53,10 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_champion,
                 parent, false);
 
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setOnClickListener(new OnChampionClickedListener(viewHolder));
+
+        return viewHolder;
     }
 
     @Override
@@ -69,5 +78,18 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void populate(List<Champion> championList) {
         this.mChampionList = championList;
         notifyDataSetChanged();
+    }
+
+    private class OnChampionClickedListener implements View.OnClickListener {
+        RecyclerView.ViewHolder viewHolder;
+
+        public OnChampionClickedListener(RecyclerView.ViewHolder viewHolder) {
+            this.viewHolder = viewHolder;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onChampionClick(mChampionList.get(viewHolder.getAdapterPosition()).getId());
+        }
     }
 }
