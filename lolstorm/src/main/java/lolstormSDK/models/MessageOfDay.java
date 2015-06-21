@@ -5,9 +5,9 @@ import org.parceler.Parcel;
 @Parcel
 public class MessageOfDay {
 
-     long createDate;
-     String message;
-     int version;
+    long createDate;
+    String message;
+    int version;
 
     public long getCreateDate() {
         return createDate;
@@ -35,8 +35,8 @@ public class MessageOfDay {
 
     @Override
     public String toString() {
-        return "MessageOfDay [createDate=" + createDate + ", message="
-                + message + ", version=" + version + "]";
+        return "MessageOfDay [createDate=" + createDate + ", message=" + message + ", version=" +
+                version + "]";
     }
 
 }

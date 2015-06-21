@@ -5,6 +5,9 @@ import org.parceler.Parcel;
 
 @Parcel
 public class ParticipantIdentity {
+    int participantId;
+    Player player;
+
     public int getParticipantId() {
         return participantId;
     }
@@ -20,7 +23,4 @@ public class ParticipantIdentity {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
-     int participantId;
-     Player player;
 }

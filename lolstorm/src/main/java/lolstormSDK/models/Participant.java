@@ -6,6 +6,15 @@ import java.util.ArrayList;
 
 @Parcel
 public class Participant {
+    int championId;
+    ArrayList<Mastery> masteries;
+    int participantId;
+    ArrayList<Rune> runes;
+    int spell1Id;
+    int spell2Id;
+    ParticipantStats stats;
+    int teamId;
+
     public int getChampionId() {
         return championId;
     }
@@ -69,13 +78,4 @@ public class Participant {
     public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
-
-     int championId;
-     ArrayList<Mastery> masteries;
-     int participantId;
-     ArrayList<Rune> runes;
-     int spell1Id;
-     int spell2Id;
-     ParticipantStats stats;
-     int teamId;
 }

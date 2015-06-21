@@ -5,16 +5,16 @@ import org.parceler.Parcel;
 @Parcel
 public class MatchHistorySummary {
 
-     int assists;
-     int deaths;
-     long gameId;
-     String gameMode;
-     boolean invalid;
-     int kills;
-     int mapId;
-     int opposingTeamKills;
-     String opposingTeamName;
-     boolean win;
+    int assists;
+    int deaths;
+    long gameId;
+    String gameMode;
+    boolean invalid;
+    int kills;
+    int mapId;
+    int opposingTeamKills;
+    String opposingTeamName;
+    boolean win;
 
     public int getAssists() {
         return assists;
@@ -98,12 +98,10 @@ public class MatchHistorySummary {
 
     @Override
     public String toString() {
-        return "MatchHistorySummary [assists=" + assists + ", deaths=" + deaths
-                + ", gameId=" + gameId + ", gameMode=" + gameMode
-                + ", invalid=" + invalid + ", kills=" + kills + ", mapId="
-                + mapId + ", opposingTeamKills=" + opposingTeamKills
-                + ", opposingTeamName=" + opposingTeamName + ", win=" + win
-                + "]";
+        return "MatchHistorySummary [assists=" + assists + ", deaths=" + deaths + ", gameId=" +
+                gameId + ", gameMode=" + gameMode + ", invalid=" + invalid + ", kills=" + kills +
+                ", mapId=" + mapId + ", opposingTeamKills=" + opposingTeamKills + ", " +
+                "opposingTeamName=" + opposingTeamName + ", win=" + win + "]";
     }
 
 }

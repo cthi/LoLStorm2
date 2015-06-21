@@ -7,11 +7,11 @@ import java.util.ArrayList;
 @Parcel
 public class SpellVars {
 
-     ArrayList<Double> coeff;
-     String dyn;
-     String key;
-     String link;
-     String ranksWith;
+    ArrayList<Double> coeff;
+    String dyn;
+    String key;
+    String link;
+    String ranksWith;
 
     public ArrayList<Double> getCoeff() {
         return coeff;

@@ -1,51 +1,47 @@
 package lolstormSDK.models;
+
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
 
 @Parcel
-public class LevelTip
-{
-	 ArrayList<String> effect;
-	 ArrayList<String> label;
+public class LevelTip {
+    ArrayList<String> effect;
+    ArrayList<String> label;
 
-	/**
-	 * Returns effect.
-	 *
-	 * @return ArrayList<String> effect.
-	 */
-	public ArrayList<String> getEffect()
-	{
-		return effect;
-	}
+    /**
+     * Returns effect.
+     *
+     * @return ArrayList<String> effect.
+     */
+    public ArrayList<String> getEffect() {
+        return effect;
+    }
 
-	/**
-	 * Sets effect.
-	 *
-	 * @param effect effect.
-	 */
-	public void setEffect(ArrayList<String> effect)
-	{
-		this.effect = effect;
-	}
+    /**
+     * Sets effect.
+     *
+     * @param effect effect.
+     */
+    public void setEffect(ArrayList<String> effect) {
+        this.effect = effect;
+    }
 
-	/**
-	 * Returns label.
-	 *
-	 * @return ArrayList<String> label.
-	 */
-	public ArrayList<String> getLabel()
-	{
-		return label;
-	}
+    /**
+     * Returns label.
+     *
+     * @return ArrayList<String> label.
+     */
+    public ArrayList<String> getLabel() {
+        return label;
+    }
 
-	/**
-	 * Sets label.
-	 *
-	 * @param label label.
-	 */
-	public void setLabel(ArrayList<String> label)
-	{
-		this.label = label;
-	}
+    /**
+     * Sets label.
+     *
+     * @param label label.
+     */
+    public void setLabel(ArrayList<String> label) {
+        this.label = label;
+    }
 }

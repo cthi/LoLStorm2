@@ -5,6 +5,15 @@ import org.parceler.Parcel;
 @Parcel
 public class Player {
 
+    String matchHistoryUri;
+    int profileIcon;
+    String summonerName;
+    int championId;
+    long summonerId;
+    int teamId;
+    boolean isWinner;
+    long level;
+
     public String getMatchHistoryUri() {
         return matchHistoryUri;
     }
@@ -28,15 +37,6 @@ public class Player {
     public void setSummonerName(String summonerName) {
         this.summonerName = summonerName;
     }
-
-    String matchHistoryUri;
-    int profileIcon;
-    String summonerName;
-    int championId;
-    long summonerId;
-    int teamId;
-    boolean isWinner;
-    long level;
 
     public long getLevel() {
         return level;

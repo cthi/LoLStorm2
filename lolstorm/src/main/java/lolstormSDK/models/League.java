@@ -7,11 +7,11 @@ import java.util.ArrayList;
 @Parcel
 public class League {
 
-     ArrayList<LeagueEntry> entries;
-     String name;
-     String participantId;
-     String queue;
-     String tier;
+    ArrayList<LeagueEntry> entries;
+    String name;
+    String participantId;
+    String queue;
+    String tier;
 
     public ArrayList<LeagueEntry> getEntries() {
         return entries;
@@ -55,9 +55,8 @@ public class League {
 
     @Override
     public String toString() {
-        return "League [entries=" + entries + ", name=" + name
-                + ", participantId=" + participantId + ", queue=" + queue
-                + ", tier=" + tier + "]";
+        return "League [entries=" + entries + ", name=" + name + ", participantId=" +
+                participantId + ", queue=" + queue + ", tier=" + tier + "]";
     }
 
 }

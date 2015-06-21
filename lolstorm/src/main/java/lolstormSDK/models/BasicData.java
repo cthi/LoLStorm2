@@ -8,29 +8,29 @@ import java.util.Map;
 @Parcel
 public class BasicData {
 
-     String colloq;
-     boolean consumeOnFull;
-     boolean consumed;
-     int depth;
-     String description;
-     ArrayList<String> from;
-     Gold gold;
-     String group;
-     boolean hideFromAll;
-     int id;
-     Image image;
-     boolean inStore;
-     ArrayList<String> into;
-     Map<String, Boolean> maps;
-     String name;
-     String plaintext;
-     String RequiredChampion;
-     MetaData rune;
-     String sanitizedDescription;
-     int specialRecipe;
-     int stacks;
-     BasicDataStats stats;
-     ArrayList<String> tags;
+    String colloq;
+    boolean consumeOnFull;
+    boolean consumed;
+    int depth;
+    String description;
+    ArrayList<String> from;
+    Gold gold;
+    String group;
+    boolean hideFromAll;
+    int id;
+    Image image;
+    boolean inStore;
+    ArrayList<String> into;
+    Map<String, Boolean> maps;
+    String name;
+    String plaintext;
+    String RequiredChampion;
+    MetaData rune;
+    String sanitizedDescription;
+    int specialRecipe;
+    int stacks;
+    BasicDataStats stats;
+    ArrayList<String> tags;
 
     public String getColloq() {
         return colloq;

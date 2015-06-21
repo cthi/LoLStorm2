@@ -7,8 +7,8 @@ import java.util.HashSet;
 @Parcel
 public class MasteryPages {
 
-     HashSet<MasteryPage> pages;
-     long summonerId;
+    HashSet<MasteryPage> pages;
+    long summonerId;
 
     public HashSet<MasteryPage> getPages() {
         return pages;
@@ -28,8 +28,7 @@ public class MasteryPages {
 
     @Override
     public String toString() {
-        return "MasteryPages [pages=" + pages + ", summonerId=" + summonerId
-                + "]";
+        return "MasteryPages [pages=" + pages + ", summonerId=" + summonerId + "]";
     }
 
 }

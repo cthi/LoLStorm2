@@ -7,9 +7,9 @@ import java.util.ArrayList;
 @Parcel
 public class MasteryTree {
 
-     ArrayList<MasteryTreeList> Defense;
-     ArrayList<MasteryTreeList> Offense;
-     ArrayList<MasteryTreeList> Utility;
+    ArrayList<MasteryTreeList> Defense;
+    ArrayList<MasteryTreeList> Offense;
+    ArrayList<MasteryTreeList> Utility;
 
     public ArrayList<MasteryTreeList> getDefense() {
         return Defense;

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,18 +19,20 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.ChampionSpell;
 
-public class ChampionSpellAdater extends BaseHeaderRecyclerViewAdapter<ChampionSpell> {
+public class ChampionSpellAdapter extends BaseHeaderRecyclerViewAdapter<ChampionSpell> {
     private Context mContext;
     private List<ChampionSpell> mChampionSpells;
     private View mHeader;
 
-    public ChampionSpellAdater(Context context, List<ChampionSpell> championSpells, View header) {
+    public ChampionSpellAdapter(Context context, List<ChampionSpell> championSpells, View header) {
         this.mContext = context;
         this.mChampionSpells = championSpells;
         this.mHeader = header;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.item_champion_spell_bg)
+        RelativeLayout mBg;
         @InjectView(R.id.item_champion_spell_image)
         ImageView mSpellImage;
         @InjectView(R.id.item_champion_spell_name)
@@ -73,6 +76,7 @@ public class ChampionSpellAdater extends BaseHeaderRecyclerViewAdapter<ChampionS
             viewHolder.mSpellDesc.setText(currentSpell.getSanitizedDescription());
             setSpellCost(viewHolder.mSpellCost, currentSpell);
             setCoolDown(viewHolder.mSpellCd, currentSpell);
+            setBackgroundColor(viewHolder.mBg, viewHolder.getLayoutPosition());
         }
     }
 
@@ -116,6 +120,15 @@ public class ChampionSpellAdater extends BaseHeaderRecyclerViewAdapter<ChampionS
             }
             cd = "Cooldown: " + cd.substring(0, cd.length() - 1) + " Seconds";
             coolDown.setText(cd);
+        }
+    }
+
+
+    private void setBackgroundColor(View view, int position) {
+        if (position % 2 == 0) {
+            view.setBackgroundColor(mContext.getResources().getColor(R.color.list_grey_1));
+        } else {
+            view.setBackgroundColor(mContext.getResources().getColor(R.color.list_grey_2));
         }
     }
 }

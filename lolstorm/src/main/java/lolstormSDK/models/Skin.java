@@ -5,9 +5,9 @@ import org.parceler.Parcel;
 @Parcel
 public class Skin {
 
-     int id;
-     String name;
-     int num;
+    int id;
+    String name;
+    int num;
 
     public int getId() {
         return id;
@@ -33,5 +33,5 @@ public class Skin {
         this.num = num;
     }
 
-    
+
 }

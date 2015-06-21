@@ -5,10 +5,10 @@ import org.parceler.Parcel;
 @Parcel
 public class Gold {
 
-     int base;
-     int sell;
-     int total;
-     boolean purchasable;
+    int base;
+    int sell;
+    int total;
+    boolean purchasable;
 
     public int getBase() {
         return base;

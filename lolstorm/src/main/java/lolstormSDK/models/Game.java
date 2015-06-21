@@ -7,30 +7,29 @@ import java.util.ArrayList;
 @Parcel
 public class Game {
 
+    int championId;
+    long createDate;
+    ArrayList<Player> fellowPlayers;
+    long gameId;
+    String gameMode;
+    String gameType;
+    boolean invalid;
+    int level;
+    int mapId;
+    int spell1;
+    int spell2;
+    RawStats stats;
+    String subType;
+    int teamId;
+
     @Override
     public String toString() {
-        return "Game [championId=" + championId + ", createDate=" + createDate
-                + ", fellowPlayers="
-                + fellowPlayers + ", gameId=" + gameId + ", gameMode="
-                + gameMode + ", gameType=" + gameType + ", invalid=" + invalid
-                + ", level=" + level + ", mapId=" + mapId + ", spell1="
-                + spell1 + ", spell2=" + spell2 + ", stats=" + stats
-                + ", subType=" + subType + ", teamId=" + teamId + "]";
+        return "Game [championId=" + championId + ", createDate=" + createDate + ", " +
+                "fellowPlayers=" + fellowPlayers + ", gameId=" + gameId + ", gameMode=" +
+                gameMode + ", gameType=" + gameType + ", invalid=" + invalid + ", level=" + level
+                + ", mapId=" + mapId + ", spell1=" + spell1 + ", spell2=" + spell2 + ", stats=" +
+                stats + ", subType=" + subType + ", teamId=" + teamId + "]";
     }
-     int championId;
-     long createDate;
-     ArrayList<Player> fellowPlayers;
-     long gameId;
-     String gameMode;
-     String gameType;
-     boolean invalid;
-     int level;
-     int mapId;
-     int spell1;
-     int spell2;
-     RawStats stats;
-     String subType;
-     int teamId;
 
     public int getChampionId() {
         return championId;

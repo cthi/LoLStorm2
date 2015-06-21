@@ -7,13 +7,13 @@ import java.util.ArrayList;
 @Parcel
 public class Mastery {
 
-     ArrayList<String> description;
-     int id;
-     Image image;
-     String name;
-     String prereq;
-     int ranks;
-     ArrayList<String> sanitizedDescription;
+    ArrayList<String> description;
+    int id;
+    Image image;
+    String name;
+    String prereq;
+    int ranks;
+    ArrayList<String> sanitizedDescription;
 
     public ArrayList<String> getDescription() {
         return description;

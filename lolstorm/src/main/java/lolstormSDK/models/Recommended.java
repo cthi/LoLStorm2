@@ -7,13 +7,13 @@ import java.util.ArrayList;
 @Parcel
 public class Recommended {
 
-     ArrayList<Block> blocks;
-     String champion;
-     String map;
-     String mode;
-     boolean priority;
-     String title;
-     String type;
+    ArrayList<Block> blocks;
+    String champion;
+    String map;
+    String mode;
+    boolean priority;
+    String title;
+    String type;
 
     public ArrayList<Block> getBlocks() {
         return blocks;

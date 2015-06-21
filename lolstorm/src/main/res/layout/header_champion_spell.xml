@@ -23,6 +23,7 @@
         android:layout_toRightOf="@id/header_champion_detail_image"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:textStyle="bold"
         tools:text="Aatrox"/>
 
     <TextView

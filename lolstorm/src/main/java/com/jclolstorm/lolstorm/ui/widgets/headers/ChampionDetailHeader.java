@@ -38,7 +38,7 @@ public class ChampionDetailHeader extends RelativeLayout {
     }
 
     private void init() {
-        inflate(getContext(), R.layout.header_champion_detail, this);
+        inflate(getContext(), R.layout.header_champion_spell, this);
         ButterKnife.inject(this);
     }
 

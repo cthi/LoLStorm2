@@ -5,10 +5,10 @@ import org.parceler.Parcel;
 @Parcel
 public class Passive {
 
-     String description;
-     String name;
-     String sanitizedDescription;
-     Image image;
+    String description;
+    String name;
+    String sanitizedDescription;
+    Image image;
 
     public String getDescription() {
         return description;

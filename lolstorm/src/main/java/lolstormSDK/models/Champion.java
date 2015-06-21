@@ -7,32 +7,33 @@ import java.util.ArrayList;
 @Parcel
 public class Champion {
 
-     boolean active;
-     boolean botEnabled;
-     boolean botMmEnabled;
-     boolean freeToPlay;
-     boolean rankedPlayEnabled;
-     ArrayList<String> allytips;
-     ArrayList<String> enemytips;
-     ArrayList<String> tags;
-     ArrayList<Recommended> recommended;
-     ArrayList<Skin> skins;
-     ArrayList<ChampionSpell> spells;
-     String blurb;
-     String key;
-     String lore;
-     String name;
-     String partype;
-     String title;
-     long id;
-     Image image;
-     Info info;
-     Passive passive;
-     Stats stats;
+    boolean active;
+    boolean botEnabled;
+    boolean botMmEnabled;
+    boolean freeToPlay;
+    boolean rankedPlayEnabled;
+    ArrayList<String> allytips;
+    ArrayList<String> enemytips;
+    ArrayList<String> tags;
+    ArrayList<Recommended> recommended;
+    ArrayList<Skin> skins;
+    ArrayList<ChampionSpell> spells;
+    String blurb;
+    String key;
+    String lore;
+    String name;
+    String partype;
+    String title;
+    long id;
+    Image image;
+    Info info;
+    Passive passive;
+    Stats stats;
 
-    public Champion() {}
+    public Champion() {
+    }
 
-    public Champion (String name, long id) {
+    public Champion(String name, long id) {
         this.name = name;
         this.id = id;
     }
@@ -177,11 +178,11 @@ public class Champion {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

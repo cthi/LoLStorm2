@@ -5,10 +5,10 @@ import org.parceler.Parcel;
 @Parcel
 public class Info {
 
-     int attack;
-     int defense;
-     int difficulty;
-     int magic;
+    int attack;
+    int defense;
+    int difficulty;
+    int magic;
 
     public int getAttack() {
         return attack;

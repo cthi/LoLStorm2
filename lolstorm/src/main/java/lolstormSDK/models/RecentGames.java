@@ -7,8 +7,8 @@ import java.util.ArrayList;
 @Parcel
 public class RecentGames {
 
-     ArrayList<Game> games;
-     long summonerId;
+    ArrayList<Game> games;
+    long summonerId;
 
     public ArrayList<Game> getGames() {
         return games;
@@ -28,8 +28,7 @@ public class RecentGames {
 
     @Override
     public String toString() {
-        return "RecentGames [games=" + games + ", summonerId=" + summonerId
-                + "]";
+        return "RecentGames [games=" + games + ", summonerId=" + summonerId + "]";
     }
 
 }

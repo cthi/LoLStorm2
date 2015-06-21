@@ -5,15 +5,15 @@ import org.parceler.Parcel;
 @Parcel
 public class ChampionStat {
 
-     int count;
-     int id;
-     String name;
-     int value;
+    int count;
+    int id;
+    String name;
+    int value;
 
     @Override
     public String toString() {
-        return "ChampionStat [count=" + count + ", id=" + id + ", name=" + name
-                + ", value=" + value + "]";
+        return "ChampionStat [count=" + count + ", id=" + id + ", name=" + name + ", value=" +
+                value + "]";
     }
 
     public int getCount() {

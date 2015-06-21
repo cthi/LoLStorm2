@@ -7,26 +7,26 @@ import java.util.ArrayList;
 @Parcel
 public class ChampionSpell {
 
-     ArrayList<Integer> cost;
-     ArrayList<Double> cooldown;
-     ArrayList<String> effectBurn;
-     ArrayList<Object> effect;
-     ArrayList<Image> altimages;
-     ArrayList<SpellVars> vars;
-     String cooldownBurn;
-     String costBurn;
-     String costType;
-     String description;
-     String key;
-     String name;
-     String rangeBurn;
-     String recource;
-     String sanitizedDescription;
-     String sanitizedTooltip;
-     String tooltip;
-     int maxrank;
-     Image image;
-     LevelTip leveltip;
+    ArrayList<Integer> cost;
+    ArrayList<Double> cooldown;
+    ArrayList<String> effectBurn;
+    ArrayList<Object> effect;
+    ArrayList<Image> altimages;
+    ArrayList<SpellVars> vars;
+    String cooldownBurn;
+    String costBurn;
+    String costType;
+    String description;
+    String key;
+    String name;
+    String rangeBurn;
+    String recource;
+    String sanitizedDescription;
+    String sanitizedTooltip;
+    String tooltip;
+    int maxrank;
+    Image image;
+    LevelTip leveltip;
 
     public ArrayList<Integer> getCost() {
         return cost;

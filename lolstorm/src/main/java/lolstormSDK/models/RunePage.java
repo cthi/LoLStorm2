@@ -7,10 +7,10 @@ import java.util.ArrayList;
 @Parcel
 public class RunePage {
 
-     boolean current;
-     long id;
-     String name;
-     ArrayList<RuneSlot> slots;
+    boolean current;
+    long id;
+    String name;
+    ArrayList<RuneSlot> slots;
 
     public boolean isCurrent() {
         return current;
@@ -46,8 +46,8 @@ public class RunePage {
 
     @Override
     public String toString() {
-        return "RunePage [current=" + current + ", id=" + id + ", name=" + name
-                + ", slots=" + slots + "]";
+        return "RunePage [current=" + current + ", id=" + id + ", name=" + name + ", slots=" +
+                slots + "]";
     }
 
 }

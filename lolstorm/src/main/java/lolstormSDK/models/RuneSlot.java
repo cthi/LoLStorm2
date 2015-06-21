@@ -5,8 +5,8 @@ import org.parceler.Parcel;
 @Parcel
 public class RuneSlot {
 
-     int runeId;
-     int runeSlotId;
+    int runeId;
+    int runeSlotId;
 
     public int getRuneId() {
         return runeId;

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 @Parcel
 public class MasteryPage {
 
-     boolean current;
-     long id;
-     ArrayList<Mastery> masteries;
-     String name;
+    boolean current;
+    long id;
+    ArrayList<Mastery> masteries;
+    String name;
 
     public boolean isCurrent() {
         return current;
@@ -46,7 +46,8 @@ public class MasteryPage {
 
     @Override
     public String toString() {
-        return "MasteryPage{" + "current=" + current + ", id=" + id + ", masteries=" + masteries + ", name=" + name + '}';
+        return "MasteryPage{" + "current=" + current + ", id=" + id + ", masteries=" + masteries
+                + ", name=" + name + '}';
     }
 
 }

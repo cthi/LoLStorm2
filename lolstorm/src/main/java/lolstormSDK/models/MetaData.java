@@ -5,9 +5,9 @@ import org.parceler.Parcel;
 @Parcel
 public class MetaData {
 
-     String tier;
-     String type;
-     boolean isRune;
+    String tier;
+    String type;
+    boolean isRune;
 
     public String getTier() {
         return tier;

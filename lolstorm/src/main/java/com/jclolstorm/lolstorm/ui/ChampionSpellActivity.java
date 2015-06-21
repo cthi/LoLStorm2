@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.jclolstorm.lolstorm.R;
-import com.jclolstorm.lolstorm.adapters.ChampionSpellAdater;
+import com.jclolstorm.lolstorm.adapters.ChampionSpellAdapter;
 import com.jclolstorm.lolstorm.presenters.ChampionSpellPresenter;
 import com.jclolstorm.lolstorm.ui.widgets.headers.ChampionDetailHeader;
 import com.jclolstorm.lolstorm.utils.Constants;
@@ -26,7 +26,7 @@ public class ChampionSpellActivity extends AppCompatActivity implements Champion
     Toolbar mToolbar;
     @InjectView(R.id.champion_spell_rv)
     RecyclerView mRecyclerView;
-    private ChampionSpellAdater mAdapter;
+    private ChampionSpellAdapter mAdapter;
     private ChampionDetailHeader mHeader;
     private ChampionSpellPresenter mPresenter;
 
@@ -56,7 +56,7 @@ public class ChampionSpellActivity extends AppCompatActivity implements Champion
 
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ChampionSpellAdater(this, new ArrayList<>(), mHeader);
+        mAdapter = new ChampionSpellAdapter(this, new ArrayList<>(), mHeader);
         mRecyclerView.setAdapter(mAdapter);
     }
 

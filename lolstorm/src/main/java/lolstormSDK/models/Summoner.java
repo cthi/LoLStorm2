@@ -5,11 +5,11 @@ import org.parceler.Parcel;
 @Parcel
 public class Summoner {
 
-     long id;
-     String name;
-     int profileIconId;
-     long revisionDate;
-     long summonerLevel;
+    long id;
+    String name;
+    int profileIconId;
+    long revisionDate;
+    long summonerLevel;
 
     public long getId() {
         return id;
@@ -31,31 +31,14 @@ public class Summoner {
         return profileIconId;
     }
 
-    public void setProfileIconId(int profileIconId) {
-        this.profileIconId = profileIconId;
-    }
-
-    public long getRevisionDate() {
-        return revisionDate;
-    }
-
-    public void setRevisionDate(long revisionDate) {
-        this.revisionDate = revisionDate;
-    }
-
     public long getSummonerLevel() {
         return summonerLevel;
     }
 
-    public void setSummonerLevel(long summonerLevel) {
-        this.summonerLevel = summonerLevel;
-    }
-
     @Override
     public String toString() {
-        return "Summoner [id=" + id + ", name=" + name + ", profileIconId="
-                + profileIconId + ", revisionDate=" + revisionDate
-                + ", summonerLevel=" + summonerLevel + "]";
+        return "Summoner [id=" + id + ", name=" + name + ", profileIconId=" + profileIconId + ", " +
+                "revisionDate=" + revisionDate + ", summonerLevel=" + summonerLevel + "]";
     }
 
 }

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 @Parcel
 public class RunePages {
 
-     ArrayList<RunePage> pages;
-     long summonerId;
+    ArrayList<RunePage> pages;
+    long summonerId;
 
     public ArrayList<RunePage> getPages() {
         return pages;

@@ -7,10 +7,10 @@ import java.util.Map;
 @Parcel
 public class RuneList {
 
-     BasicData basic;
-     Map<String, Rune> data;
-     String type;
-     String version;
+    BasicData basic;
+    Map<String, Rune> data;
+    String type;
+    String version;
 
     public BasicData getBasic() {
         return basic;

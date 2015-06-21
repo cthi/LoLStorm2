@@ -5,10 +5,10 @@ import org.parceler.Parcel;
 @Parcel
 public class MiniSeries {
 
-     int losses;
-     String progress;
-     int target;
-     int wins;
+    int losses;
+    String progress;
+    int target;
+    int wins;
 
     public int getLosses() {
         return losses;
@@ -44,7 +44,8 @@ public class MiniSeries {
 
     @Override
     public String toString() {
-        return "MiniSeries{" + "losses=" + losses + ", progress=" + progress + ", target=" + target + ", wins=" + wins + '}';
+        return "MiniSeries{" + "losses=" + losses + ", progress=" + progress + ", target=" +
+                target + ", wins=" + wins + '}';
     }
 
 }

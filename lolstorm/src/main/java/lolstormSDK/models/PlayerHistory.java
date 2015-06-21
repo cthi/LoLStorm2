@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @Parcel
 public class PlayerHistory {
-     ArrayList<MatchSummary> matches;
+    ArrayList<MatchSummary> matches;
 
     public ArrayList<MatchSummary> getMatches() {
         return matches;

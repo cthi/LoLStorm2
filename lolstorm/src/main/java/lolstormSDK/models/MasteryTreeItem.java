@@ -5,8 +5,8 @@ import org.parceler.Parcel;
 @Parcel
 public class MasteryTreeItem {
 
-     int masteryId;
-     String prereq;
+    int masteryId;
+    String prereq;
 
     public int getMasteryId() {
         return masteryId;

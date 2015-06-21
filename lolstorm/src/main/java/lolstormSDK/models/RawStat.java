@@ -5,9 +5,9 @@ import org.parceler.Parcel;
 @Parcel
 public class RawStat {
 
-     int id;
-     String name;
-     int value;
+    int id;
+    String name;
+    int value;
 
     public int getId() {
         return id;
@@ -35,8 +35,7 @@ public class RawStat {
 
     @Override
     public String toString() {
-        return "RawStat [id=" + id + ", name=" + name + ", value=" + value
-                + "]";
+        return "RawStat [id=" + id + ", name=" + name + ", value=" + value + "]";
     }
 
 }

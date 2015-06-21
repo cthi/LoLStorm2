@@ -8,6 +8,33 @@ import java.util.Map;
 @Parcel
 public class Rune {
 
+    long rank;
+    long runeid;
+    String colloq;
+    boolean consumeOnFull;
+    boolean consumed;
+    int depth;
+    ArrayList<String> from;
+    Gold gold;
+    String group;
+    boolean hideFromAll;
+    Image image;
+    boolean inStore;
+    ArrayList<String> into;
+    Map<String, Boolean> maps;
+    String plaintext;
+    String RequiredChampion;
+    MetaData rune;
+    String sanitizedDescription;
+    int specialRecipe;
+    int stacks;
+    BasicDataStats stats;
+    ArrayList<String> tags;
+    String description;
+    int id;
+    String name;
+    int tier;
+
     public long getRank() {
         return rank;
     }
@@ -39,33 +66,6 @@ public class Rune {
     public boolean isInStore() {
         return inStore;
     }
-
-     long rank;
-     long runeid;
-     String colloq;
-     boolean consumeOnFull;
-     boolean consumed;
-     int depth;
-     ArrayList<String> from;
-     Gold gold;
-     String group;
-     boolean hideFromAll;
-     Image image;
-     boolean inStore;
-     ArrayList<String> into;
-     Map<String, Boolean> maps;
-     String plaintext;
-     String RequiredChampion;
-     MetaData rune;
-     String sanitizedDescription;
-     int specialRecipe;
-     int stacks;
-     BasicDataStats stats;
-     ArrayList<String> tags;
-     String description;
-     int id;
-     String name;
-     int tier;
 
     public String getColloq() {
         return colloq;
@@ -261,8 +261,8 @@ public class Rune {
 
     @Override
     public String toString() {
-        return "Rune [description=" + description + ", id=" + id + ", name="
-                + name + ", tier=" + tier + "]";
+        return "Rune [description=" + description + ", id=" + id + ", name=" + name + ", tier=" +
+                tier + "]";
     }
 
 }

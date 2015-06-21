@@ -7,15 +7,14 @@ import java.util.ArrayList;
 @Parcel
 public class PlayerStatsSummaryList {
 
-     ArrayList<PlayerStatsSummary> playerStatSummaries;
-     long summonerId;
+    ArrayList<PlayerStatsSummary> playerStatSummaries;
+    long summonerId;
 
     public ArrayList<PlayerStatsSummary> getPlayerStatSummaries() {
         return playerStatSummaries;
     }
 
-    public void setOkayerStatSummaries(
-            ArrayList<PlayerStatsSummary> playerStatSummaries) {
+    public void setOkayerStatSummaries(ArrayList<PlayerStatsSummary> playerStatSummaries) {
         this.playerStatSummaries = playerStatSummaries;
     }
 
@@ -29,8 +28,8 @@ public class PlayerStatsSummaryList {
 
     @Override
     public String toString() {
-        return "PlayerStatsSummaryList [playerStatSummaries="
-                + playerStatSummaries + ", summonerId=" + summonerId + "]";
+        return "PlayerStatsSummaryList [playerStatSummaries=" + playerStatSummaries + ", " +
+                "summonerId=" + summonerId + "]";
     }
 
 }

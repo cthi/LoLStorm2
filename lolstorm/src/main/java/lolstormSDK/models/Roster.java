@@ -7,8 +7,8 @@ import java.util.ArrayList;
 @Parcel
 public class Roster {
 
-     ArrayList<TeamMemberInfo> memberList;
-     long ownerId;
+    ArrayList<TeamMemberInfo> memberList;
+    long ownerId;
 
     public ArrayList<TeamMemberInfo> getMemberList() {
         return memberList;
@@ -28,8 +28,7 @@ public class Roster {
 
     @Override
     public String toString() {
-        return "Roster [memberList=" + memberList + ", ownerId=" + ownerId
-                + "]";
+        return "Roster [memberList=" + memberList + ", ownerId=" + ownerId + "]";
     }
 
 }

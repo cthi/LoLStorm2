@@ -5,16 +5,16 @@ import org.parceler.Parcel;
 @Parcel
 public class LeagueEntry implements Comparable<LeagueEntry> {
 
-     String division;
-     boolean isFreshBlood;
-     boolean isHotStreak;
-     boolean isInactive;
-     boolean isVeteran;
-     int leaguePoints;
-     MiniSeries miniSeries;
-     String playerOrTeamId;
-     String playerOrTeamName;
-     int wins;
+    String division;
+    boolean isFreshBlood;
+    boolean isHotStreak;
+    boolean isInactive;
+    boolean isVeteran;
+    int leaguePoints;
+    MiniSeries miniSeries;
+    String playerOrTeamId;
+    String playerOrTeamName;
+    int wins;
 
     public String getDivision() {
         return division;
@@ -122,7 +122,11 @@ public class LeagueEntry implements Comparable<LeagueEntry> {
 
     @Override
     public String toString() {
-        return "LeagueItem{" + "division=" + division + ", isFreshBlood=" + isFreshBlood + ", isHotStreak=" + isHotStreak + ", isInactive=" + isInactive + ", isVeteran=" + isVeteran + ", leaguePoints=" + leaguePoints + ", miniSeries=" + miniSeries + ", playerOrTeamId=" + playerOrTeamId + ", playerOrTeamName=" + playerOrTeamName + ", wins=" + wins + '}';
+        return "LeagueItem{" + "division=" + division + ", isFreshBlood=" + isFreshBlood + ", " +
+                "isHotStreak=" + isHotStreak + ", isInactive=" + isInactive + ", isVeteran=" +
+                isVeteran + ", leaguePoints=" + leaguePoints + ", miniSeries=" + miniSeries + ", " +
+                "playerOrTeamId=" + playerOrTeamId + ", playerOrTeamName=" + playerOrTeamName +
+                ", wins=" + wins + '}';
     }
 
     @Override
@@ -138,16 +142,19 @@ public class LeagueEntry implements Comparable<LeagueEntry> {
         }
 
         if (ams != null) {
-            if (ams.getProgress().replace("N", "").length() == bms.getProgress().replace("N", "").length()) {
+            if (ams.getProgress().replace("N", "").length() == bms.getProgress().replace("N", "")
+                    .length()) {
                 if ((ams.getProgress().length() - ams.getProgress().replace("L", "").length()) >
-                        (bms.getProgress().length() - bms.getProgress().replace("L", "").length())) {
+                        (bms.getProgress().length() - bms.getProgress().replace("L", "").length()
+                        )) {
                     return -1;
                 } else {
                     return 1;
                 }
             }
 
-            if (ams.getProgress().replace("N", "").length() > bms.getProgress().replace("N", "").length()) {
+            if (ams.getProgress().replace("N", "").length() > bms.getProgress().replace("N", "")
+                    .length()) {
                 return -1;
             } else {
                 return 1;

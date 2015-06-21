@@ -8,10 +8,10 @@ import java.util.Map;
 @Parcel
 public class ChampionList {
 
-     Map<String, Champion> data;
-     Map<String, String> keys;
-     ArrayList<Champion> champions;
-     String format, type, version;
+    Map<String, Champion> data;
+    Map<String, String> keys;
+    ArrayList<Champion> champions;
+    String format, type, version;
 
     public Map<String, Champion> getData() {
         return data;

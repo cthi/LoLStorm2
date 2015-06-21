@@ -7,6 +7,19 @@ import java.util.ArrayList;
 @Parcel
 public class MatchSummary {
 
+    int mapId;
+    long matchCreation;
+    long matchDuration;
+    long matchId;
+    String matchMode;
+    String matchType;
+    String matchVersion;
+    ArrayList<ParticipantIdentity> participantIdentities;
+    ArrayList<Participant> participants;
+    String queueType;
+    String region;
+    String season;
+
     public int getMapId() {
         return mapId;
     }
@@ -102,17 +115,4 @@ public class MatchSummary {
     public void setSeason(String season) {
         this.season = season;
     }
-
-     int mapId;
-     long matchCreation;
-     long matchDuration;
-     long matchId;
-     String matchMode;
-     String matchType;
-     String matchVersion;
-     ArrayList<ParticipantIdentity> participantIdentities;
-     ArrayList<Participant> participants;
-     String queueType;
-     String region;
-     String season;
 }

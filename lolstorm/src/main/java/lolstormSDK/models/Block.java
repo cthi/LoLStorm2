@@ -7,9 +7,9 @@ import java.util.ArrayList;
 @Parcel
 public class Block {
 
-     ArrayList<BlockItem> items;
-     boolean recMath;
-     String type;
+    ArrayList<BlockItem> items;
+    boolean recMath;
+    String type;
 
     public ArrayList<BlockItem> getItems() {
         return items;

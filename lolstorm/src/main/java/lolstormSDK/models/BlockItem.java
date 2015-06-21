@@ -5,8 +5,8 @@ import org.parceler.Parcel;
 @Parcel
 public class BlockItem {
 
-     int count;
-     int id;
+    int count;
+    int id;
 
     public int getCount() {
         return count;

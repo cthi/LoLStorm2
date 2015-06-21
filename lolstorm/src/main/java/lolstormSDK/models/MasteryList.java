@@ -7,10 +7,10 @@ import java.util.Map;
 @Parcel
 public class MasteryList {
 
-     Map<String, Mastery> data;
-     MasteryTree tree;
-     String type;
-     String version;
+    Map<String, Mastery> data;
+    MasteryTree tree;
+    String type;
+    String version;
 
     public Map<String, Mastery> getData() {
         return data;

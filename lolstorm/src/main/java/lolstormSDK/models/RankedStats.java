@@ -7,9 +7,9 @@ import java.util.ArrayList;
 @Parcel
 public class RankedStats {
 
-     ArrayList<ChampionStats> champions;
-     long modifyDate;
-     long summonerId;
+    ArrayList<ChampionStats> champions;
+    long modifyDate;
+    long summonerId;
 
     public ArrayList<ChampionStats> getChampions() {
         return champions;
@@ -37,8 +37,8 @@ public class RankedStats {
 
     @Override
     public String toString() {
-        return "RankedStats [champions=" + champions + ", modifyDate="
-                + modifyDate + ", summonerId=" + summonerId + "]";
+        return "RankedStats [champions=" + champions + ", modifyDate=" + modifyDate + ", " +
+                "summonerId=" + summonerId + "]";
     }
 
 }

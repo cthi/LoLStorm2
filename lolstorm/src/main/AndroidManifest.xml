@@ -34,7 +34,8 @@
         </activity>
 
         <activity
-            android:name=".ui.ChampionSpellActivity">
+            android:name=".ui.ChampionSpellActivity"
+            android:theme="@style/Base.Theme.LoLStorm">
         </activity>
     </application>
 </manifest>

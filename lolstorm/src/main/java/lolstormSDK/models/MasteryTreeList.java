@@ -7,7 +7,7 @@ import java.util.ArrayList;
 @Parcel
 public class MasteryTreeList {
 
-     ArrayList<MasteryTreeItem> masteryTreeItems;
+    ArrayList<MasteryTreeItem> masteryTreeItems;
 
     public ArrayList<MasteryTreeItem> getMasteryTreeItems() {
         return masteryTreeItems;

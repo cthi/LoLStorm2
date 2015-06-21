@@ -5,13 +5,13 @@ import org.parceler.Parcel;
 @Parcel
 public class Image {
 
-     String full;
-     String group;
-     String sprite;
-     int h;
-     int w;
-     int x;
-     int y;
+    String full;
+    String group;
+    String sprite;
+    int h;
+    int w;
+    int x;
+    int y;
 
     public String getFull() {
         return full;
