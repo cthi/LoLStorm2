@@ -27,12 +27,10 @@ package com.jclolstorm.lolstorm.models;
 public class Stat {
     private String label;
     private int value;
-    private int indicatorColor;
 
-    public Stat(String label, int value, int indicatorColor) {
+    public Stat(String label, int value) {
         this.label = label;
         this.value = value;
-        this.indicatorColor = indicatorColor;
     }
 
     public String getLabel() {
@@ -42,6 +40,4 @@ public class Stat {
     public int getValue() {
         return value;
     }
-
-    public int getIndicatorColor () { return indicatorColor; }
 }

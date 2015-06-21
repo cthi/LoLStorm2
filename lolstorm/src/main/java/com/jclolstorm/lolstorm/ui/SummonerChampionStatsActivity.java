@@ -98,7 +98,7 @@ public class SummonerChampionStatsActivity extends AppCompatActivity
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             SummonerChampionStatsAdapter adapter =
-                    new SummonerChampionStatsAdapter(this, new ArrayList<>());
+                    new SummonerChampionStatsAdapter(new ArrayList<>());
             mRecyclerView.setAdapter(adapter);
         }
     }

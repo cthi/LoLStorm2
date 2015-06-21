@@ -53,26 +53,26 @@ public class SummonerChampionStatsPresenter {
     private void processStats(AggregatedStats stats) {
         ArrayList<Stat> statList = new ArrayList<>();
 
-        statList.add(new Stat("Games Played", stats.getTotalSessionsPlayed(), R.color.green_primary));
-        statList.add(new Stat("Games Won", stats.getTotalSessionsWon(), R.color.green_primary));
-        statList.add(new Stat("Games Lost", stats.getTotalSessionsLost(), R.color.green_primary));
-        statList.add(new Stat("Gold Earned", stats.getTotalGoldEarned(), R.color.green_primary));
-        statList.add(new Stat("Kills", stats.getTotalChampionKills(), R.color.green_primary));
-        statList.add(new Stat("Deaths", stats.getTotalDeathsPerSession(), R.color.green_primary));
-        statList.add(new Stat("Assists", stats.getTotalAssists(), R.color.green_primary));
-        statList.add(new Stat("Max Kills", stats.getMostChampionKillsPerSession(), R.color.green_primary));
-        statList.add(new Stat("Damage Dealt", stats.getTotalDamageDealt(), R.color.green_primary));
-        statList.add(new Stat("Physical Damage", stats.getTotalPhysicalDamageDealt(), R.color.green_primary));
-        statList.add(new Stat("Magic Damage Dealt", stats.getTotalMagicDamageDealt(), R.color.green_primary));
-        statList.add(new Stat("Damage Taken", stats.getTotalDamageTaken(), R.color.green_primary));
-        statList.add(new Stat("Double Kills", stats.getTotalDoubleKills(), R.color.green_primary));
-        statList.add(new Stat("Triple Kills", stats.getTotalTripleKills(), R.color.green_primary));
-        statList.add(new Stat("Quadra Kills", stats.getTotalQuadraKills(), R.color.green_primary));
-        statList.add(new Stat("Penta Kills", stats.getTotalPentaKills(), R.color.green_primary));
-        statList.add(new Stat("Legendary Kills", stats.getTotalUnrealKills(), R.color.green_primary));
-        statList.add(new Stat("Minions Killed", stats.getTotalMinionKills(), R.color.green_primary));
-        statList.add(new Stat("Jungle Minions Killed", stats.getTotalNeutralMinionsKilled(), R.color.green_primary));
-        statList.add(new Stat("Turrets Destroyed", stats.getTotalTurretsKilled(), R.color.green_primary));
+        statList.add(new Stat("Games Played", stats.getTotalSessionsPlayed()));
+        statList.add(new Stat("Games Won", stats.getTotalSessionsWon()));
+        statList.add(new Stat("Games Lost", stats.getTotalSessionsLost()));
+        statList.add(new Stat("Gold Earned", stats.getTotalGoldEarned()));
+        statList.add(new Stat("Kills", stats.getTotalChampionKills()));
+        statList.add(new Stat("Deaths", stats.getTotalDeathsPerSession()));
+        statList.add(new Stat("Assists", stats.getTotalAssists()));
+        statList.add(new Stat("Max Kills", stats.getMostChampionKillsPerSession()));
+        statList.add(new Stat("Damage Dealt", stats.getTotalDamageDealt()));
+        statList.add(new Stat("Physical Damage", stats.getTotalPhysicalDamageDealt()));
+        statList.add(new Stat("Magic Damage Dealt", stats.getTotalMagicDamageDealt()));
+        statList.add(new Stat("Damage Taken", stats.getTotalDamageTaken()));
+        statList.add(new Stat("Double Kills", stats.getTotalDoubleKills()));
+        statList.add(new Stat("Triple Kills", stats.getTotalTripleKills()));
+        statList.add(new Stat("Quadra Kills", stats.getTotalQuadraKills()));
+        statList.add(new Stat("Penta Kills", stats.getTotalPentaKills()));
+        statList.add(new Stat("Legendary Kills", stats.getTotalUnrealKills()));
+        statList.add(new Stat("Minions Killed", stats.getTotalMinionKills()));
+        statList.add(new Stat("Jungle Minions Killed", stats.getTotalNeutralMinionsKilled()));
+        statList.add(new Stat("Turrets Destroyed", stats.getTotalTurretsKilled()));
 
         view.populateAdapter(statList);
     }
