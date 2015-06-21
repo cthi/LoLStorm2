@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +55,7 @@ public class ChampionsFragment extends Fragment implements ChampionsView, Champi
     private void initRecyclerView() {
         if (null != mRecyclerView) {
             mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mAdapter = new ChampionsAdapter(getActivity(), this, new ArrayList<>());
             mRecyclerView.setAdapter(mAdapter);
         }

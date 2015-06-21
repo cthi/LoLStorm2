@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,6 +37,8 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.item_champion_bg)
+        RelativeLayout mBg;
         @InjectView(R.id.item_champion_image)
         ImageView mChampionImage;
         @InjectView(R.id.item_champion_name)
@@ -68,6 +71,7 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 .load(ResourceUtils.championDrawableFromID((int) currentChampion
                 .getId(), mContext)).into(viewHolder.mChampionImage);
         viewHolder.mChampionName.setText(currentChampion.getName());
+        setBackgroundColor(viewHolder.mBg, viewHolder.getLayoutPosition());
     }
 
     @Override
@@ -90,6 +94,14 @@ public class ChampionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View v) {
             mListener.onChampionClick(mChampionList.get(viewHolder.getAdapterPosition()).getId());
+        }
+    }
+
+    private void setBackgroundColor(View view, int position) {
+        if (position % 2 == 0) {
+            view.setBackgroundColor(mContext.getResources().getColor(R.color.list_grey_1));
+        } else {
+            view.setBackgroundColor(mContext.getResources().getColor(R.color.list_grey_2));
         }
     }
 }
