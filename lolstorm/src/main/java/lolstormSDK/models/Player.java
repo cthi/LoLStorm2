@@ -4,8 +4,6 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Player {
-
-    String matchHistoryUri;
     int profileIcon;
     String summonerName;
     int championId;
@@ -13,14 +11,6 @@ public class Player {
     int teamId;
     boolean isWinner;
     long level;
-
-    public String getMatchHistoryUri() {
-        return matchHistoryUri;
-    }
-
-    public void setMatchHistoryUri(String matchHistoryUri) {
-        this.matchHistoryUri = matchHistoryUri;
-    }
 
     public int getProfileIcon() {
         return profileIcon;
@@ -50,16 +40,8 @@ public class Player {
         return championId;
     }
 
-    public void setChampionId(int championId) {
-        this.championId = championId;
-    }
-
     public long getSummonerId() {
         return summonerId;
-    }
-
-    public void setSummonerId(long summonerId) {
-        this.summonerId = summonerId;
     }
 
     public int getTeamId() {

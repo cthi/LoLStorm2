@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import lolstormSDK.models.League;
-import lolstormSDK.models.PlayerStatsSummaryList;
 import lolstormSDK.models.RankedStats;
 import lolstormSDK.models.RecentGames;
 import lolstormSDK.models.Summoner;
@@ -21,9 +20,6 @@ public interface RiotApi {
     @GET("/api/lol/{region}/v2.5/league/by-summoner/{summonerIds}")
     Observable<Map<String, List<League>>> getSummonerLeagues(@Path("region") String region, @Path("summonerIds") long id, @Query("api_key") String apikey);
 
-    @GET("/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/summary")
-    Observable<PlayerStatsSummaryList> getSummonerStatsSummary(@Path("region") String regions, @Path("summonerId") long id, @Query("api_key") String apikey);
-
     @GET("/api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked")
     Observable<RankedStats> getSummonerRankedStats(@Path("region") String regions, @Path("summonerId") long id, @Query("api_key") String apikey);
 
@@ -32,7 +28,4 @@ public interface RiotApi {
 
     @GET("/api/lol/{region}/v1.4/summoner/{summonerIds}")
     Observable<Map<String,Summoner>> getSummonersById(@Path("region") String regions, @Path("summonerIds") String ids, @Query("api_key") String apikey);
-
-    @GET("/api/lol/{region}/v1.4/summoner/{summonerIds}/name")
-    Observable<Map<String,String>> getSummonerNamesFromId(@Path("region") String region, @Path("summonerIds") String ids, @Query("api_key") String apiKey);
 }

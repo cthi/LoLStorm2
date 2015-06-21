@@ -9,7 +9,6 @@ import lolstormSDK.RiotApi;
 import lolstormSDK.RiotApiImpl;
 import lolstormSDK.RiotEndpoint;
 import lolstormSDK.models.League;
-import lolstormSDK.models.PlayerStatsSummaryList;
 import lolstormSDK.models.RankedStats;
 import lolstormSDK.models.RecentGames;
 import lolstormSDK.models.Summoner;
@@ -41,10 +40,6 @@ public class RiotApiModule {
         return getApi().getSummonerLeagues(getRegion(), summonerID, API_KEY);
     }
 
-    public static Observable<PlayerStatsSummaryList> getSummonerStatsSummary(long summonerID) {
-        return getApi().getSummonerStatsSummary(getRegion(), summonerID, API_KEY);
-    }
-
     public static Observable<RankedStats> getSummonerRankedStats(long summonerID) {
         return getApi().getSummonerRankedStats(getRegion(), summonerID, API_KEY);
     }
@@ -55,9 +50,5 @@ public class RiotApiModule {
 
     public static Observable<Map<String,Summoner>> getSummonersById(String summonerIDs) {
         return getApi().getSummonersById(getRegion(), summonerIDs, API_KEY);
-    }
-
-    public static Observable<Map<String,String>> getSummonerNamesFromId(String summonerIDs) {
-        return getApi().getSummonerNamesFromId(getRegion(), summonerIDs, API_KEY);
     }
 }
