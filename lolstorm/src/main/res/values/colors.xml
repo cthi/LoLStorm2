@@ -20,12 +20,12 @@
     <color name="white_transparent">#66ffffff</color>
     <color name="black">#000000</color>
 
-    <color name="green_primary_light">#26A69A</color>
-    <color name="green_primary">#009688</color>
-    <color name="green_primary_dark">#006e60</color>
+    <color name="green_primary_light">#00796B</color>
+    <color name="green_primary">#00695C</color>
+    <color name="green_primary_dark">#004D40</color>
 
-    <color name="game_red">#f44336</color>
-    <color name="game_blue">#03a9f4</color>
+    <color name="game_red">#EF9A9A</color>
+    <color name="game_blue">#81D4FA</color>
 
     <color name="list_grey_1">#ebebeb</color>
     <color name="list_grey_2">#d3d3d3</color>
