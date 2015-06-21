@@ -64,10 +64,10 @@
         <item>com.squareup.retrofit:retrofit:1.9.0</item>
         <item>o.reactivex:rxandroid:0.24.0</item>
         <item>org.parceler:parceler-api:1.0.0</item>
+        <item>com.readystatesoftware.sqliteasset:sqliteassethelper</item>
     </string-array>
 
     <!-- Menu -->
     <string name="summoner_menu_fav">Favorite</string>
     <string name="summoner_menu_remove">Remove</string>
-
 </resources>

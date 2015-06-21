@@ -47,7 +47,7 @@ public class ChampionsFragment extends Fragment implements ChampionsView, Champi
         mPresenter = new ChampionsPresenter();
         mPresenter.setView(this);
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string
+        getActivity().setTitle(R.string
                 .summoner_champions_title);
         return view;
     }
