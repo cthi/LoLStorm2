@@ -39,6 +39,7 @@ public class ChampionSpellPresenter {
         cursor.close();
         mChampion = new Gson().fromJson(championAsString, Champion.class);
 
+        mView.setTitle(mChampion.getName());
         mView.initHeaderData(mChampion);
         mView.populateAdapter(mChampion.getSpells());
     }

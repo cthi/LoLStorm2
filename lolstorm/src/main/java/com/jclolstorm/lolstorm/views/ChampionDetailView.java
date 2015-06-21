@@ -10,4 +10,6 @@ public interface ChampionDetailView {
     void initHeaderData(Champion champion);
 
     void populateAdapter(List<ChampionSpell> championSpellList);
+
+    void setTitle(String title);
 }

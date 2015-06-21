@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.ChampionSpellAdapter;
@@ -46,8 +47,19 @@ public class ChampionSpellActivity extends AppCompatActivity implements Champion
         mPresenter.setChampionId(getIntent().getExtras().getInt(Constants.CHAMPION_ID_TAG), this);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initToolbar() {
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initHeader() {
@@ -68,5 +80,12 @@ public class ChampionSpellActivity extends AppCompatActivity implements Champion
     @Override
     public void populateAdapter(List<ChampionSpell> championSpellList) {
         mAdapter.populate(championSpellList);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        if (null != getSupportActionBar()) {
+            getSupportActionBar().setTitle(title);
+        }
     }
 }
