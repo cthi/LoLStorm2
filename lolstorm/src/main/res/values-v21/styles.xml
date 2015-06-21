@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.LoLStorm.Solid" parent="Base.Theme.LoLStorm"/>
+
     <style name="Theme.LoLStorm" parent="Base.Theme.LoLStorm">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.LolStorm.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:elevation">2dp</item>
     </style>
 
 </resources>

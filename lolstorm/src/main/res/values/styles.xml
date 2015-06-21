@@ -18,6 +18,8 @@
 
     <style name="Theme.LoLStorm" parent="Base.Theme.LoLStorm"/>
 
+    <style name="Theme.LoLStorm.Solid" parent="Base.Theme.LoLStorm"/>
+
     <style name="Base.Theme.LoLStorm" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryDark">@color/green_primary_dark</item>
@@ -26,5 +28,9 @@
         <item name="colorButtonNormal">@color/white</item>
         <item name="android:textColorTertiary">@color/black</item>
     </style>
+
+    <style name="Theme.LolStorm.Toolbar" parent="Base.Theme.LolStorm.Toolbar"/>
+
+    <style name="Base.Theme.LolStorm.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
 </resources>
