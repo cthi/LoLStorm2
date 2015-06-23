@@ -108,7 +108,7 @@ public class SummonerSearchAdapter extends BaseHeaderRecyclerViewAdapter<User> {
             User user = mUserList.get(position - 1);
 
             viewHolder.mName.setText(user.getName());
-            viewHolder.mRegion.setText(user.getRegion());
+            viewHolder.mRegion.setText(user.getRegion().toUpperCase());
             Glide.with(mContext).load(ResourceUtils.numberedDrawableFromID(user.getIconID(),
                     mContext)).into(viewHolder.mIcon);
         }
