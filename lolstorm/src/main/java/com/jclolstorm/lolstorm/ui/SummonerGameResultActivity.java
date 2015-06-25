@@ -50,6 +50,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.GameConstants;
+import lolstormSDK.RiotEndpoint;
 import lolstormSDK.models.Game;
 import lolstormSDK.models.Player;
 
@@ -121,7 +122,7 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.USER_TAG, Parcels.wrap(new User(player.getSummonerName(),
-                "na", player.getProfileIcon(), player.getLevel(), player.getSummonerId())));
+                RiotEndpoint.getInstance().getRegion(), player.getProfileIcon(), player.getLevel(), player.getSummonerId())));
 
         intent.putExtras(bundle);
 

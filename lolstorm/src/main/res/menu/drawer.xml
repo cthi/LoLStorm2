@@ -35,6 +35,10 @@
             android:icon="@drawable/ic_face_black_24dp"
             android:title="@string/summoner_champions_title"/>
         <item
+            android:id="@+id/drawer_regions"
+            android:icon="@drawable/ic_public_black_24dp"
+            android:title="@string/region_title"/>
+        <item
             android:id="@+id/drawer_about"
             android:icon="@drawable/ic_turned_in_black_24dp"
             android:title="@string/about_title"/>

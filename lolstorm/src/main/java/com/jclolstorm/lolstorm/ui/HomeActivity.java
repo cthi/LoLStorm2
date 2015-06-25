@@ -24,6 +24,7 @@
 
 package com.jclolstorm.lolstorm.ui;
 
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,11 +33,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.models.User;
+import com.jclolstorm.lolstorm.presenters.RegionPresenter;
 import com.jclolstorm.lolstorm.ui.widgets.headers.NavViewHeader;
 
 import butterknife.ButterKnife;
@@ -54,6 +57,8 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     private NavViewHeader mHeader;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private RegionPresenter mRegionPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
         initNavDrawer();
         linkDrawer();
         initView();
+        initRegions();
     }
 
     @Override
@@ -114,7 +120,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Fragment fragment;
+                        Fragment fragment = null;
 
                         if (item.equals("Search")) {
                             fragment = SummonerSearchFragment.newInstance();
@@ -122,18 +128,33 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
                             fragment = AboutFragment.newInstance();
                         } else if (item.equals("Champions")) {
                             fragment = ChampionsFragment.newInstance();
+                        } else if (item.equals("Region")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                            builder.setSingleChoiceItems(mRegionPresenter.getRegionList(), 0, null);
+                            builder.setTitle("Region");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                                    mRegionPresenter.setRegion(position);
+                                }
+                            });
+                            builder.show();
                         } else {
                             fragment = SummonerSearchFragment.newInstance();
                         }
 
-                        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R
-                                .id.home_fragment);
-                        if (fragment.getClass() != currentFragment.getClass()) {
-                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                            ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
-                            ft.replace(R.id.home_fragment, fragment).commit();
-
+                        if (null != fragment) {
+                            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R
+                                    .id.home_fragment);
+                            if (fragment.getClass() != currentFragment.getClass()) {
+                                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                                ft.replace(R.id.home_fragment, fragment).commit();
+                            }
                         }
+
                     }
                 }, 300);
                 return true;
@@ -153,5 +174,10 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
         getSupportFragmentManager().beginTransaction().replace(R.id.home_fragment,
                 SummonerSearchFragment.newInstance()).commit();
         mNavView.getMenu().getItem(0).setChecked(true);
+    }
+
+    private void initRegions() {
+        mRegionPresenter = new RegionPresenter();
+        mRegionPresenter.initRegions(this);
     }
 }

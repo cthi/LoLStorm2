@@ -27,6 +27,7 @@
 
     <string name="summoner_search_title">Search</string>
     <string name="summoner_champions_title">Champions</string>
+    <string name="region_title">Region</string>
     <string name="about_title">About</string>
 
     <string name="drawer_open">Drawer Open</string>
@@ -42,18 +43,6 @@
     <string name="player_updated">Your favorite player has been updated.</string>
 
     <!-- String Arrays -->
-    <string-array name="home_pager_items">
-        <item>Search</item>
-        <item>Champions</item>
-        <item>About</item>
-    </string-array>
-
-    <string-array name="champion_pager_items">
-        <item>SUMMARY</item>
-        <item>SKILLS</item>
-        <item>STATS</item>
-    </string-array>
-
     <string-array name="player_pager_items">
         <item>SUMMARY</item>
         <item>CHAMPIONS</item>
@@ -78,4 +67,20 @@
     <!-- Menu -->
     <string name="summoner_menu_fav">Favorite</string>
     <string name="summoner_menu_remove">Remove</string>
+
+    <!-- Region Dialog -->
+    <string-array name="regions">
+        <item>BR</item>
+        <item>EUNE</item>
+        <item>EUW</item>
+        <item>KR</item>
+        <item>LAN</item>
+        <item>LAS</item>
+        <item>NA</item>
+        <item>OCE</item>
+        <item>TR</item>
+        <item>RUW</item>
+        <item>PBE</item>
+    </string-array>
+
 </resources>

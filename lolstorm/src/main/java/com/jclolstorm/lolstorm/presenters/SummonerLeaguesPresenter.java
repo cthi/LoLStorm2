@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import lolstormSDK.GameConstants;
+import lolstormSDK.RiotEndpoint;
 import lolstormSDK.models.League;
 import lolstormSDK.models.LeagueEntry;
 import lolstormSDK.models.Summoner;
@@ -119,7 +120,7 @@ public class SummonerLeaguesPresenter {
                     @Override
                     public void onNext(Map<String, Summoner> stringSummonerMap) {
                         Summoner summoner = stringSummonerMap.get(filteredName);
-                        user = new User(summoner.getName(), "na", summoner.getProfileIconId(),
+                        user = new User(summoner.getName(), RiotEndpoint.getInstance().getRegion(), summoner.getProfileIconId(),
                                 summoner.getSummonerLevel(), summoner.getId());
 
                     }
