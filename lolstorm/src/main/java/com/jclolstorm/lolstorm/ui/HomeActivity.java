@@ -39,7 +39,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.models.User;
-import com.jclolstorm.lolstorm.presenters.RegionPresenter;
+import com.jclolstorm.lolstorm.persistence.user.RegionManager;
 import com.jclolstorm.lolstorm.ui.widgets.headers.NavViewHeader;
 
 import butterknife.ButterKnife;
@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     private NavViewHeader mHeader;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private RegionPresenter mRegionPresenter;
+    private RegionManager mRegionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,12 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
         linkDrawer();
         initView();
         initRegions();
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        mRegionManager.restoreSavedRegion();
     }
 
     @Override
@@ -130,14 +136,14 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
                             fragment = ChampionsFragment.newInstance();
                         } else if (item.equals("Region")) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                            builder.setSingleChoiceItems(mRegionPresenter.getRegionList(), 0, null);
+                            builder.setSingleChoiceItems(mRegionManager.getRegionList(), 0, null);
                             builder.setTitle("Region");
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-                                    mRegionPresenter.setRegion(position);
+                                    mRegionManager.setRegion(position);
                                 }
                             });
                             builder.show();
@@ -177,7 +183,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     }
 
     private void initRegions() {
-        mRegionPresenter = new RegionPresenter();
-        mRegionPresenter.initRegions(this);
+        mRegionManager = new RegionManager();
+        mRegionManager.initRegions(this);
     }
 }

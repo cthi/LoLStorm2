@@ -54,6 +54,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lolstormSDK.RiotEndpoint;
 
 public class SummonerSearchFragment extends Fragment implements SummonerSearchView, SummonerSearchAdapter.OnSummonerItemClick {
 
@@ -153,6 +154,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     @Override
     public void onSummonerClick(User user) {
         startPlayerView(user);
+        RiotEndpoint.getInstance().setRegion(user.getRegion());
     }
 
     @Override
