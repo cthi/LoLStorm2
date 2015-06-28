@@ -108,20 +108,22 @@ public class SummonerSearchPresenter {
     }
 
     public void removeUser(User toRemove) {
+        System.out.println(users.size());
         for (User user : users) {
             if (user.getName().equals(toRemove.getName())
-                    && user.getRegionId() == RiotEndpoint.getInstance().getRegionId()) {
+                    && user.getRegionId() == toRemove.getRegionId()) {
                 users.remove(user);
                 savedSummonerList.updateSavedUsers(users);
                 return;
             }
         }
+        System.out.println(users.size());
     }
 
     private void saveUser(User newUser) {
         for (User user : users) {
             if (user.getName().equals(newUser.getName())
-                    && user.getRegionId() == RiotEndpoint.getInstance().getRegionId()) {
+                    && user.getRegionId() == newUser.getRegionId()) {
                 return;
             }
         }
