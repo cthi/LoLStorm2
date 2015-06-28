@@ -115,62 +115,55 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     }
 
     private void initNavDrawer() {
-        if (null != mNavView) {
-            mNavView.addHeaderView(mHeader);
-            mNavView.setNavigationItemSelectedListener((menuItem -> {
-                menuItem.setChecked(true);
 
-                // TODO fix this
-                String item = menuItem.getTitle().toString();
-                mDrawerLayout.closeDrawers();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Fragment fragment = null;
-
-                        if (item.equals("Search")) {
-                            fragment = SummonerSearchFragment.newInstance();
-                        } else if (item.equals("About")) {
-                            fragment = AboutFragment.newInstance();
-                        } else if (item.equals("Champions")) {
-                            fragment = ChampionsFragment.newInstance();
-                        } else if (item.equals("Region")) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                            builder.setSingleChoiceItems(mRegionManager.getRegionList(),
-                                    RiotEndpoint.getInstance().getRegionId(), null);
-                            builder.setTitle("Region");
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    int position = ((AlertDialog) dialog).getListView()
-                                            .getCheckedItemPosition();
-                                    mRegionManager.setRegion(position);
-                                }
-                            });
-                            builder.setNegativeButton("Cancel", null);
-                            builder.show();
-                        } else {
-                            fragment = SummonerSearchFragment.newInstance();
-                        }
-
-                        if (null != fragment) {
-                            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R
-                                    .id.home_fragment);
-                            if (fragment.getClass() != currentFragment.getClass()) {
-                                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                                ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
-                                ft.replace(R.id.home_fragment, fragment).commit();
-                            }
-                        }
-
-                    }
-                }, 300);
-                return true;
-            }));
-
+        if (null == mNavView) {
+            return;
         }
+
+        mNavView.addHeaderView(mHeader);
+        mNavView.setNavigationItemSelectedListener((menuItem -> {
+            mDrawerLayout.closeDrawers();
+
+            Fragment switchTo = null;
+
+            switch (menuItem.getItemId()) {
+                case R.id.drawer_search:
+                    switchTo = SummonerSearchFragment.newInstance();
+                    break;
+                case R.id.drawer_champions:
+                    switchTo = ChampionsFragment.newInstance();
+                    break;
+                case R.id.drawer_regions:
+                    showRegionDialog();
+                    break;
+                case R.id.drawer_about:
+                    switchTo = AboutFragment.newInstance();
+                    break;
+            }
+
+            if (menuItem.getItemId() != R.id.drawer_regions) {
+                menuItem.setChecked(true);
+            }
+
+            if (null != switchTo) {
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id
+                        .home_fragment);
+                final Fragment tempFragment = switchTo;
+
+                if (switchTo.getClass() != currentFragment.getClass()) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                            ft.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out);
+                            ft.replace(R.id.home_fragment, tempFragment).commit();
+                        }
+                    }, 300);
+                }
+            }
+
+            return true;
+        }));
     }
 
     private void linkDrawer() {
@@ -189,5 +182,21 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     private void initRegions() {
         mRegionManager = new RegionManager();
         mRegionManager.initRegions(this);
+    }
+
+    private void showRegionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setSingleChoiceItems(mRegionManager.getRegionList(), RiotEndpoint.getInstance().getRegionId(), null);
+        builder.setTitle(getString(R.string.region_title));
+        builder.setPositiveButton(getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int position = ((AlertDialog) dialog).getListView()
+                        .getCheckedItemPosition();
+                mRegionManager.setRegion(position);
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_cancel), null);
+        builder.show();
     }
 }

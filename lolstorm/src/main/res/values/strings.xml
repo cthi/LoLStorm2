@@ -33,6 +33,9 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
 
+    <string name="dialog_ok">Ok</string>
+    <string name="dialog_cancel">Cancel</string>
+
     <string name="error_internet_connection">Please check your internet connection.</string>
     <string name="error_summoner_not_found">The summoner was not found.</string>
     <string name="error_data_not_found">No info was found.</string>
