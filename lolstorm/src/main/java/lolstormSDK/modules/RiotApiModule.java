@@ -53,7 +53,7 @@ public class RiotApiModule {
     }
 
     private static String getRegion() {
-        return RiotEndpoint.getInstance().getRegion();
+        return RiotEndpoint.getInstance().getRegionAsString();
     }
 
     public static Observable<RecentGames> getSummonerRecentGames(long summonerID) {

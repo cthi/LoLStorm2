@@ -24,10 +24,9 @@ public class RegionManager {
         return regions;
     }
 
-    public void setRegion(int position) {
-        String region = regions[position].toString().toLowerCase();
-        RiotEndpoint.getInstance().setRegion(region);
-        mUserSettings.updateSavedRegion(region);
+    public void setRegion(int regionId) {
+        RiotEndpoint.getInstance().setRegion(regionId);
+        mUserSettings.updateSavedRegion(regionId);
     }
 
     public void restoreSavedRegion() {

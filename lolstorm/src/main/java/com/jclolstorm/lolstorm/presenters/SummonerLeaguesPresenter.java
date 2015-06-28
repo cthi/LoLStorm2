@@ -146,7 +146,7 @@ public class SummonerLeaguesPresenter {
                     @Override
                     public void onNext(Map<String, Summoner> stringSummonerMap) {
                         Summoner summoner = stringSummonerMap.get(filteredName);
-                        user = new User(summoner.getName(), RiotEndpoint.getInstance().getRegion(), summoner.getProfileIconId(),
+                        user = new User(summoner.getName(), RiotEndpoint.getInstance().getRegionId(), summoner.getProfileIconId(),
                                 summoner.getSummonerLevel(), summoner.getId());
                     }
                 });

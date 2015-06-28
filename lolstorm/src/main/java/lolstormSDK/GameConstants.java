@@ -41,6 +41,18 @@ public class GameConstants {
     public final static String DIV_5 = "V";
     private final static String DIV_UNKNOWN = "";
 
+    public final static int REGION_BR = 0;
+    public final static int REGION_EUNE = 1;
+    public final static int REGION_EUW = 2;
+    public final static int REGION_KR = 3;
+    public final static int REGION_LAN = 4;
+    public final static int REGION_LAS = 5;
+    public final static int REGION_NA = 6;
+    public final static int REGION_OCE = 7;
+    public final static int REGION_TR = 8;
+    public final static int REGION_RUW = 9;
+    public final static int REGION_PBE = 10;
+
     public static final String divisionFromInt(int division) {
         switch (division) {
             case 1:
@@ -55,6 +67,35 @@ public class GameConstants {
                 return DIV_5;
             default:
                 return DIV_UNKNOWN;
+        }
+    }
+
+    public static String regionFromInt(int region) {
+        switch (region) {
+            case REGION_BR:
+                return "br";
+            case REGION_EUNE:
+                return "eune";
+            case REGION_EUW:
+                return "euw";
+            case REGION_KR:
+                return "kr";
+            case REGION_LAN:
+                return "lan";
+            case REGION_LAS:
+                return "las";
+            case REGION_NA:
+                return "na";
+            case REGION_OCE:
+                return "oce";
+            case REGION_TR:
+                return "tr";
+            case REGION_RUW:
+                return "ruw";
+            case REGION_PBE:
+                return "pbe";
+            default:
+                return "na";
         }
     }
 

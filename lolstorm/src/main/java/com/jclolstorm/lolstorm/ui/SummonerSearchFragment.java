@@ -149,7 +149,7 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     public void onSummonerClick(User user) {
         if (NetworkUtils.hasConnection(getActivity())) {
             startPlayerView(user);
-            RiotEndpoint.getInstance().setRegion(user.getRegion());
+            RiotEndpoint.getInstance().setRegion(user.getRegionId());
         } else {
             Snackbar.make(mRecyclerView, R.string.error_internet_connection, Snackbar.LENGTH_SHORT).show();
         }

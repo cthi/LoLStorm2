@@ -28,6 +28,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import lolstormSDK.GameConstants;
+
 public class UserSettings {
 
     private final String REGION_TAG = "region";
@@ -38,11 +40,11 @@ public class UserSettings {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public void updateSavedRegion(String region) {
-        mPreferences.edit().putString(REGION_TAG, region).apply();
+    public void updateSavedRegion(int region) {
+        mPreferences.edit().putInt(REGION_TAG, region).apply();
     }
 
-    public String getSavedRegion() {
-        return mPreferences.getString(REGION_TAG, "");
+    public int getSavedRegion() {
+        return mPreferences.getInt(REGION_TAG, GameConstants.REGION_NA);
     }
 }

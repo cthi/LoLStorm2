@@ -31,6 +31,7 @@ public class RiotEndpoint implements Endpoint {
     private static final String BASE2 = ".api.pvp.net";
 
     private String url;
+    private int regionId;
     private String region;
 
     private static RiotEndpoint endpoint;
@@ -38,18 +39,25 @@ public class RiotEndpoint implements Endpoint {
     public static RiotEndpoint getInstance() {
         if (null == endpoint) {
             endpoint = new RiotEndpoint();
-            endpoint.setRegion("na");
+            endpoint.setRegion(GameConstants.REGION_NA);
         }
 
         return endpoint;
     }
-    public void setRegion(String region) {
-        url = BASE1 + region + BASE2;
+    public void setRegion(int regionId) {
+        String region = GameConstants.regionFromInt(regionId);
+
+        this.url = BASE1 + region + BASE2;
         this.region = region;
+        this.regionId = regionId;
     }
 
-    public String getRegion() {
+    public String getRegionAsString() {
         return region;
+    }
+
+    public int getRegionId() {
+        return regionId;
     }
 
     @Override

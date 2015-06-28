@@ -78,7 +78,7 @@ public class SummonerPagerActivity extends AppCompatActivity {
 
             User user = Parcels.unwrap(getIntent()
                     .getExtras().getParcelable(Constants.USER_TAG));
-            getSupportActionBar().setTitle(RiotEndpoint.getInstance().getRegion().toUpperCase() + " " + user.getName());
+            getSupportActionBar().setTitle(RiotEndpoint.getInstance().getRegionAsString().toUpperCase() + " " + user.getName());
         }
     }
 

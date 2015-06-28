@@ -26,11 +26,13 @@ package com.jclolstorm.lolstorm.models;
 
 import org.parceler.Parcel;
 
+import lolstormSDK.GameConstants;
+
 @Parcel
 public class User {
 
     String name;
-    String region;
+    int regionId;
     int iconID;
     long level;
     long userID;
@@ -38,15 +40,15 @@ public class User {
     public User() {
     }
 
-    public User(String name, String region, int iconID) {
+    public User(String name, int regionId, int iconID) {
         this.name = name;
-        this.region = region;
+        this.regionId = regionId;
         this.iconID = iconID;
     }
 
-    public User(String name, String region, int iconID, long level, long userID) {
+    public User(String name, int regionId, int iconID, long level, long userID) {
         this.name = name;
-        this.region = region;
+        this.regionId = regionId;
         this.iconID = iconID;
         this.userID = userID;
         this.level = level;
@@ -57,7 +59,11 @@ public class User {
     }
 
     public String getRegion() {
-        return region;
+        return GameConstants.regionFromInt(regionId);
+    }
+
+    public int getRegionId () {
+        return regionId;
     }
 
     public int getIconID() {

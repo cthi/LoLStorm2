@@ -97,7 +97,9 @@ public class SummonerSearchPresenter {
                     @Override
                     public void onNext(Map<String, Summoner> stringSummonerMap) {
                         Summoner summoner = stringSummonerMap.get(filteredName);
-                        newUser = new User(summoner.getName(), RiotEndpoint.getInstance().getRegion(), summoner.getProfileIconId(),
+                        newUser = new User(summoner.getName(),
+                                RiotEndpoint.getInstance().getRegionId(),
+                                summoner.getProfileIconId(),
                                 summoner.getSummonerLevel(), summoner.getId());
 
                         saveUser(newUser);
@@ -107,8 +109,8 @@ public class SummonerSearchPresenter {
 
     public void removeUser(User toRemove) {
         for (User user : users) {
-            if (user.getName().equals(toRemove.getName()) &&
-                    user.getRegion().equalsIgnoreCase(RiotEndpoint.getInstance().getRegion())) {
+            if (user.getName().equals(toRemove.getName())
+                    && user.getRegionId() == RiotEndpoint.getInstance().getRegionId()) {
                 users.remove(user);
                 savedSummonerList.updateSavedUsers(users);
                 return;
@@ -118,8 +120,8 @@ public class SummonerSearchPresenter {
 
     private void saveUser(User newUser) {
         for (User user : users) {
-            if (user.getName().equals(newUser.getName()) &&
-                    user.getRegion().equalsIgnoreCase(RiotEndpoint.getInstance().getRegion())) {
+            if (user.getName().equals(newUser.getName())
+                    && user.getRegionId() == RiotEndpoint.getInstance().getRegionId()) {
                 return;
             }
         }

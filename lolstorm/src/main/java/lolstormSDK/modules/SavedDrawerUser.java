@@ -31,6 +31,8 @@ import android.preference.PreferenceManager;
 import com.google.gson.Gson;
 import com.jclolstorm.lolstorm.models.User;
 
+import lolstormSDK.GameConstants;
+
 public class SavedDrawerUser {
 
     private final String DRAWER_USER_TAG = "drawer_user_tag";
@@ -62,7 +64,7 @@ public class SavedDrawerUser {
 
     private User getDefaultUser() {
         if (null == defaultUser) {
-            defaultUser = new User("LoLStorm", "na", 502);
+            defaultUser = new User("LoLStorm", GameConstants.REGION_NA, 502);
         }
 
         return defaultUser;

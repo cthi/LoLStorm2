@@ -127,7 +127,7 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.USER_TAG, Parcels.wrap(new User(player.getSummonerName(),
-                RiotEndpoint.getInstance().getRegion(), player.getProfileIcon(), player.getLevel(), player.getSummonerId())));
+                RiotEndpoint.getInstance().getRegionId(), player.getProfileIcon(), player.getLevel(), player.getSummonerId())));
 
         intent.putExtras(bundle);
 
