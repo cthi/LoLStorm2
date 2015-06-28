@@ -30,7 +30,6 @@ public class RegionManager {
     }
 
     public void restoreSavedRegion() {
-        System.out.println(mUserSettings.getSavedRegion());
         RiotEndpoint.getInstance().setRegion(mUserSettings.getSavedRegion());
     }
 }

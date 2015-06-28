@@ -62,7 +62,6 @@ public class SummonerChampionsHeader extends RelativeLayout {
 
     public void setStats(ChampionStats championStats) {
         mSummonerTotalKda.setText(formatKDA(championStats.getStats()));
-        System.out.println(formatStats(championStats.getStats()));
         mSummonerTotalGames.setText(formatStats(championStats.getStats()));
     }
 

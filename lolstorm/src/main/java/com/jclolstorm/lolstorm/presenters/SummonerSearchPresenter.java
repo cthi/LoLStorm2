@@ -108,7 +108,6 @@ public class SummonerSearchPresenter {
     }
 
     public void removeUser(User toRemove) {
-        System.out.println(users.size());
         for (User user : users) {
             if (user.getName().equals(toRemove.getName())
                     && user.getRegionId() == toRemove.getRegionId()) {
@@ -117,7 +116,6 @@ public class SummonerSearchPresenter {
                 return;
             }
         }
-        System.out.println(users.size());
     }
 
     private void saveUser(User newUser) {
