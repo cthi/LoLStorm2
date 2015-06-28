@@ -37,6 +37,7 @@ import com.jclolstorm.lolstorm.utils.ResourceUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lolstormSDK.RiotEndpoint;
 
 public class NavViewHeader extends RelativeLayout {
 
@@ -44,6 +45,8 @@ public class NavViewHeader extends RelativeLayout {
     ImageView mUserImage;
     @InjectView(R.id.header_drawer_summoner_name)
     TextView mUserName;
+    @InjectView(R.id.header_drawer_region)
+    TextView mCurrentRegion;
 
     public NavViewHeader(Context context) {
         super(context, null);
@@ -69,5 +72,9 @@ public class NavViewHeader extends RelativeLayout {
         Glide.with(getContext()).load(ResourceUtils.numberedDrawableFromID(user.getIconID(),
                 getContext())).into(mUserImage);
         mUserName.setText(user.getName());
+    }
+
+    public void updateRegionText() {
+        mCurrentRegion.setText(RiotEndpoint.getInstance().getRegionAsString().toUpperCase());
     }
 }

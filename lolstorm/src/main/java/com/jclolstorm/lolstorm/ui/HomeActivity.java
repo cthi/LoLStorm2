@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     public void onResume() {
         super.onResume();
         mRegionManager.restoreSavedRegion();
+        mHeader.updateRegionText();
     }
 
     @Override
@@ -194,6 +195,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
                 int position = ((AlertDialog) dialog).getListView()
                         .getCheckedItemPosition();
                 mRegionManager.setRegion(position);
+                mHeader.updateRegionText();
             }
         });
         builder.setNegativeButton(getString(R.string.dialog_cancel), null);
