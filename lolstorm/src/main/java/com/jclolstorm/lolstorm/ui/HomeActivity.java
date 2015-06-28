@@ -146,6 +146,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
                                     mRegionManager.setRegion(position);
                                 }
                             });
+                            builder.setNegativeButton("Cancel", null);
                             builder.show();
                         } else {
                             fragment = SummonerSearchFragment.newInstance();
