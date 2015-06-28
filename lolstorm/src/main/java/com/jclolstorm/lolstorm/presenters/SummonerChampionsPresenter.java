@@ -24,12 +24,14 @@
 
 package com.jclolstorm.lolstorm.presenters;
 
+import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.views.SummonerChampionsView;
 
 import java.util.Collections;
 import java.util.List;
 
+import lolstormSDK.RiotErrors;
 import lolstormSDK.models.ChampionStats;
 import lolstormSDK.models.RankedStats;
 import lolstormSDK.modules.RiotApiModule;
@@ -74,9 +76,20 @@ public class SummonerChampionsPresenter {
 
             @Override
             public void onError(Throwable e) {
-                mView.showNoDataView();
+                if (e instanceof RiotErrors.RiotConnectionException) {
+                    mView.showErrorView(R.string.error_internet_connection);
+                } else if (e instanceof RiotErrors.RiotDataNotFoundException) {
+                    mView.showErrorView(R.string.error_data_not_found);
+                } else if (e instanceof RiotErrors.RiotServerFailureException) {
+                    mView.showErrorView(R.string.error_server_failure);
+                } else if (e instanceof RiotErrors.RiotApiLimitException) {
+                    mView.showErrorView(R.string.error_server_failure);
+                } else if (e instanceof RiotErrors.RiotGenericFailureException) {
+                    mView.showErrorView(R.string.error_app_update);
+                } else {
+                    mView.showErrorView(R.string.error_app_unknown);
+                }
             }
-
 
             @Override
             public void onNext(RankedStats rankedStats) {

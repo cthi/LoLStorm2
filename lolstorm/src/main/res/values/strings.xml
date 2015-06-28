@@ -36,6 +36,9 @@
     <string name="error_internet_connection">Please check your internet connection.</string>
     <string name="error_summoner_not_found">The summoner was not found.</string>
     <string name="error_data_not_found">No info was found.</string>
+    <string name="error_server_failure">There was a problem connecting to the server.</string>
+    <string name="error_app_update">Please update LoLStorm.</string>
+    <string name="error_app_unknown">Unknown error.</string>
 
     <string name="header_summoner_search_title">Search</string>
 

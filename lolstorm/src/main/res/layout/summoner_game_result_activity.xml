@@ -33,11 +33,19 @@
         android:id="@+id/summoner_game_result_toolbar"
         layout="@layout/toolbar"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/summoner_game_result_rv"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="@dimen/view_padding"/>
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/summoner_game_result_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/view_padding"/>
+
+        <include
+            layout="@layout/error_placeholder"/>
+
+    </FrameLayout>
 </LinearLayout>

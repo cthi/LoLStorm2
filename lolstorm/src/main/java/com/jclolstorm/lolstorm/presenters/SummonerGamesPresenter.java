@@ -24,11 +24,13 @@
 
 package com.jclolstorm.lolstorm.presenters;
 
+import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.views.SummonerGamesView;
 
 import java.util.List;
 
+import lolstormSDK.RiotErrors;
 import lolstormSDK.models.Game;
 import lolstormSDK.models.RecentGames;
 import lolstormSDK.modules.RiotApiModule;
@@ -70,8 +72,19 @@ public class SummonerGamesPresenter {
 
             @Override
             public void onError(Throwable e) {
-                System.out.println("ERRRRRRRRRRRRRRRRor");
-                view.showNoDataView();
+                if (e instanceof RiotErrors.RiotConnectionException) {
+                    view.showErrorView(R.string.error_internet_connection);
+                } else if (e instanceof RiotErrors.RiotDataNotFoundException) {
+                    view.showErrorView(R.string.error_data_not_found);
+                } else if (e instanceof RiotErrors.RiotServerFailureException) {
+                    view.showErrorView(R.string.error_server_failure);
+                } else if (e instanceof RiotErrors.RiotApiLimitException) {
+                    view.showErrorView(R.string.error_server_failure);
+                } else if (e instanceof RiotErrors.RiotGenericFailureException) {
+                    view.showErrorView(R.string.error_app_update);
+                } else {
+                    view.showErrorView(R.string.error_app_unknown);
+                }
             }
 
             @Override

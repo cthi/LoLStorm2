@@ -31,6 +31,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
@@ -61,6 +63,9 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
     Toolbar mToolbar;
     @InjectView(R.id.summoner_game_result_rv)
     RecyclerView mRecyclerView;
+    @InjectView(R.id.error_placeholder)
+    TextView mErrorPlaceholder;
+
     private SummonerGameResultHeader mHeader;
 
     private BaseHeaderRecyclerViewAdapter<Player> mAdapter;
@@ -139,6 +144,13 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
     @Override
     public void populateAdapter(List<Player> stats) {
         mAdapter.populate(stats);
+    }
+
+    @Override
+    public void showErrorView(int errorMessage) {
+        mErrorPlaceholder.setVisibility(View.VISIBLE);
+        mErrorPlaceholder.setText(getString(errorMessage));
+        mRecyclerView.setVisibility(View.GONE);
     }
 
     @Override

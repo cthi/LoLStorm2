@@ -35,7 +35,9 @@ public class RiotApiImpl {
 
     public static RiotApi getInstance(RiotEndpoint endpoint){
         if (api == null){
-            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(endpoint).build();
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setErrorHandler(new RiotApiErrorHandler())
+                    .setEndpoint(endpoint).build();
             api = restAdapter.create(RiotApi.class);
         }
         return api;

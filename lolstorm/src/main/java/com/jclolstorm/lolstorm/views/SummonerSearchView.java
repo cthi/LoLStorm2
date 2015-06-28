@@ -30,9 +30,7 @@ import java.util.List;
 
 public interface SummonerSearchView extends BaseView {
 
-    void displaySummonerNotFoundError();
-
-    void displayInternetError();
+    void displayErrorMessage(int errorMessage);
 
     void populateAdapter(List<User> users);
 

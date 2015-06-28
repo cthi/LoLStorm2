@@ -55,8 +55,8 @@ import lolstormSDK.models.Game;
 
 public class SummonerGamesFragment extends Fragment implements SummonerGamesView, SummonerGamesAdapter.OnGameItemClick {
 
-    @InjectView(R.id.no_info_error)
-    TextView mNoData;
+    @InjectView(R.id.error_placeholder)
+    TextView mErrorPlaceholder;
     @InjectView(R.id.summoner_games_progress)
     ProgressBar mProgressBar;
     @InjectView(R.id.summoner_games_rv)
@@ -103,8 +103,9 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     }
 
     @Override
-    public void showNoDataView() {
-        mNoData.setVisibility(View.VISIBLE);
+    public void showErrorView(int errorMessage) {
+        mErrorPlaceholder.setVisibility(View.VISIBLE);
+        mErrorPlaceholder.setText(getString(errorMessage));
         mRecyclerView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
     }

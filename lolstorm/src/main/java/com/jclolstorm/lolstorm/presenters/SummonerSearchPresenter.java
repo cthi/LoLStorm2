@@ -24,6 +24,7 @@
 
 package com.jclolstorm.lolstorm.presenters;
 
+import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.ui.SummonerSearchFragment;
 import com.jclolstorm.lolstorm.views.SummonerSearchView;
@@ -32,6 +33,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import lolstormSDK.RiotEndpoint;
+import lolstormSDK.RiotErrors;
 import lolstormSDK.models.Summoner;
 import lolstormSDK.modules.RiotApiModule;
 import lolstormSDK.modules.SavedSummonerList;
@@ -58,13 +60,12 @@ public class SummonerSearchPresenter {
 
     public void onSearch(String summonerName) {
         if (!view.hasConnection()) {
-            view.displayInternetError();
+            view.displayErrorMessage(R.string.error_internet_connection);
             return;
         }
 
         summonerName = summonerName.replaceAll("\\s","").toLowerCase();
         final String filteredName = summonerName;
-
         RiotApiModule
                 .getSummonerIDFromName(filteredName)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,8 +79,19 @@ public class SummonerSearchPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.displaySummonerNotFoundError();
-                        e.printStackTrace();
+                        if (e instanceof RiotErrors.RiotConnectionException) {
+                            view.displayErrorMessage(R.string.error_internet_connection);
+                        } else if (e instanceof RiotErrors.RiotDataNotFoundException) {
+                            view.displayErrorMessage(R.string.error_summoner_not_found);
+                        } else if (e instanceof RiotErrors.RiotServerFailureException) {
+                            view.displayErrorMessage(R.string.error_server_failure);
+                        } else if (e instanceof RiotErrors.RiotApiLimitException) {
+                            view.displayErrorMessage(R.string.error_server_failure);
+                        } else if (e instanceof RiotErrors.RiotGenericFailureException) {
+                            view.displayErrorMessage(R.string.error_app_update);
+                        } else {
+                            view.displayErrorMessage(R.string.error_app_unknown);
+                        }
                     }
 
                     @Override

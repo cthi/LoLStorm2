@@ -112,14 +112,8 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     }
 
     @Override
-    public void displaySummonerNotFoundError() {
-        Snackbar.make(mRecyclerView, R.string.error_summoner_not_found, Snackbar.LENGTH_SHORT)
-                .show();
-    }
-
-    @Override
-    public void displayInternetError() {
-        Snackbar.make(mRecyclerView, R.string.error_internet_connection, Snackbar.LENGTH_SHORT)
+    public void displayErrorMessage(int errorMessage) {
+        Snackbar.make(mRecyclerView, errorMessage, Snackbar.LENGTH_LONG)
                 .show();
     }
 
@@ -153,8 +147,12 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
 
     @Override
     public void onSummonerClick(User user) {
-        startPlayerView(user);
-        RiotEndpoint.getInstance().setRegion(user.getRegion());
+        if (NetworkUtils.hasConnection(getActivity())) {
+            startPlayerView(user);
+            RiotEndpoint.getInstance().setRegion(user.getRegion());
+        } else {
+            Snackbar.make(mRecyclerView, R.string.error_internet_connection, Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -45,6 +45,6 @@
         android:layout_gravity="center"/>
 
     <include
-        layout="@layout/no_info_error"/>
+        layout="@layout/error_placeholder"/>
 
 </FrameLayout>

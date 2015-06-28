@@ -55,8 +55,8 @@ import lolstormSDK.models.ChampionStats;
 public class SummonerChampionsFragment extends Fragment implements
         SummonerChampionsView, SummonerChampionsAdapter.OnChampionItemClick {
 
-    @InjectView(R.id.no_info_error)
-    TextView mNoData;
+    @InjectView(R.id.error_placeholder)
+    TextView mErrorPlaceholder;
     @InjectView(R.id.summoner_champions_progress)
     ProgressBar mProgressBar;
     @InjectView(R.id.summoner_champions_rv)
@@ -101,8 +101,9 @@ public class SummonerChampionsFragment extends Fragment implements
     }
 
     @Override
-    public void showNoDataView() {
-        mNoData.setVisibility(View.VISIBLE);
+    public void showErrorView(int errorMessage) {
+        mErrorPlaceholder.setVisibility(View.VISIBLE);
+        mErrorPlaceholder.setText(getString(errorMessage));
         mRecyclerView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
     }

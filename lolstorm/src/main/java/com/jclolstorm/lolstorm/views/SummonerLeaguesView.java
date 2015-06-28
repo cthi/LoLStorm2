@@ -38,7 +38,7 @@ public interface SummonerLeaguesView {
 
     void hideLoading();
 
-    void showNoDataView();
+    void showErrorView(int errorMessage);
 
     void startPlayerView(User user);
 

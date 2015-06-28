@@ -59,8 +59,8 @@ import lolstormSDK.models.LeagueEntry;
 public class SummonerLeaguesFragment extends Fragment implements SummonerLeaguesView,
         SummonerLeaguesAdapter.OnLeagueItemClick {
 
-    @InjectView(R.id.no_info_error)
-    TextView mNoData;
+    @InjectView(R.id.error_placeholder)
+    TextView mErrorPlaceholder;
     @InjectView(R.id.summoner_leagues_progress)
     ProgressBar mProgressBar;
     @InjectView(R.id.summoner_leagues_rv)
@@ -107,8 +107,9 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
     }
 
     @Override
-    public void showNoDataView() {
-        mNoData.setVisibility(View.VISIBLE);
+    public void showErrorView(int errorMessage) {
+        mErrorPlaceholder.setVisibility(View.VISIBLE);
+        mErrorPlaceholder.setText(getString(errorMessage));
         mRecyclerView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
     }

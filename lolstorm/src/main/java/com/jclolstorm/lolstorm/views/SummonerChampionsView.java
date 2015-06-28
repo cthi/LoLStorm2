@@ -36,6 +36,6 @@ public interface SummonerChampionsView {
 
     void hideLoading();
 
-    void showNoDataView();
+    void showErrorView(int errorMessage);
 
 }

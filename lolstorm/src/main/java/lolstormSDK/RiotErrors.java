@@ -22,18 +22,34 @@
  * SOFTWARE.
  */
 
-package com.jclolstorm.lolstorm.views;
+package lolstormSDK;
 
+public class RiotErrors {
 
-import java.util.List;
+    public static final int HTTP_400 = 400;
+    public static final int HTTP_401 = 401;
+    public static final int HTTP_404 = 404;
+    public static final int HTTP_429 = 429;
+    public static final int HTTP_500 = 500;
+    public static final int HTTP_503 = 503;
 
-import lolstormSDK.models.Game;
+    public static class RiotConnectionException extends Exception {
+        public RiotConnectionException() {}
+    }
 
-public interface SummonerGamesView extends BaseView {
+    public static class RiotDataNotFoundException extends Exception {
+        public RiotDataNotFoundException() {}
+    }
 
-    void populate(List<Game> gameList);
+    public static class RiotServerFailureException extends Exception {
+        public RiotServerFailureException() {}
+    }
 
-    void hideLoading();
+    public static class RiotApiLimitException extends Exception {
+        public RiotApiLimitException() {}
+    }
 
-    void showErrorView(int errorMessage);
+    public static class RiotGenericFailureException extends Exception {
+        public RiotGenericFailureException() {}
+    }
 }

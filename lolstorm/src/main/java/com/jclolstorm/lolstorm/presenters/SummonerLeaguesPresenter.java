@@ -25,6 +25,7 @@
 package com.jclolstorm.lolstorm.presenters;
 
 
+import com.jclolstorm.lolstorm.R;
 import com.jclolstorm.lolstorm.models.User;
 import com.jclolstorm.lolstorm.views.SummonerLeaguesView;
 
@@ -36,6 +37,7 @@ import java.util.Map;
 
 import lolstormSDK.GameConstants;
 import lolstormSDK.RiotEndpoint;
+import lolstormSDK.RiotErrors;
 import lolstormSDK.models.League;
 import lolstormSDK.models.LeagueEntry;
 import lolstormSDK.models.Summoner;
@@ -89,7 +91,19 @@ public class SummonerLeaguesPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showNoDataView();
+                        if (e instanceof RiotErrors.RiotConnectionException) {
+                            view.showErrorView(R.string.error_internet_connection);
+                        } else if (e instanceof RiotErrors.RiotDataNotFoundException) {
+                            view.showErrorView(R.string.error_data_not_found);
+                        } else if (e instanceof RiotErrors.RiotServerFailureException) {
+                            view.showErrorView(R.string.error_server_failure);
+                        } else if (e instanceof RiotErrors.RiotApiLimitException) {
+                            view.showErrorView(R.string.error_server_failure);
+                        } else if (e instanceof RiotErrors.RiotGenericFailureException) {
+                            view.showErrorView(R.string.error_app_update);
+                        } else {
+                            view.showErrorView(R.string.error_app_unknown);
+                        }
                     }
 
                     @Override
@@ -114,7 +128,19 @@ public class SummonerLeaguesPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.displaySummonerNotFoundError();
+                        if (e instanceof RiotErrors.RiotConnectionException) {
+                            view.showErrorView(R.string.error_internet_connection);
+                        } else if (e instanceof RiotErrors.RiotDataNotFoundException) {
+                            view.showErrorView(R.string.error_data_not_found);
+                        } else if (e instanceof RiotErrors.RiotServerFailureException) {
+                            view.showErrorView(R.string.error_server_failure);
+                        } else if (e instanceof RiotErrors.RiotApiLimitException) {
+                            view.showErrorView(R.string.error_server_failure);
+                        } else if (e instanceof RiotErrors.RiotGenericFailureException) {
+                            view.showErrorView(R.string.error_app_update);
+                        } else {
+                            view.showErrorView(R.string.error_app_unknown);
+                        }
                     }
 
                     @Override
@@ -122,7 +148,6 @@ public class SummonerLeaguesPresenter {
                         Summoner summoner = stringSummonerMap.get(filteredName);
                         user = new User(summoner.getName(), RiotEndpoint.getInstance().getRegion(), summoner.getProfileIconId(),
                                 summoner.getSummonerLevel(), summoner.getId());
-
                     }
                 });
     }

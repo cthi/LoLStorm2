@@ -34,4 +34,6 @@ public interface SummonerGameResultView extends BaseView {
 
     void populateAdapter(List<Player> stats);
 
+    void showErrorView(int errorMessage);
+
 }
