@@ -44,6 +44,7 @@ import com.jclolstorm.lolstorm.ui.widgets.headers.NavViewHeader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lolstormSDK.RiotEndpoint;
 import lolstormSDK.modules.SavedDrawerUser;
 
 public class HomeActivity extends AppCompatActivity implements SummonerSearchFragment.OnFavorite {
@@ -74,8 +75,8 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     }
 
     @Override
-    public void onRestart() {
-        super.onRestart();
+    public void onResume() {
+        super.onResume();
         mRegionManager.restoreSavedRegion();
     }
 
@@ -136,13 +137,15 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
                             fragment = ChampionsFragment.newInstance();
                         } else if (item.equals("Region")) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                            builder.setSingleChoiceItems(mRegionManager.getRegionList(), 0, null);
+                            builder.setSingleChoiceItems(mRegionManager.getRegionList(),
+                                    RiotEndpoint.getInstance().getRegionId(), null);
                             builder.setTitle("Region");
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                                    int position = ((AlertDialog) dialog).getListView()
+                                            .getCheckedItemPosition();
                                     mRegionManager.setRegion(position);
                                 }
                             });
