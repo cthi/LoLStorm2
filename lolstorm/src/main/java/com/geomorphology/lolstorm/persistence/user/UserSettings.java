@@ -22,51 +22,29 @@
  * SOFTWARE.
  */
 
-package lolstormSDK.modules;
+package com.geomorphology.lolstorm.persistence.user;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.gson.Gson;
-import com.geomorphology.lolstorm.models.User;
-
 import lolstormSDK.GameConstants;
 
-public class SavedDrawerUser {
+public class UserSettings {
 
-    private final String DRAWER_USER_TAG = "drawer_user_tag";
-    private User defaultUser;
+    private final String REGION_TAG = "region";
 
     private SharedPreferences mPreferences;
 
-    public SavedDrawerUser(Context context) {
+    public UserSettings(Context context) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public void updateSavedDrawerUser(User user) {
-        String userAsJson = new Gson().toJson(user);
-
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(DRAWER_USER_TAG, userAsJson);
-        editor.apply();
+    public void updateSavedRegion(int region) {
+        mPreferences.edit().putInt(REGION_TAG, region).apply();
     }
 
-    public User getSavedDrawerUser() {
-        String historyAsJson = mPreferences.getString(DRAWER_USER_TAG, null);
-
-        if (null == historyAsJson) {
-            return getDefaultUser();
-        } else {
-            return new Gson().fromJson(historyAsJson, User.class);
-        }
-    }
-
-    private User getDefaultUser() {
-        if (null == defaultUser) {
-            defaultUser = new User("LoLStorm", GameConstants.REGION_NA, 502);
-        }
-
-        return defaultUser;
+    public int getSavedRegion() {
+        return mPreferences.getInt(REGION_TAG, GameConstants.REGION_NA);
     }
 }

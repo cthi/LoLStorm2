@@ -37,7 +37,7 @@
         android:padding="@dimen/view_padding"
         android:visibility="invisible"/>
 
-    <com.jclolstorm.lolstorm.ui.widgets.ColoredProgressBar
+    <com.geomorphology.lolstorm.ui.widgets.ColoredProgressBar
         android:id="@+id/summoner_leagues_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"

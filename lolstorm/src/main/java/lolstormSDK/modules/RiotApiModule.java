@@ -24,7 +24,7 @@
 
 package lolstormSDK.modules;
 
-import com.jclolstorm.lolstorm.BuildConfig;
+import com.geomorphology.lolstorm.BuildConfig;
 
 import java.util.List;
 import java.util.Map;

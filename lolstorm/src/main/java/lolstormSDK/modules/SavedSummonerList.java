@@ -30,7 +30,7 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.jclolstorm.lolstorm.models.User;
+import com.geomorphology.lolstorm.models.User;
 
 import java.lang.reflect.Type;
 import java.util.LinkedList;
