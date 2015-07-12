@@ -226,6 +226,7 @@ public class GameConstants {
         championMap.put("16","Soraka");
         championMap.put("50","Swain");
         championMap.put("134","Syndra");
+        championMap.put("223", "TahmKench");
         championMap.put("91","Talon");
         championMap.put("44","Taric");
         championMap.put("17","Teemo");
@@ -357,6 +358,7 @@ public class GameConstants {
         championMap.put("16","Soraka");
         championMap.put("50","Swain");
         championMap.put("134","Syndra");
+        championMap.put("223", "Tahm Kench");
         championMap.put("91","Talon");
         championMap.put("44","Taric");
         championMap.put("17","Teemo");
