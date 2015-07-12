@@ -22,29 +22,19 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.persistence.user;
+package com.geomorphology.lolstorm.di.module;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
+import com.geomorphology.lolstorm.presenters.SummonerGamesPresenter;
 
-import lolstormSDK.GameConstants;
+import dagger.Module;
+import dagger.Provides;
 
-public class UserSettings {
+@Module
+public class SummonerGamesModule {
 
-    private final String REGION_TAG = "region";
-
-    private SharedPreferences mPreferences;
-
-    public UserSettings(Context context) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    public void updateSavedRegion(int region) {
-        mPreferences.edit().putInt(REGION_TAG, region).apply();
-    }
-
-    public int getSavedRegion() {
-        return mPreferences.getInt(REGION_TAG, GameConstants.REGION_NA);
+    @Provides
+    SummonerGamesPresenter providePresenter(NetworkConnectionInteractor interactor) {
+        return new SummonerGamesPresenter(interactor);
     }
 }

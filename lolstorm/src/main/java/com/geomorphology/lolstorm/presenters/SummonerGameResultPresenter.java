@@ -25,6 +25,7 @@
 package com.geomorphology.lolstorm.presenters;
 
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
 import com.geomorphology.lolstorm.views.SummonerGameResultView;
 
 import java.util.Collections;
@@ -42,6 +43,7 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class SummonerGameResultPresenter {
 
+    private NetworkConnectionInteractor mInteractor;
     private SummonerGameResultView view;
     private Game game;
     private Map<String, Summoner> summonerMap;
@@ -49,7 +51,8 @@ public class SummonerGameResultPresenter {
     private Comparator<Player> winsComparator;
     private Comparator<Player> lossComparator;
 
-    public SummonerGameResultPresenter() {
+    public SummonerGameResultPresenter(NetworkConnectionInteractor interactor) {
+        this.mInteractor = interactor;
         initComparator();
     }
 
@@ -63,6 +66,11 @@ public class SummonerGameResultPresenter {
     }
 
     private void loadPlayersFromId(List<Player> playerList) {
+        if (!mInteractor.hasNetworkConnection()) {
+            view.showErrorView(R.string.error_internet_connection);
+            return;
+        }
+
         String playerIdList = constructQueryList(playerList);
 
         RiotApiModule.getSummonersById(playerIdList).observeOn(AndroidSchedulers.mainThread())

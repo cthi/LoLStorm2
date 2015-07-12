@@ -1,6 +1,6 @@
 package com.geomorphology.lolstorm.persistence.user;
 
-import android.content.Context;
+import android.content.res.Resources;
 
 import com.geomorphology.lolstorm.R;
 
@@ -9,14 +9,15 @@ import lolstormSDK.RiotEndpoint;
 public class RegionManager {
 
     private CharSequence[] regions;
-    private UserSettings mUserSettings;
+    private UserManager mUserManager;
 
-    public RegionManager() {
+    public RegionManager(UserManager manager, Resources resources) {
+        this.mUserManager = manager;
+        initRegions(resources);
     }
 
-    public void initRegions(Context context) {
-        regions = context.getResources().getStringArray(R.array.regions);
-        mUserSettings = new UserSettings(context);
+    public void initRegions(Resources resources) {
+        regions = resources.getStringArray(R.array.regions);
     }
 
     public CharSequence[] getRegionList() {
@@ -25,10 +26,10 @@ public class RegionManager {
 
     public void setRegion(int regionId) {
         RiotEndpoint.getInstance().setRegion(regionId);
-        mUserSettings.updateSavedRegion(regionId);
+        mUserManager.updateSavedRegion(regionId);
     }
 
     public void restoreSavedRegion() {
-        RiotEndpoint.getInstance().setRegion(mUserSettings.getSavedRegion());
+        RiotEndpoint.getInstance().setRegion(mUserManager.getSavedRegion());
     }
 }

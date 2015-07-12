@@ -22,26 +22,39 @@
  * SOFTWARE.
  */
 
-package lolstormSDK.modules;
+package com.geomorphology.lolstorm.persistence.user;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-import com.google.gson.Gson;
 import com.geomorphology.lolstorm.models.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.LinkedList;
 
 import lolstormSDK.GameConstants;
 
-public class SavedDrawerUser {
+public class UserManager {
 
+    private final String REGION_TAG = "region";
+    private final String USER_TAG = "user";
     private final String DRAWER_USER_TAG = "drawer_user_tag";
-    private User defaultUser;
 
     private SharedPreferences mPreferences;
 
-    public SavedDrawerUser(Context context) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private User defaultUser;
+
+    public UserManager(SharedPreferences preferences) {
+        mPreferences = preferences;
+    }
+
+    public void updateSavedRegion(int region) {
+        mPreferences.edit().putInt(REGION_TAG, region).apply();
+    }
+
+    public int getSavedRegion() {
+        return mPreferences.getInt(REGION_TAG, GameConstants.REGION_NA);
     }
 
     public void updateSavedDrawerUser(User user) {
@@ -68,5 +81,28 @@ public class SavedDrawerUser {
         }
 
         return defaultUser;
+    }
+
+    public void updateSavedUsers(LinkedList<User> users) {
+        while (users.size() > 15) {
+            users.removeLast();
+        }
+
+        String userAsJson = new Gson().toJson(users);
+
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(USER_TAG, userAsJson);
+        editor.apply();
+    }
+
+    public LinkedList<User> getSavedUsers() {
+        String historyAsJson = mPreferences.getString(USER_TAG, null);
+
+        if (null == historyAsJson) {
+            return new LinkedList<>();
+        } else {
+            Type type = new TypeToken<LinkedList<User>>() {}.getType();
+            return new Gson().fromJson(historyAsJson, type);
+        }
     }
 }

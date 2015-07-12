@@ -35,9 +35,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.geomorphology.lolstorm.adapters.SummonerGamesAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerSummonerGamesComponent;
+import com.geomorphology.lolstorm.di.module.SummonerGamesModule;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.presenters.SummonerGamesPresenter;
 import com.geomorphology.lolstorm.ui.widgets.headers.SummonerGamesHeader;
@@ -48,6 +51,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -63,9 +68,10 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     RecyclerView mRecyclerView;
     private SummonerGamesHeader mHeader;
 
-    private BaseHeaderRecyclerViewAdapter<Game> mAdapter;
-    private SummonerGamesPresenter presenter;
+    @Inject
+    SummonerGamesPresenter presenter;
 
+    private BaseHeaderRecyclerViewAdapter<Game> mAdapter;
     private User user;
 
     public static SummonerGamesFragment newInstance(Bundle bundle) {
@@ -75,11 +81,19 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
         return fragment;
     }
 
+    public void buildGraph() {
+        DaggerSummonerGamesComponent.builder()
+                .appComponent(LoLStormApplication.get(getActivity()).component())
+                .summonerGamesModule(new SummonerGamesModule())
+                .build()
+                .inject(this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.summoner_games_fragment, container, false);
-
+        buildGraph();
         ButterKnife.inject(this, view);
 
         initHeader();
@@ -87,7 +101,6 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
 
         user = Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG));
 
-        presenter = new SummonerGamesPresenter();
         presenter.setView(this);
         presenter.setUser(user);
 
@@ -140,11 +153,5 @@ public class SummonerGamesFragment extends Fragment implements SummonerGamesView
     public void populate(List<Game> gameList) {
         mAdapter.populate(gameList);
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public boolean hasConnection() {
-        //TODO fix
-        return true;
     }
 }

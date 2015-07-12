@@ -22,18 +22,37 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.views;
+package com.geomorphology.lolstorm;
 
-import java.util.List;
+import android.app.Application;
+import android.content.Context;
 
-import lolstormSDK.models.Player;
+import com.geomorphology.lolstorm.di.component.AppComponent;
+import com.geomorphology.lolstorm.di.component.DaggerAppComponent;
+import com.geomorphology.lolstorm.di.module.AppModule;
 
-public interface SummonerGameResultView {
+public class LoLStormApplication extends Application {
 
-    void setTitle(String title);
+    private AppComponent mAppComponent;
 
-    void populateAdapter(List<Player> stats);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        buildGraph();
+    }
 
-    void showErrorView(int errorMessage);
+    private void buildGraph() {
+        mAppComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .build();
+        mAppComponent.inject(this);
+    }
 
+    public AppComponent component() {
+        return mAppComponent;
+    }
+
+    public static LoLStormApplication get(Context context) {
+        return (LoLStormApplication) context.getApplicationContext();
+    }
 }

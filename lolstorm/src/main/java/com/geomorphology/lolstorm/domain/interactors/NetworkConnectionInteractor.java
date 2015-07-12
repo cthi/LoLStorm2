@@ -22,18 +22,21 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.views;
+package com.geomorphology.lolstorm.domain.interactors;
 
-import java.util.List;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
-import lolstormSDK.models.Player;
+public class NetworkConnectionInteractor {
 
-public interface SummonerGameResultView {
+    private ConnectivityManager mConnectivityManager;
 
-    void setTitle(String title);
+    public NetworkConnectionInteractor(ConnectivityManager connectivityManager) {
+        this.mConnectivityManager = connectivityManager;
+    }
 
-    void populateAdapter(List<Player> stats);
-
-    void showErrorView(int errorMessage);
-
+    public boolean hasNetworkConnection() {
+        NetworkInfo activeNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
 }

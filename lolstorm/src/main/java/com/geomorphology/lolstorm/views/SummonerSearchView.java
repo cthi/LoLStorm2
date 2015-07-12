@@ -28,7 +28,7 @@ import com.geomorphology.lolstorm.models.User;
 
 import java.util.List;
 
-public interface SummonerSearchView extends BaseView {
+public interface SummonerSearchView {
 
     void displayErrorMessage(int errorMessage);
 

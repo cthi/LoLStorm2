@@ -22,18 +22,19 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.views;
+package com.geomorphology.lolstorm.di.component;
 
-import java.util.List;
+import com.geomorphology.lolstorm.di.PerScope;
+import com.geomorphology.lolstorm.di.module.SummonerLeagueModule;
+import com.geomorphology.lolstorm.ui.SummonerLeaguesFragment;
 
-import lolstormSDK.models.Player;
+import dagger.Component;
 
-public interface SummonerGameResultView {
-
-    void setTitle(String title);
-
-    void populateAdapter(List<Player> stats);
-
-    void showErrorView(int errorMessage);
-
+@PerScope
+@Component(
+        dependencies = AppComponent.class,
+        modules = SummonerLeagueModule.class
+)
+public interface SummonerLeagueComponent {
+    void inject(SummonerLeaguesFragment fragment);
 }

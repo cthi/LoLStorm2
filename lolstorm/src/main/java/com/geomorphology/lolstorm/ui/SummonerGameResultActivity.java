@@ -34,20 +34,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.geomorphology.lolstorm.adapters.SummonerGameResultAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerSummonerGameResultComponent;
+import com.geomorphology.lolstorm.di.module.SummonerGameResultModule;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.presenters.SummonerGameResultPresenter;
 import com.geomorphology.lolstorm.ui.widgets.headers.SummonerGameResultHeader;
 import com.geomorphology.lolstorm.utils.Constants;
-import com.geomorphology.lolstorm.utils.NetworkUtils;
 import com.geomorphology.lolstorm.views.SummonerGameResultView;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -59,22 +63,32 @@ import lolstormSDK.models.Player;
 public class SummonerGameResultActivity extends AppCompatActivity implements
         SummonerGameResultView, SummonerGameResultAdapter.OnSummonerItemClick {
 
+    @Inject
+    SummonerGameResultPresenter presenter;
+
     @InjectView(R.id.summoner_game_result_toolbar)
     Toolbar mToolbar;
     @InjectView(R.id.summoner_game_result_rv)
     RecyclerView mRecyclerView;
     @InjectView(R.id.error_placeholder)
     TextView mErrorPlaceholder;
-
     private SummonerGameResultHeader mHeader;
 
     private BaseHeaderRecyclerViewAdapter<Player> mAdapter;
-    private SummonerGameResultPresenter presenter;
+
+    public void buildGraph() {
+        DaggerSummonerGameResultComponent.builder()
+                .appComponent(LoLStormApplication.get(this).component())
+                .summonerGameResultModule(new SummonerGameResultModule())
+                .build()
+                .inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.summoner_game_result_activity);
+        buildGraph();
         ButterKnife.inject(this);
 
         mHeader = new SummonerGameResultHeader(this);
@@ -82,7 +96,6 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
         initToolbar();
         initRecyclerView();
 
-        presenter = new SummonerGameResultPresenter();
         presenter.setView(this);
 
         Game game = Parcels.unwrap(getIntent().getExtras().getParcelable(Constants.GAME_TAG));
@@ -151,10 +164,5 @@ public class SummonerGameResultActivity extends AppCompatActivity implements
         mErrorPlaceholder.setVisibility(View.VISIBLE);
         mErrorPlaceholder.setText(getString(errorMessage));
         mRecyclerView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public boolean hasConnection() {
-        return NetworkUtils.hasConnection(this);
     }
 }

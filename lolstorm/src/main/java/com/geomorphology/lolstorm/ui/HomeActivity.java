@@ -37,17 +37,27 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.di.component.DaggerHomeComponent;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.persistence.user.RegionManager;
+import com.geomorphology.lolstorm.persistence.user.UserManager;
+import com.geomorphology.lolstorm.di.module.UserModule;
 import com.geomorphology.lolstorm.ui.widgets.headers.NavViewHeader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.RiotEndpoint;
-import lolstormSDK.modules.SavedDrawerUser;
+
+import javax.inject.Inject;
 
 public class HomeActivity extends AppCompatActivity implements SummonerSearchFragment.OnFavorite {
+
+    @Inject
+    UserManager userManager;
+    @Inject
+    RegionManager regionManager;
 
     @InjectView(R.id.home_activity_toolbar)
     Toolbar mToolbar;
@@ -58,12 +68,19 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     private NavViewHeader mHeader;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private RegionManager mRegionManager;
+    public void buildGraph() {
+        DaggerHomeComponent.builder()
+                .appComponent(LoLStormApplication.get(this).component())
+                .userModule(new UserModule())
+                .build()
+                .inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
+        buildGraph();
         ButterKnife.inject(this);
 
         initToolbar();
@@ -71,13 +88,12 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
         initNavDrawer();
         linkDrawer();
         initView();
-        initRegions();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mRegionManager.restoreSavedRegion();
+        regionManager.restoreSavedRegion();
         mHeader.updateRegionText();
     }
 
@@ -95,7 +111,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
 
     @Override
     public void onFavorite(User user) {
-        new SavedDrawerUser(this).updateSavedDrawerUser(user);
+        userManager.updateSavedDrawerUser(user);
         mHeader.setUser(user);
     }
 
@@ -109,8 +125,7 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
     private void initHeader() {
         mHeader = new NavViewHeader(this);
 
-        SavedDrawerUser savedDrawerUser = new SavedDrawerUser(this);
-        User savedUser = savedDrawerUser.getSavedDrawerUser();
+        User savedUser = userManager.getSavedDrawerUser();
 
         mHeader.setUser(savedUser);
     }
@@ -180,21 +195,16 @@ public class HomeActivity extends AppCompatActivity implements SummonerSearchFra
         mNavView.getMenu().getItem(0).setChecked(true);
     }
 
-    private void initRegions() {
-        mRegionManager = new RegionManager();
-        mRegionManager.initRegions(this);
-    }
-
     private void showRegionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-        builder.setSingleChoiceItems(mRegionManager.getRegionList(), RiotEndpoint.getInstance().getRegionId(), null);
+        builder.setSingleChoiceItems(regionManager.getRegionList(), RiotEndpoint.getInstance().getRegionId(), null);
         builder.setTitle(getString(R.string.region_title));
         builder.setPositiveButton(getString(R.string.dialog_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int position = ((AlertDialog) dialog).getListView()
                         .getCheckedItemPosition();
-                mRegionManager.setRegion(position);
+                regionManager.setRegion(position);
                 mHeader.updateRegionText();
             }
         });

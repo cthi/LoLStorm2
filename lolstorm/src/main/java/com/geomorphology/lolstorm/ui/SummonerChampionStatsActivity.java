@@ -31,8 +31,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.SummonerChampionStatsAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerSummonerChampionStatsComponent;
+import com.geomorphology.lolstorm.di.module.SummonerChampionStatsModule;
 import com.geomorphology.lolstorm.models.Stat;
 import com.geomorphology.lolstorm.presenters.SummonerChampionStatsPresenter;
 import com.geomorphology.lolstorm.utils.Constants;
@@ -42,6 +45,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -55,18 +60,27 @@ public class SummonerChampionStatsActivity extends AppCompatActivity
     @InjectView(R.id.summoner_champion_stats_rv)
     RecyclerView mRecyclerView;
 
-    private SummonerChampionStatsPresenter presenter;
+    @Inject
+    SummonerChampionStatsPresenter presenter;
+
+    public void buildGraph() {
+        DaggerSummonerChampionStatsComponent.builder()
+                .appComponent(LoLStormApplication.get(this).component())
+                .summonerChampionStatsModule(new SummonerChampionStatsModule())
+                .build()
+                .inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.summoner_champion_stats_activity);
+        buildGraph();
         ButterKnife.inject(this);
 
         initToolbar();
         initRecyclerView();
 
-        presenter = new SummonerChampionStatsPresenter();
         presenter.setView(this);
 
         ChampionStats championStats = Parcels.unwrap(getIntent().getExtras()

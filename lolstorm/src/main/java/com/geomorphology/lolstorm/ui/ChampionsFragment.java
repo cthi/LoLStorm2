@@ -33,14 +33,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.ChampionsAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerChampionsComponent;
+import com.geomorphology.lolstorm.di.module.ChampionsModule;
 import com.geomorphology.lolstorm.presenters.ChampionsPresenter;
 import com.geomorphology.lolstorm.utils.Constants;
 import com.geomorphology.lolstorm.views.ChampionsView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -52,22 +57,31 @@ public class ChampionsFragment extends Fragment implements ChampionsView, Champi
     @InjectView(R.id.champions_rv)
     RecyclerView mRecyclerView;
 
+    @Inject
+    ChampionsPresenter mPresenter;
+
     private ChampionsAdapter mAdapter;
-    private ChampionsPresenter mPresenter;
 
     public static ChampionsFragment newInstance() {
         return new ChampionsFragment();
+    }
+
+    private void buildGraph() {
+        DaggerChampionsComponent.builder()
+                .appComponent(LoLStormApplication.get(getActivity()).component())
+                .championsModule(new ChampionsModule())
+                .build()
+                .inject(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.champions_fragment, container, false);
-
+        buildGraph();
         ButterKnife.inject(this, view);
 
         initRecyclerView();
-        mPresenter = new ChampionsPresenter();
         mPresenter.setView(this);
 
         getActivity().setTitle(R.string.summoner_champions_title);

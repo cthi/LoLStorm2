@@ -38,14 +38,9 @@ import lolstormSDK.models.RecentGames;
 import lolstormSDK.models.Summoner;
 import rx.Observable;
 
-
 public class RiotApiModule {
 
     private static final String API_KEY = BuildConfig.API_KEY;
-
-    public static Observable<Map<String,Summoner>> getSummonerIDFromName(String summonerName) {
-        return getSummonersByName(summonerName);
-    }
 
     private static RiotApi getApi() {
         RiotEndpoint endpoint = RiotEndpoint.getInstance();
@@ -54,6 +49,10 @@ public class RiotApiModule {
 
     private static String getRegion() {
         return RiotEndpoint.getInstance().getRegionAsString();
+    }
+
+    public static Observable<Map<String,Summoner>> getSummonerIDFromName(String summonerName) {
+        return getSummonersByName(summonerName);
     }
 
     public static Observable<RecentGames> getSummonerRecentGames(long summonerID) {

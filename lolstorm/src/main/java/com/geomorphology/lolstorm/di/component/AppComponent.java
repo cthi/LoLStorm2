@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,z
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
@@ -22,18 +22,35 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.views;
+package com.geomorphology.lolstorm.di.component;
 
-import java.util.List;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 
-import lolstormSDK.models.Player;
+import com.geomorphology.lolstorm.LoLStormApplication;
+import com.geomorphology.lolstorm.di.module.AppModule;
+import com.geomorphology.lolstorm.di.module.InteractorModule;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
 
-public interface SummonerGameResultView {
+import javax.inject.Singleton;
 
-    void setTitle(String title);
+import dagger.Component;
 
-    void populateAdapter(List<Player> stats);
+@Singleton
+@Component (
+    modules = {
+            AppModule.class,
+            InteractorModule.class
+    })
+public interface AppComponent {
+    void inject(LoLStormApplication application);
 
-    void showErrorView(int errorMessage);
+    NetworkConnectionInteractor getNetworkConnectionInteractor();
 
+    SharedPreferences getSharedPreferences();
+
+    Resources getResources();
+
+    Context getContext();
 }

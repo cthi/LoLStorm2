@@ -22,18 +22,19 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.views;
+package com.geomorphology.lolstorm.di.module;
 
-import java.util.List;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
+import com.geomorphology.lolstorm.presenters.SummonerChampionsPresenter;
 
-import lolstormSDK.models.Player;
+import dagger.Module;
+import dagger.Provides;
 
-public interface SummonerGameResultView {
+@Module
+public class SummonerChampionsModule {
 
-    void setTitle(String title);
-
-    void populateAdapter(List<Player> stats);
-
-    void showErrorView(int errorMessage);
-
+    @Provides
+    public SummonerChampionsPresenter providePresenter(NetworkConnectionInteractor interactor) {
+        return new SummonerChampionsPresenter(interactor);
+    }
 }

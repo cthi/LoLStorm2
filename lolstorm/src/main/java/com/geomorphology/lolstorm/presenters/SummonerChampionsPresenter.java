@@ -25,6 +25,7 @@
 package com.geomorphology.lolstorm.presenters;
 
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.views.SummonerChampionsView;
 
@@ -40,12 +41,14 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class SummonerChampionsPresenter {
 
+    private NetworkConnectionInteractor mInteractor;
     private SummonerChampionsView mView;
 
     private List<ChampionStats> mStatList;
     private ChampionStats mHeaderStat;
 
-    public SummonerChampionsPresenter() {
+    public SummonerChampionsPresenter(NetworkConnectionInteractor interactor) {
+        this.mInteractor = interactor;
     }
 
     public void setView(SummonerChampionsView view) {
@@ -67,6 +70,10 @@ public class SummonerChampionsPresenter {
     }
 
     private void getRankedStats(long userID) {
+        if (!mInteractor.hasNetworkConnection()) {
+            mView.showErrorView(R.string.error_internet_connection);
+            return;
+        }
         RiotApiModule.getSummonerRankedStats(userID).observeOn(AndroidSchedulers.mainThread())
                 .retry(3).subscribe(new Subscriber<RankedStats>() {
             @Override

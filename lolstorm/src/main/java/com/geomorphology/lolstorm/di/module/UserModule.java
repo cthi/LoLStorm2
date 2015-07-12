@@ -22,18 +22,27 @@
  * SOFTWARE.
  */
 
-package com.geomorphology.lolstorm.views;
+package com.geomorphology.lolstorm.di.module;
 
-import java.util.List;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 
-import lolstormSDK.models.Player;
+import com.geomorphology.lolstorm.persistence.user.RegionManager;
+import com.geomorphology.lolstorm.persistence.user.UserManager;
 
-public interface SummonerGameResultView {
+import dagger.Module;
+import dagger.Provides;
 
-    void setTitle(String title);
+@Module
+public class UserModule {
 
-    void populateAdapter(List<Player> stats);
+    @Provides
+    public UserManager getUserManager(SharedPreferences preferences) {
+        return new UserManager(preferences);
+    }
 
-    void showErrorView(int errorMessage);
-
+    @Provides
+    public RegionManager getRegionManager(UserManager manager, Resources resources) {
+        return new RegionManager(manager, resources);
+    }
 }

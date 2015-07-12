@@ -35,9 +35,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.geomorphology.lolstorm.adapters.SummonerChampionsAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerSummonerChampionsComponent;
+import com.geomorphology.lolstorm.di.module.SummonerChampionsModule;
 import com.geomorphology.lolstorm.presenters.SummonerChampionsPresenter;
 import com.geomorphology.lolstorm.ui.widgets.headers.SummonerChampionsHeader;
 import com.geomorphology.lolstorm.utils.Constants;
@@ -47,6 +50,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -64,7 +69,9 @@ public class SummonerChampionsFragment extends Fragment implements
     private SummonerChampionsHeader header;
 
     private BaseHeaderRecyclerViewAdapter<ChampionStats> mAdapter;
-    private SummonerChampionsPresenter presenter;
+
+    @Inject
+    SummonerChampionsPresenter presenter;
 
     public static SummonerChampionsFragment newInstance(Bundle bundle) {
         SummonerChampionsFragment fragment = new SummonerChampionsFragment();
@@ -73,17 +80,24 @@ public class SummonerChampionsFragment extends Fragment implements
         return fragment;
     }
 
+    public void buildGraph() {
+        DaggerSummonerChampionsComponent.builder()
+                .appComponent(LoLStormApplication.get(getActivity()).component())
+                .summonerChampionsModule(new SummonerChampionsModule())
+                .build()
+                .inject(this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.summoner_champions_fragment, container, false);
-
+        buildGraph();
         ButterKnife.inject(this, view);
 
         header = new SummonerChampionsHeader(getActivity());
         initRecyclerView();
 
-        presenter = new SummonerChampionsPresenter();
         presenter.setView(this);
         presenter.setUser(Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG)));
 

@@ -38,9 +38,6 @@ public class ChampionsPresenter {
 
     private ChampionsView mView;
 
-    public ChampionsPresenter() {
-    }
-
     public void setView(ChampionsView view) {
         this.mView = view;
         getListOfChampions();

@@ -24,38 +24,35 @@
 
 package com.geomorphology.lolstorm.presenters;
 
-
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.google.gson.Gson;
 import com.geomorphology.lolstorm.persistence.champion.ChampionEntry;
-import com.geomorphology.lolstorm.persistence.champion.ChampionReaderDbHelper;
 import com.geomorphology.lolstorm.views.ChampionDetailView;
 
 import lolstormSDK.models.Champion;
 
 public class ChampionSpellPresenter {
 
+    private SQLiteDatabase mChampionDb;
     private ChampionDetailView mView;
     private Champion mChampion;
 
-    public ChampionSpellPresenter() {
+    public ChampionSpellPresenter(SQLiteDatabase championDb) {
+        this.mChampionDb = championDb;
     }
 
     public void setView(ChampionDetailView view) {
         this.mView = view;
     }
 
-    public void setChampionId(int championId, Context context) {
-
-        SQLiteDatabase db = ChampionReaderDbHelper.getInstance(context).getReadableDatabase();
+    public void setChampionId(int championId) {
 
         String order = ChampionEntry.COLUMN_NAME_CHAMPION_ID + "= " + championId;
 
         String query = "SELECT * FROM " + ChampionEntry.TABLE_NAME + " WHERE " + order;
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = mChampionDb.rawQuery(query, null);
         cursor.moveToFirst();
 
         String championAsString = cursor.getString(cursor.getColumnIndex(ChampionEntry

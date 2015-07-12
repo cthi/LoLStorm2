@@ -22,49 +22,51 @@
  * SOFTWARE.
  */
 
-package lolstormSDK.modules;
+package com.geomorphology.lolstorm.di.module;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.geomorphology.lolstorm.models.User;
+import javax.inject.Singleton;
 
-import java.lang.reflect.Type;
-import java.util.LinkedList;
+import dagger.Module;
+import dagger.Provides;
 
-public class SavedSummonerList {
+@Module
+public class AppModule {
 
-    private final String USER_TAG = "user";
+    private final Application mApplication;
 
-    private SharedPreferences mPreferences;
-
-    public SavedSummonerList(Context context) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public AppModule(Application application) {
+        this.mApplication = application;
     }
 
-    public void updateSavedUsers(LinkedList<User> users) {
-        while (users.size() > 15) {
-            users.removeLast();
-        }
-
-        String userAsJson = new Gson().toJson(users);
-
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(USER_TAG, userAsJson);
-        editor.apply();
+    @Provides
+    @Singleton
+    public Context provideApplicationContext() {
+        return mApplication.getApplicationContext();
     }
 
-    public LinkedList<User> getSavedUsers() {
-        String historyAsJson = mPreferences.getString(USER_TAG, null);
+    @Provides
+    @Singleton
+    public ConnectivityManager provideConnectivityManager() {
+        return (ConnectivityManager) mApplication.getApplicationContext().getSystemService
+                (Context.CONNECTIVITY_SERVICE);
+    }
 
-        if (null == historyAsJson) {
-            return new LinkedList<>();
-        } else {
-            Type type = new TypeToken<LinkedList<User>>() {}.getType();
-            return new Gson().fromJson(historyAsJson, type);
-        }
+    @Provides
+    @Singleton
+    public SharedPreferences provideSharedPreferences() {
+        return PreferenceManager.getDefaultSharedPreferences(mApplication.getApplicationContext());
+    }
+
+    @Provides
+    @Singleton
+    public Resources provideResources() {
+        return mApplication.getApplicationContext().getResources();
     }
 }

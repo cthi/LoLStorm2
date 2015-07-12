@@ -28,7 +28,6 @@ import android.content.Context;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
-
 public class ChampionReaderDbHelper extends SQLiteAssetHelper {
 
     public static final int DATABASE_VERSION = 1;

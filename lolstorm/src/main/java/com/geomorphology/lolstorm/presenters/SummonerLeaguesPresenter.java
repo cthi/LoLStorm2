@@ -26,9 +26,9 @@ package com.geomorphology.lolstorm.presenters;
 
 
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.views.SummonerLeaguesView;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,13 +49,16 @@ public class SummonerLeaguesPresenter {
 
     private final static String QUEUE_TYPE = "RANKED_SOLO_5x5";
 
+    private NetworkConnectionInteractor mInteractor;
     private League currentLeague;
     private List<LeagueEntry> currentEntries;
     private int currentDivision;
 
     private SummonerLeaguesView view;
 
-    public SummonerLeaguesPresenter() {}
+    public SummonerLeaguesPresenter(NetworkConnectionInteractor interactor) {
+        mInteractor = interactor;
+    }
 
     public void setView(SummonerLeaguesView view) {
         this.view = view;
@@ -80,6 +83,11 @@ public class SummonerLeaguesPresenter {
     }
 
     private void getLeagues(long userID) {
+        if (!mInteractor.hasNetworkConnection()) {
+            view.showErrorView(R.string.error_internet_connection);
+            return;
+        }
+
         RiotApiModule.getSummonerLeagues(userID)
                 .observeOn(AndroidSchedulers.mainThread())
                 .retry(3)

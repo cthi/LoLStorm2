@@ -31,8 +31,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.ChampionSpellAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerChampionSpellComponent;
+import com.geomorphology.lolstorm.di.module.ChampionSpellModule;
 import com.geomorphology.lolstorm.presenters.ChampionSpellPresenter;
 import com.geomorphology.lolstorm.ui.widgets.headers.ChampionDetailHeader;
 import com.geomorphology.lolstorm.utils.Constants;
@@ -40,6 +43,8 @@ import com.geomorphology.lolstorm.views.ChampionDetailView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -51,24 +56,34 @@ public class ChampionSpellActivity extends AppCompatActivity implements Champion
     Toolbar mToolbar;
     @InjectView(R.id.champion_spell_rv)
     RecyclerView mRecyclerView;
+
+    @Inject
+    ChampionSpellPresenter mPresenter;
+
     private ChampionSpellAdapter mAdapter;
     private ChampionDetailHeader mHeader;
-    private ChampionSpellPresenter mPresenter;
+
+    private void buildGraph() {
+        DaggerChampionSpellComponent.builder()
+                .appComponent(LoLStormApplication.get(this).component())
+                .championSpellModule(new ChampionSpellModule())
+                .build()
+                .inject(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.champion_spell_activity);
+        buildGraph();
         ButterKnife.inject(this);
 
         initToolbar();
         initHeader();
         initRecyclerView();
 
-        mPresenter = new ChampionSpellPresenter();
         mPresenter.setView(this);
-
-        mPresenter.setChampionId(getIntent().getExtras().getInt(Constants.CHAMPION_ID_TAG), this);
+        mPresenter.setChampionId(getIntent().getExtras().getInt(Constants.CHAMPION_ID_TAG));
     }
 
     @Override

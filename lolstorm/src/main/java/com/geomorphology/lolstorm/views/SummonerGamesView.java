@@ -29,7 +29,7 @@ import java.util.List;
 
 import lolstormSDK.models.Game;
 
-public interface SummonerGamesView extends BaseView {
+public interface SummonerGamesView {
 
     void populate(List<Game> gameList);
 

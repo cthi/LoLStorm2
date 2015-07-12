@@ -25,8 +25,9 @@
 package com.geomorphology.lolstorm.presenters;
 
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
 import com.geomorphology.lolstorm.models.User;
-import com.geomorphology.lolstorm.ui.SummonerSearchFragment;
+import com.geomorphology.lolstorm.persistence.user.UserManager;
 import com.geomorphology.lolstorm.views.SummonerSearchView;
 
 import java.util.LinkedList;
@@ -36,30 +37,33 @@ import lolstormSDK.RiotEndpoint;
 import lolstormSDK.RiotErrors;
 import lolstormSDK.models.Summoner;
 import lolstormSDK.modules.RiotApiModule;
-import lolstormSDK.modules.SavedSummonerList;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class SummonerSearchPresenter {
 
+    NetworkConnectionInteractor mNetworkConnectionInteractor;
     private SummonerSearchView view;
-    private SavedSummonerList savedSummonerList;
+    private UserManager mUserManager;
     private LinkedList<User> users;
 
-    public SummonerSearchPresenter(SummonerSearchView view) {
-        this.view = view;
+    public SummonerSearchPresenter(NetworkConnectionInteractor interactor, UserManager manager) {
+        this.mNetworkConnectionInteractor = interactor;
+        this.mUserManager = manager;
+    }
 
-        savedSummonerList = new SavedSummonerList(((SummonerSearchFragment) view).getActivity());
+    public void setView(SummonerSearchView view) {
+        this.view = view;
     }
 
     private void initSummonerList() {
-        users = savedSummonerList.getSavedUsers();
+        users = mUserManager.getSavedUsers();
 
         view.populateAdapter(users);
     }
 
     public void onSearch(String summonerName) {
-        if (!view.hasConnection()) {
+        if (!mNetworkConnectionInteractor.hasNetworkConnection()) {
             view.displayErrorMessage(R.string.error_internet_connection);
             return;
         }
@@ -112,7 +116,7 @@ public class SummonerSearchPresenter {
             if (user.getName().equals(toRemove.getName())
                     && user.getRegionId() == toRemove.getRegionId()) {
                 users.remove(user);
-                savedSummonerList.updateSavedUsers(users);
+                mUserManager.updateSavedUsers(users);
                 return;
             }
         }
@@ -127,7 +131,7 @@ public class SummonerSearchPresenter {
         }
 
         users.add(0, newUser);
-        savedSummonerList.updateSavedUsers(users);
+        mUserManager.updateSavedUsers(users);
     }
 
     public void onResume() {

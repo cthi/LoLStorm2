@@ -25,6 +25,7 @@
 package com.geomorphology.lolstorm.presenters;
 
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.domain.interactors.NetworkConnectionInteractor;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.views.SummonerGamesView;
 
@@ -39,10 +40,12 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class SummonerGamesPresenter {
 
+    private NetworkConnectionInteractor mInteractor;
     private SummonerGamesView view;
     private List<Game> gameList;
 
-    public SummonerGamesPresenter() {
+    public SummonerGamesPresenter(NetworkConnectionInteractor interactor) {
+        this.mInteractor = interactor;
     }
 
     public void setView(SummonerGamesView view) {
@@ -63,6 +66,11 @@ public class SummonerGamesPresenter {
     }
 
     private void getRecentGames(long userID) {
+        if (!mInteractor.hasNetworkConnection()) {
+            view.showErrorView(R.string.error_internet_connection);
+            return;
+        }
+
         RiotApiModule.getSummonerRecentGames(userID).observeOn(AndroidSchedulers.mainThread())
                 .retry(3).subscribe(new Subscriber<RecentGames>() {
             @Override

@@ -36,9 +36,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
 import com.geomorphology.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.geomorphology.lolstorm.adapters.SummonerLeaguesAdapter;
+import com.geomorphology.lolstorm.di.component.DaggerSummonerLeagueComponent;
+import com.geomorphology.lolstorm.di.module.SummonerLeagueModule;
 import com.geomorphology.lolstorm.models.User;
 import com.geomorphology.lolstorm.presenters.SummonerLeaguesPresenter;
 import com.geomorphology.lolstorm.ui.widgets.headers.SummonerLeaguesHeader;
@@ -50,6 +53,8 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.models.League;
@@ -58,6 +63,9 @@ import lolstormSDK.models.LeagueEntry;
 
 public class SummonerLeaguesFragment extends Fragment implements SummonerLeaguesView,
         SummonerLeaguesAdapter.OnLeagueItemClick {
+
+    @Inject
+    SummonerLeaguesPresenter presenter;
 
     @InjectView(R.id.error_placeholder)
     TextView mErrorPlaceholder;
@@ -68,7 +76,6 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
     private SummonerLeaguesHeader mHeader;
 
     private BaseHeaderRecyclerViewAdapter<LeagueEntry> mAdapter;
-    private SummonerLeaguesPresenter presenter;
 
     public static SummonerLeaguesFragment newInstance(Bundle bundle) {
         SummonerLeaguesFragment fragment = new SummonerLeaguesFragment();
@@ -77,11 +84,19 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
         return fragment;
     }
 
+    public void buildGraph() {
+        DaggerSummonerLeagueComponent.builder()
+                .appComponent(LoLStormApplication.get(getActivity()).component())
+                .summonerLeagueModule(new SummonerLeagueModule())
+                .build()
+                .inject(this);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View view = inflater.inflate(R.layout.summoner_leagues_fragment, container, false);
-
+        buildGraph();
         ButterKnife.inject(this, view);
 
         showLoading();
@@ -89,7 +104,6 @@ public class SummonerLeaguesFragment extends Fragment implements SummonerLeagues
         initHeader();
         initRecyclerView();
 
-        presenter = new SummonerLeaguesPresenter();
         presenter.setView(this);
         presenter.setUser(Parcels.unwrap(getArguments().getParcelable(Constants.USER_TAG)));
 

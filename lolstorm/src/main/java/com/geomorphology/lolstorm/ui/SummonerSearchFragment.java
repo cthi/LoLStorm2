@@ -38,7 +38,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.geomorphology.lolstorm.LoLStormApplication;
 import com.geomorphology.lolstorm.R;
+import com.geomorphology.lolstorm.di.component.DaggerSearchComponent;
+import com.geomorphology.lolstorm.di.module.SearchModule;
 import com.geomorphology.lolstorm.adapters.BaseHeaderRecyclerViewAdapter;
 import com.geomorphology.lolstorm.adapters.SummonerSearchAdapter;
 import com.geomorphology.lolstorm.presenters.SummonerSearchPresenter;
@@ -52,11 +55,16 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lolstormSDK.RiotEndpoint;
 
 public class SummonerSearchFragment extends Fragment implements SummonerSearchView, SummonerSearchAdapter.OnSummonerItemClick {
+
+    @Inject
+    SummonerSearchPresenter mPresenter;
 
     @InjectView(R.id.summoner_search_rv)
     RecyclerView mRecyclerView;
@@ -67,10 +75,14 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     private EditText mSearchText;
     private Button mSearchButton;
 
-    SummonerSearchPresenter mPresenter;
-
     public interface OnFavorite {
         void onFavorite(User user);
+    }
+
+    public void buildGraph() {
+        DaggerSearchComponent.builder()
+                .appComponent(LoLStormApplication.get(getActivity()).component())
+                .searchModule(new SearchModule()).build().inject(this);
     }
 
     public SummonerSearchFragment() {}
@@ -92,15 +104,15 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.summoner_search_fragment, container, false);
+        buildGraph();
 
+        View view = inflater.inflate(R.layout.summoner_search_fragment, container, false);
         ButterKnife.inject(this, view);
 
         initRecyclerView();
         initHeaderClick();
 
-        mPresenter = new SummonerSearchPresenter(this);
-
+        mPresenter.setView(this);
         getActivity().setTitle(getString(R.string.summoner_search_title));
         return view;
     }
@@ -164,11 +176,6 @@ public class SummonerSearchFragment extends Fragment implements SummonerSearchVi
     @Override
     public void onSummonerRemove(User user) {
         mPresenter.removeUser(user);
-    }
-
-    @Override
-    public boolean hasConnection() {
-        return NetworkUtils.hasConnection(getActivity());
     }
 
     @Override
