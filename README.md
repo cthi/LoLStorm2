@@ -1,7 +1,17 @@
 # LoLStorm2
 A League of Legends buddy application for Android.
 
-Showcases the Model-View-Presenter architechture.
+Features include match history, champion ranked stats, leagues, and more.
+All major regions supported.
+
+LoLStorm is on the Play store:
+
+*[![Play Store Badge](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.geomorphology.lolstorm)*
+
+# Source
+
+Showcases the Model-View-Presenter architechture, as well as dependancy injection using Dagger 2.
+
 # License 
 
 ```
@@ -14,6 +24,7 @@ of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
+
 furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
@@ -28,3 +39,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ```
+
+# Disclaimer
+
+LoL Storm isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
