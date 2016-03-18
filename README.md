@@ -4,10 +4,6 @@ A League of Legends buddy application for Android.
 Features include match history, champion ranked stats, leagues, and more.
 All major regions supported.
 
-LoLStorm is on the Play store:
-
-*[![Play Store Badge](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.geomorphology.lolstorm)*
-
 # Source
 
 Showcases the Model-View-Presenter architechture, as well as dependancy injection using Dagger 2.
