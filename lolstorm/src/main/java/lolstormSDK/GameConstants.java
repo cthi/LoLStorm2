@@ -172,6 +172,7 @@ public class GameConstants {
         championMap.put("24","Jax");
         championMap.put("126","Jayce");
         championMap.put("222","Jinx");
+        championMap.put("202","Jhin");
         championMap.put("429","Kalista");
         championMap.put("43","Karma");
         championMap.put("30","Karthus");
@@ -194,6 +195,7 @@ public class GameConstants {
         championMap.put("11","MasterYi");
         championMap.put("21","MissFortune");
         championMap.put("62","MonkeyKing");
+        championMap.put("420","Illaoi");
         championMap.put("82","Mordekaiser");
         championMap.put("25","Morgana");
         championMap.put("267","Nami");
@@ -234,6 +236,7 @@ public class GameConstants {
         championMap.put("18","Tristana");
         championMap.put("48","Trundle");
         championMap.put("23","Tryndamere");
+        championMap.put("203", "Kindred");
         championMap.put("4","TwistedFate");
         championMap.put("29","Twitch");
         championMap.put("77","Udyr");
@@ -310,12 +313,14 @@ public class GameConstants {
         championMap.put("38","Kassadin");
         championMap.put("55","Katarina");
         championMap.put("10","Kayle");
+        championMap.put("420","Illaoi");
         championMap.put("85","Kennen");
         championMap.put("121","Kha'Zix");
         championMap.put("96","Kog'Maw");
         championMap.put("7","LeBlanc");
         championMap.put("64","Lee Sin");
         championMap.put("89","Leona");
+        championMap.put("202","Jhin");
         championMap.put("127","Lissandra");
         championMap.put("236","Lucian");
         championMap.put("117","Lulu");
@@ -359,6 +364,7 @@ public class GameConstants {
         championMap.put("50","Swain");
         championMap.put("134","Syndra");
         championMap.put("223", "Tahm Kench");
+        championMap.put("203", "Kindred");
         championMap.put("91","Talon");
         championMap.put("44","Taric");
         championMap.put("17","Teemo");

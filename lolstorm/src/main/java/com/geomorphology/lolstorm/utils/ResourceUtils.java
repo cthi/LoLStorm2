@@ -36,6 +36,9 @@ public class ResourceUtils {
 
     public static int championDrawableFromID(int id, Context context) {
         Resources resources = context.getResources();
+        if (id == 0) {
+            return 0;
+        }
         return resources.getIdentifier(GameConstants.CHAMPION_KEY_MAP.get(Integer.toString(id))
                 .toLowerCase(), DRAWABLE, context.getPackageName());
     }
